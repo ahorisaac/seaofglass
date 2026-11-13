@@ -1,0 +1,219 @@
+/* Lesson 04 · Hackers & Their Hats */
+.prose a {
+  color: var(--cyan);
+}
+.prose a:hover {
+  text-decoration: underline;
+}
+.promise.w {
+  --pc: #f8f9fa;
+}
+.promise.g {
+  --pc: var(--muted);
+}
+.promise.b {
+  --pc: var(--red);
+}
+.hat-orbit .triad-card b {
+  display: flex;
+  justify-content: center;
+}
+.hat-orbit .triad-card svg {
+  width: 54px;
+  height: 36px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  color: var(--pc);
+}
+.hat-orbit .triad-card.c {
+  --pc: #f8f9fa;
+}
+.hat-orbit .triad-card.i {
+  --pc: #9db0c9;
+}
+.hat-orbit .triad-card.a {
+  --pc: var(--red);
+}
+.crew-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 12px 0 24px;
+}
+.crew-grid > div {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  padding: 18px;
+}
+.crew-grid b {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+.crew-grid p {
+  font-size: 0.86rem;
+  margin: 0;
+}
+
+/* Hat sorter */
+.sorter {
+  background: linear-gradient(180deg, var(--raised), var(--surface));
+  border: 1px solid var(--line2);
+  border-radius: 18px;
+  padding: 22px;
+  margin: 16px 0 30px;
+}
+.s-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  font: 700 0.66rem var(--font-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 16px;
+}
+.s-dots {
+  display: flex;
+  gap: 6px;
+  flex: 1;
+  justify-content: center;
+}
+.s-dots i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #1a2438;
+  border: 1px solid var(--line2);
+}
+.s-dots i.current {
+  border-color: var(--cyan);
+  box-shadow: 0 0 8px rgba(56, 224, 255, 0.6);
+}
+.s-dots i.right {
+  background: var(--teal);
+  border-color: var(--teal);
+}
+.s-dots i.wrong {
+  background: var(--red);
+  border-color: var(--red);
+}
+.s-card {
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+}
+.s-card > p:first-child {
+  font-size: 1.06rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 18px;
+}
+.hat-btns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.hat-btns button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 13px 10px;
+  border-radius: 11px;
+  font: 800 0.86rem var(--font-body);
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line2);
+  transition: 0.2s;
+}
+.hat-btns button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: var(--cyan);
+}
+.hat-btns button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.hat-btns button.right {
+  border-color: var(--teal);
+  background: rgba(60, 245, 182, 0.1);
+  color: var(--teal);
+}
+.hat-btns button.wrong {
+  border-color: var(--red);
+  background: rgba(255, 77, 109, 0.1);
+  color: var(--red);
+}
+.hat {
+  width: 20px;
+  height: 12px;
+  border-radius: 10px 10px 4px 4px;
+  display: inline-block;
+  border: 1px solid var(--line2);
+}
+.hat.white {
+  background: #f8f9fa;
+}
+.hat.grey {
+  background: #9db0c9;
+}
+.hat.black {
+  background: #1a2438;
+  border-color: var(--red);
+}
+.s-feedback {
+  margin: 16px 0 0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  border: 1px solid;
+}
+.s-feedback.ok {
+  color: var(--teal);
+  background: rgba(60, 245, 182, 0.07);
+  border-color: rgba(60, 245, 182, 0.3);
+}
+.s-feedback.bad {
+  color: var(--red);
+  background: rgba(255, 77, 109, 0.07);
+  border-color: rgba(255, 77, 109, 0.3);
+}
+#s-next {
+  margin-top: 16px;
+}
+.s-summary {
+  text-align: center;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 28px;
+}
+.s-summary b {
+  font: 900 2.4rem var(--font-disp);
+  color: var(--cyan);
+  display: block;
+  margin-bottom: 8px;
+}
+.s-summary p {
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+@media (max-width: 640px) {
+  .crew-grid {
+    grid-template-columns: 1fr;
+  }
+  .hat-btns {
+    grid-template-columns: 1fr;
+  }
+  .s-dots {
+    order: 3;
+    flex-basis: 100%;
+  }
+}
