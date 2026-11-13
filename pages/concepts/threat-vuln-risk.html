@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Threat, Vulnerability & Risk — Sea of Glass</title>
+    <meta
+      name="description"
+      content="Threat is the storm, vulnerability is the open window, risk is what you might lose. Learn the three words with an interactive risk dial lab and quiz."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#070b13" />
+    <link
+      rel="canonical"
+      href="https://seaofglass.shidoon.com/pages/concepts/threat-vuln-risk.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="Threat, Vulnerability & Risk — Sea of Glass"
+    />
+    <meta
+      property="og:description"
+      content="The storm, the open window, and what you might lose. Interactive risk lab + quiz."
+    />
+    <meta
+      property="og:url"
+      content="https://seaofglass.shidoon.com/pages/concepts/threat-vuln-risk.html"
+    />
+    <meta
+      property="og:image"
+      content="https://seaofglass.shidoon.com/assets/img/og-cover.svg"
+    />
+    <link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../../assets/css/lesson.css" />
+    <link rel="stylesheet" href="../../assets/css/threat-vuln-risk.css" />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <symbol id="i-menu" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </symbol>
+        <symbol id="i-x" viewBox="0 0 24 24">
+          <path d="M6 6l12 12M18 6L6 18" />
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24">
+          <path d="M4 12h16M13 5l7 7-7 7" />
+        </symbol>
+        <symbol id="i-up" viewBox="0 0 24 24">
+          <path d="M12 20V4M5 11l7-7 7 7" />
+        </symbol>
+        <symbol id="i-replay" viewBox="0 0 24 24">
+          <path d="M20 12a8 8 0 1 1-2.3-5.6" />
+          <path d="M20 4v4h-4" />
+        </symbol>
+        <symbol id="i-shield" viewBox="0 0 24 24">
+          <path d="M12 3l7 3v5c0 4.6-3 7.6-7 9-4-1.4-7-4.4-7-9V6z" />
+          <path d="M9 11.5l2 2 4-4" />
+        </symbol>
+        <symbol id="i-terminal" viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="16" rx="2" />
+          <path d="M7 9l3 3-3 3M12 15h5" />
+        </symbol>
+        <symbol id="i-book" viewBox="0 0 24 24">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+          <path
+            d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+          />
+        </symbol>
+        <symbol id="i-flag" viewBox="0 0 24 24">
+          <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+          <path d="M4 22v-7" />
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24">
+          <path d="M4 12.5l5.5 5.5L20 6.5" />
+        </symbol>
+        <symbol id="i-lock" viewBox="0 0 24 24">
+          <rect x="4" y="11" width="16" height="10" rx="2" />
+          <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+        </symbol>
+        <symbol id="i-eye" viewBox="0 0 24 24">
+          <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" />
+          <circle cx="12" cy="12" r="3" />
+        </symbol>
+        <symbol id="i-bolt" viewBox="0 0 24 24">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9z" />
+        </symbol>
+      </defs>
+    </svg>
+
+    <div class="aurora a1" aria-hidden="true"></div>
+    <div class="aurora a2" aria-hidden="true"></div>
+    <div id="cursor" aria-hidden="true"></div>
+    <div id="progress" aria-hidden="true"></div>
+
+    <header id="nav">
+      <div class="container nav-in">
+        <a
+          class="brand"
+          href="../../index.html"
+          aria-label="Sea of Glass — home"
+        >
+          <img
+            src="../../assets/img/shidoon-mark.svg"
+            alt=""
+            width="36"
+            height="36"
+          />
+          <span class="brand-txt"
+            ><small>SHIDOON</small><strong>SEA OF GLASS</strong></span
+          >
+        </a>
+        <nav id="nav-menu" aria-label="Primary">
+          <a href="../../index.html">Home</a
+          ><a href="../paths.html">Curriculum</a> <a href="#mission">Lab</a
+          ><a href="#quiz">Quiz</a>
+          <a class="btn small primary" href="../paths.html#fundamentals"
+            >All lessons <svg class="ic"><use href="#i-arrow" /></svg
+          ></a>
+        </nav>
+        <button
+          id="nav-toggle"
+          aria-label="Menu"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+        >
+          <svg class="ic m-open"><use href="#i-menu" /></svg
+          ><svg class="ic m-close"><use href="#i-x" /></svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="main" class="container lesson">
+      <nav class="crumb" aria-label="Breadcrumb">
+        <a href="../../index.html">Home</a> /
+        <a href="../paths.html#fundamentals">Fundamentals</a> /
+        <span>Threat, Vulnerability, Risk</span>
+      </nav>
+      <p class="eyebrow">Fundamentals · Module 01 · Lesson 02</p>
+      <h1>Threat, Vulnerability &amp; <span>Risk</span></h1>
+      <div class="l-meta">
+        <span
+          ><svg class="ic"><use href="#i-book" /></svg> 12 min</span
+        >
+        <span class="state" id="read-state">Reading</span>
+        <span class="state" id="lab-state"
+          ><svg class="ic"><use href="#i-terminal" /></svg> Lab: pending</span
+        >
+        <span class="state" id="quiz-state"
+          ><svg class="ic"><use href="#i-flag" /></svg> Quiz: pending</span
+        >
+      </div>
+      <p class="banner hidden" id="lesson-banner">
+        <svg class="ic"><use href="#i-check" /></svg> Lesson complete — progress
+        saved.
+      </p>
+
+      <section class="prose" id="brief" data-section>
+        <div class="hook">
+          <p>
+            <b>Threat</b> is the storm. <b>Vulnerability</b> is the open window.
+            <b>Risk</b> is what you might lose.
+          </p>
+          <code>risk ≈ threat × vulnerability × impact</code>
+        </div>
+        <p>
+          Beginners mix these three words constantly. Keep the window picture in
+          your head and you’ll never confuse them again. Security work is mostly
+          about finding windows, closing them, and deciding which storms you can
+          live with.
+        </p>
+
+        <div class="promise t">
+          <h2><i>T</i> Threat — “the storm”</h2>
+          <p>
+            A <b>potential cause of harm</b>: a ransomware crew, a phishing
+            campaign, a careless insider, a flood, a power cut. You usually
+            can’t remove threats from the world — you reduce how often they
+            succeed against you.
+          </p>
+          <ul>
+            <li><b>Ask:</b> Who or what could hurt this system?</li>
+            <li>
+              <b>Examples:</b> attacker, malware, natural disaster, human error.
+            </li>
+          </ul>
+        </div>
+        <div class="promise v">
+          <h2><i>V</i> Vulnerability — “the open window”</h2>
+          <p>
+            A <b>weakness a threat can exploit</b>: an unpatched server, a weak
+            password, an untrained team, an unlocked server room.
+            Vulnerabilities are the part you can directly fix.
+          </p>
+          <ul>
+            <li><b>Ask:</b> What weakness lets the threat in?</li>
+            <li>
+              <b>Examples:</b> missing patch, default credentials, open S3
+              bucket, no MFA.
+            </li>
+          </ul>
+        </div>
+        <div class="promise r">
+          <h2><i>R</i> Risk — “what you might lose”</h2>
+          <p>
+            The <b>expected loss</b> if a threat exploits a vulnerability. Risk
+            blends likelihood and impact. You manage risk; you rarely reach
+            zero. A low-value test server and a hospital database can share the
+            same bug but carry very different risk.
+          </p>
+          <ul>
+            <li>
+              <b>Ask:</b> If this goes wrong, how bad is it — and how likely?
+            </li>
+            <li>
+              <b>Examples:</b> data breach fines, downtime cost, reputational
+              damage.
+            </li>
+          </ul>
+        </div>
+
+        <div class="formula">
+          <span>Worked example — phishing at a clinic</span>
+          <p>
+            Threat pressure <b>7/10</b> (constant campaigns) · Exposure
+            <b>8/10</b> (no training, no MFA) · Impact <b>9/10</b> (patient
+            records). Add training and MFA and the numbers drop — the storm
+            still exists, but fewer windows are open and the loss shrinks.
+          </p>
+        </div>
+      </section>
+
+      <!-- Risk dial lab -->
+      <section class="prose" id="risk-lab">
+        <h2>
+          <svg class="ic"><use href="#i-bolt" /></svg> Lab: the risk dial
+        </h2>
+        <p>
+          Pick a scenario, move the sliders, flip controls on. Watch the dial
+          react live. Your goal: bring the risk into the green without imagining
+          you can remove the storm.
+        </p>
+        <div class="risk-lab" id="risk-lab-root" data-band="critical">
+          <div class="risk-controls">
+            <label class="r-ctl select"
+              ><span>Scenario</span>
+              <select id="r-scenario">
+                <option value="clinic">Phishing at a clinic</option>
+                <option value="server">Unpatched web server</option>
+                <option value="laptop">Lost employee laptop</option>
+              </select>
+            </label>
+            <label class="r-ctl range"
+              ><span>Threat pressure <output id="r-t-out">7</output>/10</span
+              ><input type="range" id="r-t" min="0" max="10" step="1" value="7"
+            /></label>
+            <label class="r-ctl range"
+              ><span
+                >Exposure / vulnerability
+                <output id="r-v-out">8</output>/10</span
+              ><input type="range" id="r-v" min="0" max="10" step="1" value="8"
+            /></label>
+            <label class="r-ctl range"
+              ><span
+                >Impact if it happens <output id="r-i-out">9</output>/10</span
+              ><input type="range" id="r-i" min="0" max="10" step="1" value="9"
+            /></label>
+            <div class="control-toggles">
+              <label
+                ><input type="checkbox" id="r-training" /><i class="switch"></i
+                ><span>Staff training <small>threat −2</small></span></label
+              >
+              <label
+                ><input type="checkbox" id="r-patch" /><i class="switch"></i
+                ><span>Patching <small>vuln −3</small></span></label
+              >
+              <label
+                ><input type="checkbox" id="r-mfa" /><i class="switch"></i
+                ><span>MFA <small>vuln −2</small></span></label
+              >
+              <label
+                ><input type="checkbox" id="r-backups" /><i class="switch"></i
+                ><span>Tested backups <small>impact −3</small></span></label
+              >
+            </div>
+            <div class="r-actions">
+              <button type="button" class="btn tiny ghost" id="r-reset">
+                <svg class="ic"><use href="#i-replay" /></svg> Reset
+              </button>
+              <button type="button" class="btn tiny hot" id="r-random">
+                <svg class="ic"><use href="#i-bolt" /></svg> Randomize
+              </button>
+            </div>
+          </div>
+          <div class="risk-meter">
+            <svg viewBox="0 0 200 130" aria-hidden="true">
+              <path class="dial-bg" d="M30 110 A80 80 0 0 1 170 110" />
+              <path
+                class="dial-fg"
+                id="risk-arc"
+                d="M30 110 A80 80 0 0 1 170 110"
+              />
+              <g id="risk-needle">
+                <line x1="100" y1="110" x2="100" y2="44" />
+                <circle cx="100" cy="110" r="6" />
+              </g>
+            </svg>
+            <b id="risk-score">50</b>
+            <span class="risk-chip" id="risk-chip">Critical</span>
+            <p class="risk-formula" id="risk-formula">
+              R = 7 × 8 × 9 ÷ 10 → 50
+            </p>
+            <p class="risk-sentence" id="risk-sentence">
+              A critical risk: patient records could leak through staff inboxes.
+            </p>
+          </div>
+        </div>
+
+        <h3>What do you do with a risk?</h3>
+        <table class="map">
+          <thead>
+            <tr>
+              <th>Treatment</th>
+              <th>Meaning</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Avoid</td>
+              <td>Stop the risky activity entirely.</td>
+              <td>Shut down an old public FTP server.</td>
+            </tr>
+            <tr>
+              <td>Mitigate</td>
+              <td>Add controls to lower likelihood or impact.</td>
+              <td>Patch the server, add MFA, train staff.</td>
+            </tr>
+            <tr>
+              <td>Transfer</td>
+              <td>Shift some loss to someone else.</td>
+              <td>Cyber insurance, managed security provider.</td>
+            </tr>
+            <tr>
+              <td>Accept</td>
+              <td>Document it and live with it.</td>
+              <td>Low-risk legacy tool kept behind segmentation.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="recall">
+          <h3>
+            <svg class="ic"><use href="#i-eye" /></svg> Memory hook
+          </h3>
+          <p>
+            <b>“Storm. Window. Loss.”</b> Threat = storm, vulnerability =
+            window, risk = loss. Controls don’t delete storms — they close
+            windows and shrink losses.
+          </p>
+        </div>
+      </section>
+
+      <section class="prose" id="mission" data-section>
+        <h2>
+          <svg class="ic"><use href="#i-terminal" /></svg> Mission: name the
+          three words
+        </h2>
+        <p>
+          Read <code>scenario.txt</code>. Verify the three concepts
+          <b>in order</b>: storm, window, loss. Use initials (<code
+            >verify tvr</code
+          >) or full words.
+        </p>
+        <div class="term cli">
+          <div class="term-bar">
+            <i class="dot r"></i><i class="dot y"></i><i class="dot g"></i>
+            <span>student@seaofglass: ~/threat-vuln-risk</span
+            ><em>TRAINING SHELL</em>
+          </div>
+          <div class="term-body" id="cli-body" aria-live="polite"></div>
+          <form id="cli-form" autocomplete="off">
+            <span class="t-prompt">student@seaofglass</span
+            ><span class="t-path">:~$</span>
+            <input
+              id="cli-input"
+              type="text"
+              spellcheck="false"
+              autocapitalize="off"
+              aria-label="Terminal command input"
+              placeholder="start with: cat scenario.txt"
+            />
+          </form>
+        </div>
+      </section>
+
+      <section class="prose" id="quiz" data-section>
+        <h2>
+          <svg class="ic"><use href="#i-flag" /></svg> Checkpoint: 4 questions
+        </h2>
+        <p>
+          Score 75% or more to complete the lesson. Explanations appear after
+          you submit.
+        </p>
+        <form id="quiz-form"></form>
+        <div class="quiz-actions">
+          <button class="btn primary" id="quiz-submit" type="button">
+            Check answers
+          </button>
+          <button class="btn ghost hidden" id="quiz-retry" type="button">
+            Try again
+          </button>
+          <div class="score hidden" id="quiz-score">
+            <svg viewBox="0 0 64 64">
+              <circle class="bgc" cx="32" cy="32" r="26" />
+              <circle class="fgc" id="score-ring" cx="32" cy="32" r="26" />
+            </svg>
+            <span
+              ><b id="score-num">0%</b
+              ><small id="score-note">score</small></span
+            >
+          </div>
+        </div>
+      </section>
+
+      <nav class="l-nav" aria-label="Lesson navigation">
+        <a class="btn ghost" href="what-is-security.html"
+          >← What is Security?</a
+        >
+        <a class="btn primary" href="cia-triad.html"
+          >Next: The CIA Triad <svg class="ic"><use href="#i-arrow" /></svg
+        ></a>
+      </nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container f-bottom" style="border-top: 0">
+        <span>© <span data-year>2026</span> Shidoon · Sea of Glass</span>
+        <span class="f-ethics"
+          ><svg class="ic"><use href="#i-shield" /></svg> Train ethically. Hack
+          only what you own or have written permission to test.</span
+        >
+      </div>
+    </footer>
+
+    <button id="to-top" aria-label="Back to top">
+      <svg class="ic"><use href="#i-up" /></svg>
+    </button>
+    <script type="module" src="../../assets/js/core/main.js"></script>
+    <script
+      type="module"
+      src="../../assets/js/lessons/threat-vuln-risk.js"
+    ></script>
+  </body>
+</html>
