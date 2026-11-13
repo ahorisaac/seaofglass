@@ -1,0 +1,459 @@
+/* ============================================================
+   SEA OF GLASS · lesson template styles
+   ============================================================ */
+
+.lesson {
+  padding-top: calc(var(--nav-h) + 44px);
+  max-width: 880px;
+}
+.crumb {
+  font: 400 0.78rem var(--font-mono);
+  color: var(--faint);
+  margin-bottom: 22px;
+}
+.crumb a {
+  color: var(--muted);
+}
+.crumb a:hover {
+  color: var(--cyan);
+}
+.lesson h1 {
+  font: 900 clamp(2rem, 4.5vw, 3rem)/1.1 var(--font-disp);
+  margin-bottom: 16px;
+}
+.lesson h1 span {
+  background: var(--grad-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.l-meta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 26px;
+  font: 700 0.68rem var(--font-mono);
+  letter-spacing: 0.1em;
+  color: var(--faint);
+}
+.l-meta > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  padding: 6px 10px;
+  border-radius: 7px;
+}
+.l-meta .state.done {
+  color: var(--teal);
+  border-color: rgba(60, 245, 182, 0.4);
+  background: rgba(60, 245, 182, 0.07);
+}
+.banner {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: var(--teal);
+  font-weight: 800;
+  background: rgba(60, 245, 182, 0.08);
+  border: 1px solid rgba(60, 245, 182, 0.35);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 26px;
+}
+
+/* Prose */
+.prose {
+  margin-bottom: 44px;
+}
+.prose h2 {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.prose h2 .ic {
+  color: var(--cyan);
+}
+.prose h3 {
+  font-size: 1.1rem;
+  margin: 26px 0 10px;
+}
+.prose p {
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+.prose p b,
+.prose li b {
+  color: var(--text);
+}
+.hook {
+  background: linear-gradient(
+    135deg,
+    rgba(56, 224, 255, 0.08),
+    rgba(143, 123, 255, 0.07)
+  );
+  border: 1px solid rgba(56, 224, 255, 0.3);
+  border-radius: 16px;
+  padding: 24px 26px;
+  margin-bottom: 24px;
+}
+.hook p {
+  color: var(--text);
+  font-size: 1.12rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.hook code {
+  display: inline-block;
+  font-size: 0.85rem;
+}
+
+/* 3D triad carousel */
+.triad-scene {
+  position: relative;
+  height: 300px;
+  perspective: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0 40px;
+}
+.triad-orbit {
+  position: relative;
+  width: 200px;
+  height: 150px;
+  transform-style: preserve-3d;
+  animation: orbit 22s linear infinite;
+}
+.triad-scene:hover .triad-orbit {
+  animation-play-state: paused;
+}
+@keyframes orbit {
+  from {
+    transform: rotateY(0);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+.triad-card {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 22px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  background: linear-gradient(
+    160deg,
+    rgba(20, 30, 52, 0.92),
+    rgba(12, 18, 32, 0.92)
+  );
+  border: 1px solid var(--pc);
+  box-shadow:
+    0 0 34px color-mix(in srgb, var(--pc) 22%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backface-visibility: hidden;
+}
+.triad-card b {
+  font: 900 2.4rem var(--font-disp);
+  color: var(--pc);
+}
+.triad-card span {
+  font-weight: 900;
+  color: var(--text);
+}
+.triad-card small {
+  font: 400 0.68rem var(--font-mono);
+  letter-spacing: 0.14em;
+  color: var(--faint);
+}
+.triad-card.c {
+  --pc: var(--cyan);
+  transform: rotateY(0deg) translateZ(190px);
+}
+.triad-card.i {
+  --pc: var(--teal);
+  transform: rotateY(120deg) translateZ(190px);
+}
+.triad-card.a {
+  --pc: var(--amber);
+  transform: rotateY(240deg) translateZ(190px);
+}
+.triad-floor {
+  position: absolute;
+  bottom: 24px;
+  width: 340px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse,
+    rgba(56, 224, 255, 0.14),
+    transparent 70%
+  );
+  filter: blur(6px);
+}
+
+/* Promise blocks */
+.promise {
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--pc);
+  border-radius: 14px;
+  background: var(--surface);
+  padding: 24px 26px;
+  margin-bottom: 18px;
+}
+.promise.c {
+  --pc: var(--cyan);
+}
+.promise.i {
+  --pc: var(--teal);
+}
+.promise.a {
+  --pc: var(--amber);
+}
+.promise h2 {
+  font-size: 1.15rem;
+}
+.promise h2 i {
+  font: 900 1.3rem var(--font-disp);
+  font-style: normal;
+  color: var(--pc);
+  border: 1px solid var(--pc);
+  border-radius: 9px;
+  width: 38px;
+  height: 38px;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.promise ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+}
+.promise li {
+  color: var(--muted);
+  font-size: 0.93rem;
+  padding-left: 18px;
+  position: relative;
+}
+.promise li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--pc);
+}
+
+/* Attack map table */
+.map {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  margin: 10px 0 20px;
+}
+.map th {
+  font: 700 0.64rem var(--font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--faint);
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line2);
+}
+.map td {
+  padding: 11px 12px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+}
+.map td:first-child {
+  color: var(--text);
+  font-weight: 800;
+}
+.map td:nth-child(2),
+.map td:nth-child(3),
+.map td:nth-child(4) {
+  color: var(--red);
+  text-align: center;
+  font-weight: 800;
+}
+.recall {
+  background: rgba(143, 123, 255, 0.07);
+  border: 1px solid rgba(143, 123, 255, 0.3);
+  border-radius: 14px;
+  padding: 20px 24px;
+}
+.recall h3 {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: var(--violet);
+  margin: 0 0 8px;
+}
+.recall p {
+  margin: 0;
+}
+
+/* CLI */
+.cli .term-body {
+  height: 260px;
+}
+#cli-form {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--line);
+  font: 400 0.85rem var(--font-mono);
+  background: rgba(255, 255, 255, 0.02);
+}
+#cli-input {
+  flex: 1;
+  background: none;
+  border: 0;
+  outline: none;
+  color: var(--text);
+  font: inherit;
+  caret-color: var(--cyan);
+}
+#cli-input::placeholder {
+  color: var(--faint);
+}
+
+/* Quiz */
+.q {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  padding: 20px 22px;
+  margin-bottom: 14px;
+}
+.q legend,
+.q .q-title {
+  font-weight: 800;
+  margin-bottom: 12px;
+  display: block;
+}
+.q label {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 9px 12px;
+  border-radius: 9px;
+  cursor: pointer;
+  color: var(--muted);
+  border: 1px solid transparent;
+  transition: 0.15s;
+  font-size: 0.93rem;
+}
+.q label:hover {
+  background: rgba(56, 224, 255, 0.05);
+  color: var(--text);
+}
+.q input {
+  accent-color: var(--cyan);
+  margin-top: 4px;
+}
+.q label.right {
+  border-color: rgba(60, 245, 182, 0.5);
+  background: rgba(60, 245, 182, 0.08);
+  color: var(--teal);
+}
+.q label.wrong {
+  border-color: rgba(255, 77, 109, 0.5);
+  background: rgba(255, 77, 109, 0.08);
+  color: var(--red);
+}
+.q .why {
+  display: none;
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 9px;
+  font-size: 0.86rem;
+  background: rgba(77, 163, 255, 0.07);
+  border: 1px solid rgba(77, 163, 255, 0.25);
+  color: var(--muted);
+}
+.q.graded .why {
+  display: block;
+}
+.quiz-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.score {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.score svg {
+  width: 56px;
+  height: 56px;
+  transform: rotate(-90deg);
+}
+.score .bgc {
+  fill: none;
+  stroke: #1a2438;
+  stroke-width: 6;
+}
+.score .fgc {
+  fill: none;
+  stroke: var(--teal);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 163.4;
+  stroke-dashoffset: 163.4;
+  transition: stroke-dashoffset 1s ease;
+}
+.score.fail .fgc {
+  stroke: var(--red);
+}
+.score b {
+  font: 700 1.2rem var(--font-disp);
+  color: var(--text);
+  display: block;
+}
+.score small {
+  font: 400 0.64rem var(--font-mono);
+  letter-spacing: 0.16em;
+  color: var(--faint);
+  text-transform: uppercase;
+}
+
+/* Lesson nav */
+.l-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 10px 0 60px;
+}
+
+@media (max-width: 640px) {
+  .triad-card.c {
+    transform: rotateY(0deg) translateZ(150px);
+  }
+  .triad-card.i {
+    transform: rotateY(120deg) translateZ(150px);
+  }
+  .triad-card.a {
+    transform: rotateY(240deg) translateZ(150px);
+  }
+  .map {
+    font-size: 0.78rem;
+  }
+  .map th,
+  .map td {
+    padding: 8px 6px;
+  }
+}

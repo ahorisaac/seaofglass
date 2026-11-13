@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learning Paths & Curriculum — Sea of Glass | Shidoon</title>
+    <meta
+      name="description"
+      content="The full Sea of Glass curriculum: 23 modules, 137 lessons and labs across Cyber Security Fundamentals and Penetration Testing on Kali & Parrot. Search, explore, download."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#070b13" />
+    <link
+      rel="canonical"
+      href="https://seaofglass.shidoon.com/pages/paths.html"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Learning Paths — Sea of Glass" />
+    <meta
+      property="og:description"
+      content="23 modules · 137 lessons & labs · Kali / Parrot. The full curriculum."
+    />
+    <meta
+      property="og:url"
+      content="https://seaofglass.shidoon.com/pages/paths.html"
+    />
+    <meta
+      property="og:image"
+      content="https://seaofglass.shidoon.com/assets/img/og-cover.svg"
+    />
+    <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/base.css" />
+    <link rel="stylesheet" href="../assets/css/paths.css" />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <!-- Icon sprite (shared) -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <symbol id="i-menu" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </symbol>
+        <symbol id="i-x" viewBox="0 0 24 24">
+          <path d="M6 6l12 12M18 6L6 18" />
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24">
+          <path d="M4 12h16M13 5l7 7-7 7" />
+        </symbol>
+        <symbol id="i-up" viewBox="0 0 24 24">
+          <path d="M12 20V4M5 11l7-7 7 7" />
+        </symbol>
+        <symbol id="i-chev" viewBox="0 0 24 24">
+          <path d="M6 9l6 6 6-6" />
+        </symbol>
+        <symbol id="i-shield" viewBox="0 0 24 24">
+          <path d="M12 3l7 3v5c0 4.6-3 7.6-7 9-4-1.4-7-4.4-7-9V6z" />
+          <path d="M9 11.5l2 2 4-4" />
+        </symbol>
+        <symbol id="i-target" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="7" />
+          <circle cx="12" cy="12" r="2.5" />
+          <path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
+        </symbol>
+        <symbol id="i-terminal" viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="16" rx="2" />
+          <path d="M7 9l3 3-3 3M12 15h5" />
+        </symbol>
+        <symbol id="i-book" viewBox="0 0 24 24">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+          <path
+            d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+          />
+        </symbol>
+        <symbol id="i-flag" viewBox="0 0 24 24">
+          <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+          <path d="M4 22v-7" />
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24">
+          <path d="M4 12.5l5.5 5.5L20 6.5" />
+        </symbol>
+        <symbol id="i-search" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7" />
+          <path d="M16.5 16.5L21 21" />
+        </symbol>
+        <symbol id="i-download" viewBox="0 0 24 24">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <path d="M7 10l5 5 5-5M12 15V3" />
+        </symbol>
+        <symbol id="i-external" viewBox="0 0 24 24">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+          <path d="M15 3h6v6M10 14L21 3" />
+        </symbol>
+        <symbol id="i-lock" viewBox="0 0 24 24">
+          <rect x="4" y="11" width="16" height="10" rx="2" />
+          <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+        </symbol>
+        <symbol id="i-flask" viewBox="0 0 24 24">
+          <path
+            d="M9 3h6M10 3v6l-5.5 9A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-3L14 9V3"
+          />
+          <path d="M7.5 15h9" />
+        </symbol>
+        <symbol id="i-coffee" viewBox="0 0 24 24">
+          <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
+          <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4z" />
+          <path d="M6 2v3M10 2v3M14 2v3" />
+        </symbol>
+        <symbol id="i-mail" viewBox="0 0 24 24">
+          <rect x="2" y="4" width="20" height="16" rx="2" />
+          <path d="M22 6l-10 7L2 6" />
+        </symbol>
+        <symbol id="i-cpu" viewBox="0 0 24 24">
+          <rect x="6" y="6" width="12" height="12" rx="1" />
+          <rect x="10" y="10" width="4" height="4" />
+          <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
+        </symbol>
+      </defs>
+    </svg>
+
+    <div class="aurora a1" aria-hidden="true"></div>
+    <div class="aurora a2" aria-hidden="true"></div>
+    <div id="cursor" aria-hidden="true"></div>
+    <div id="progress" aria-hidden="true"></div>
+
+    <header id="nav">
+      <div class="container nav-in">
+        <a class="brand" href="../index.html" aria-label="Sea of Glass — home">
+          <img
+            src="../assets/img/shidoon-mark.svg"
+            alt=""
+            width="36"
+            height="36"
+          />
+          <span class="brand-txt"
+            ><small>SHIDOON</small><strong>SEA OF GLASS</strong></span
+          >
+        </a>
+        <nav id="nav-menu" aria-label="Primary">
+          <a href="../index.html">Home</a>
+          <a href="../index.html#about">About</a>
+          <a href="../index.html#globe">Live globe</a>
+          <a href="paths.html" class="active" aria-current="page">Curriculum</a>
+          <a class="btn small primary" href="concepts/cia-triad.html"
+            >Try a lesson <svg class="ic"><use href="#i-arrow" /></svg
+          ></a>
+        </nav>
+        <button
+          id="nav-toggle"
+          aria-label="Menu"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+        >
+          <svg class="ic m-open"><use href="#i-menu" /></svg
+          ><svg class="ic m-close"><use href="#i-x" /></svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- Page hero -->
+      <section class="p-hero">
+        <div class="container">
+          <p class="eyebrow reveal">Shidoon // Curriculum</p>
+          <h1 class="reveal" style="--d: 0.05s">Learning <span>Paths</span></h1>
+          <p class="lead reveal" style="--d: 0.1s">
+            Two career tracks built like operations: brief → hands-on →
+            checkpoint. Every lesson ships with a live terminal and a quiz. New
+            lessons go live weekly.
+          </p>
+          <ul class="p-stats reveal" style="--d: 0.15s">
+            <li><b id="st-modules">—</b><span>modules</span></li>
+            <li><b id="st-lessons">—</b><span>lessons &amp; labs</span></li>
+            <li><b id="st-labs">—</b><span>hands-on labs</span></li>
+            <li><b id="st-quizzes">—</b><span>checkpoints</span></li>
+          </ul>
+          <p class="ethics reveal" style="--d: 0.2s">
+            <svg class="ic"><use href="#i-lock" /></svg> Everything here is for
+            authorised testing and defence only. Get written permission before
+            touching any system you don't own.
+          </p>
+        </div>
+      </section>
+
+      <!-- Toolbar: tabs + search + export -->
+      <div class="toolbar" id="toolbar">
+        <div class="container tb-in">
+          <div class="tabs" role="tablist" aria-label="Curriculum views">
+            <button
+              data-tab="all"
+              class="active"
+              role="tab"
+              aria-selected="true"
+            >
+              All
+            </button>
+            <button data-tab="fundamentals" role="tab" aria-selected="false">
+              <svg class="ic"><use href="#i-shield" /></svg> Fundamentals
+            </button>
+            <button data-tab="pentest" role="tab" aria-selected="false">
+              <svg class="ic"><use href="#i-target" /></svg> Pentest
+            </button>
+            <button data-tab="lab" role="tab" aria-selected="false">
+              <svg class="ic"><use href="#i-flask" /></svg> Lab setup
+            </button>
+          </div>
+          <label class="search">
+            <svg class="ic"><use href="#i-search" /></svg>
+            <input
+              id="search"
+              type="search"
+              placeholder="Search 137 lessons… (e.g. nmap, phishing, TLS)"
+              aria-label="Search lessons"
+            />
+          </label>
+          <button id="dl-md" class="btn tiny ghost">
+            <svg class="ic"><use href="#i-download" /></svg> Syllabus .md
+          </button>
+        </div>
+        <p class="container search-info"><span id="search-count"></span></p>
+      </div>
+
+      <!-- How lessons work -->
+      <section class="container how" id="how">
+        <div>
+          <svg class="ic"><use href="#i-book" /></svg>
+          <h3>Read the brief</h3>
+          <p>
+            Simple, memorable explanations with real examples and 3D models.
+          </p>
+        </div>
+        <div>
+          <svg class="ic"><use href="#i-terminal" /></svg>
+          <h3>Type the commands</h3>
+          <p>A beautiful CLI inside every lesson, with instant feedback.</p>
+        </div>
+        <div>
+          <svg class="ic"><use href="#i-flag" /></svg>
+          <h3>Prove it</h3>
+          <p>Capture the flag, pass the checkpoint, save your progress.</p>
+        </div>
+        <a class="how-cta" href="concepts/cia-triad.html"
+          >Try the live sample lesson
+          <svg class="ic"><use href="#i-arrow" /></svg
+        ></a>
+      </section>
+
+      <!-- Tracks render here from curriculum.js -->
+      <div class="container" id="tracks"></div>
+      <p class="container empty hidden" id="empty">
+        No lessons match that search. Try “nmap”, “phishing” or “tls”.
+      </p>
+
+      <!-- Lab setup -->
+      <section class="container lab-sec" id="lab" data-tracksec="lab">
+        <p class="eyebrow">Lab // Build your range</p>
+        <h2>Your first hacking lab — safely.</h2>
+        <p class="lead">
+          Run Kali or Parrot inside a virtual machine on your own computer.
+          Isolated, snapshottable, free. Practise only against lab targets you
+          own.
+        </p>
+        <div class="lab-grid">
+          <article class="lab-card kali">
+            <header>
+              <svg class="ic"><use href="#i-terminal" /></svg>
+              <h3>Kali Linux</h3>
+              <span class="l-chip">Attacker's standard</span>
+            </header>
+            <p>
+              Debian-based, 600+ security tools preinstalled. The industry
+              default for penetration testing.
+            </p>
+            <ol class="lab-steps">
+              <li>
+                <b>1 · Hypervisor</b> — install
+                <a
+                  href="https://www.virtualbox.org/"
+                  target="_blank"
+                  rel="noopener"
+                  >VirtualBox <svg class="ic"><use href="#i-external" /></svg
+                ></a>
+                (or VMware).
+              </li>
+              <li>
+                <b>2 · Image</b> — grab the prebuilt VM from
+                <a
+                  href="https://www.kali.org/get-kali/"
+                  target="_blank"
+                  rel="noopener"
+                  >kali.org/get-kali
+                  <svg class="ic"><use href="#i-external" /></svg></a
+                >, import it, boot.
+              </li>
+              <li>
+                <b>3 · Login</b> — default credentials:
+                <div class="code">
+                  <pre id="code-kali-login">kali / kali</pre>
+                  <button class="copy" data-copy="#code-kali-login">
+                    Copy
+                  </button>
+                </div>
+              </li>
+              <li>
+                <b>4 · Update everything</b>:
+                <div class="code">
+                  <pre id="code-kali-update">
+sudo apt update && sudo apt full-upgrade -y</pre
+                  >
+                  <button class="copy" data-copy="#code-kali-update">
+                    Copy
+                  </button>
+                </div>
+              </li>
+              <li>
+                <b>5 · Snapshot</b> — take a VM snapshot now. Break things
+                fearlessly, roll back instantly.
+              </li>
+            </ol>
+          </article>
+          <article class="lab-card parrot">
+            <header>
+              <svg class="ic"><use href="#i-shield" /></svg>
+              <h3>Parrot OS</h3>
+              <span class="l-chip">Light &amp; private</span>
+            </header>
+            <p>
+              Lighter on RAM, privacy-friendly, gorgeous out of the box. A
+              favourite on modest laptops.
+            </p>
+            <ol class="lab-steps">
+              <li>
+                <b>1 · Hypervisor</b> — same as Kali: VirtualBox or VMware.
+              </li>
+              <li>
+                <b>2 · Image</b> — download the Security Edition from
+                <a
+                  href="https://parrotsec.org/download/"
+                  target="_blank"
+                  rel="noopener"
+                  >parrotsec.org
+                  <svg class="ic"><use href="#i-external" /></svg></a
+                >.
+              </li>
+              <li>
+                <b>3 · Update</b>:
+                <div class="code">
+                  <pre id="code-parrot-update">
+sudo apt update && sudo apt full-upgrade -y</pre
+                  >
+                  <button class="copy" data-copy="#code-parrot-update">
+                    Copy
+                  </button>
+                </div>
+              </li>
+              <li>
+                <b>4 · Core tools</b> (Home edition):
+                <div class="code">
+                  <pre id="code-parrot-tools">
+sudo apt install -y nmap burpsuite metasploit-framework</pre
+                  >
+                  <button class="copy" data-copy="#code-parrot-tools">
+                    Copy
+                  </button>
+                </div>
+              </li>
+              <li>
+                <b>5 · Isolate</b> — keep the lab on a host-only network. Never
+                point tools at systems you don't own.
+              </li>
+            </ol>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container f-grid">
+        <div class="f-brand">
+          <a class="brand" href="../index.html"
+            ><img
+              src="../assets/img/shidoon-mark.svg"
+              alt=""
+              width="34"
+              height="34"
+            />
+            <span class="brand-txt"
+              ><small>SHIDOON</small><strong>SEA OF GLASS</strong></span
+            ></a
+          >
+          <p>Immersive cyber-security education. See through every attack.</p>
+          <p class="f-status">
+            <i class="live-dot ok"></i> All systems nominal
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h4>Explore</h4>
+          <a href="../index.html">Overview</a
+          ><a href="../index.html#about">About us</a
+          ><a href="../index.html#why">Why us</a
+          ><a href="../index.html#globe">Live globe</a>
+        </nav>
+        <nav aria-label="Learn">
+          <h4>Learn</h4>
+          <a
+            href="#top"
+            onclick="
+              scrollTo({ top: 0, behavior: 'smooth' });
+              return false;
+            "
+            >All paths</a
+          ><a href="#fundamentals">Fundamentals</a
+          ><a href="#pentest">Penetration testing</a><a href="#lab">Lab setup</a
+          ><a href="concepts/cia-triad.html">Sample lesson</a>
+        </nav>
+        <nav aria-label="Connect">
+          <h4>Connect</h4>
+          <a
+            href="https://www.buymeacoffee.com/ahorisaac"
+            target="_blank"
+            rel="noopener"
+            >Buy me a coffee</a
+          ><a href="mailto:ahor@shidoon.com">Email the creator</a>
+        </nav>
+      </div>
+      <div class="container f-bottom">
+        <span
+          >© <span data-year>2026</span> Shidoon · Sea of Glass. All rights
+          reserved.</span
+        >
+        <span class="f-ethics"
+          ><svg class="ic"><use href="#i-shield" /></svg> Train ethically. Hack
+          only what you own or have written permission to test.</span
+        >
+      </div>
+    </footer>
+
+    <button id="to-top" aria-label="Back to top">
+      <svg class="ic"><use href="#i-up" /></svg>
+    </button>
+    <script type="module" src="../assets/js/core/main.js"></script>
+    <script type="module" src="../assets/js/paths.js"></script>
+  </body>
+</html>

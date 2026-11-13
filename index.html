@@ -1,0 +1,965 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Sea of Glass — Learn Cyber Security & Penetration Testing in 3D | Shidoon
+    </title>
+    <meta
+      name="description"
+      content="Watch a real cyber attack unfold in 3D, then learn to run it, break it and defend it. Hands-on Kali & Parrot labs, interactive terminals and quizzes. Free to start."
+    />
+    <meta
+      name="keywords"
+      content="cyber security course, penetration testing, kali linux, parrot os, ethical hacking, learn cybersecurity, 3d learning platform"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#070b13" />
+    <link rel="canonical" href="https://seaofglass.shidoon.com/" />
+
+    <!-- Social cards -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Sea of Glass · Shidoon" />
+    <meta
+      property="og:title"
+      content="Sea of Glass — See through every attack."
+    />
+    <meta
+      property="og:description"
+      content="Immersive 3D cyber-security education. Real kill-chain labs on Kali & Parrot, a terminal in every lesson."
+    />
+    <meta property="og:url" content="https://seaofglass.shidoon.com/" />
+    <meta
+      property="og:image"
+      content="https://seaofglass.shidoon.com/assets/img/og-cover.svg"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Sea of Glass — See through every attack."
+    />
+    <meta
+      name="twitter:description"
+      content="Immersive 3D cyber-security education by Shidoon."
+    />
+    <meta
+      name="twitter:image"
+      content="https://seaofglass.shidoon.com/assets/img/og-cover.svg"
+    />
+
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/home.css" />
+
+    <!-- Progressive enhancement flag -->
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+
+    <!-- three.js import map (pinned) -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
+
+    <!-- Structured data for search engines -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "name": "Shidoon",
+            "url": "https://seaofglass.shidoon.com/",
+            "logo": "https://seaofglass.shidoon.com/assets/img/shidoon-mark.svg",
+            "founder": { "@type": "Person", "name": "Ahor Isaac" }
+          },
+          {
+            "@type": "WebSite",
+            "name": "Sea of Glass",
+            "url": "https://seaofglass.shidoon.com/",
+            "publisher": { "@type": "Organization", "name": "Shidoon" }
+          },
+          {
+            "@type": "Course",
+            "name": "Cyber Security Fundamentals",
+            "description": "Defend-first foundations: CIA, malware, networking, cryptography, defense frameworks and your first Kali lab.",
+            "provider": { "@type": "Organization", "name": "Shidoon" },
+            "isAccessibleForFree": true
+          },
+          {
+            "@type": "Course",
+            "name": "Penetration Testing",
+            "description": "Offensive operations on Kali & Parrot: recon, web exploitation, system exploitation, evasion, cloud, OSINT, AI security and full engagements.",
+            "provider": { "@type": "Organization", "name": "Shidoon" },
+            "isAccessibleForFree": true
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <!-- Icon sprite (shared across pages) -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <symbol id="i-menu" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </symbol>
+        <symbol id="i-x" viewBox="0 0 24 24">
+          <path d="M6 6l12 12M18 6L6 18" />
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24">
+          <path d="M4 12h16M13 5l7 7-7 7" />
+        </symbol>
+        <symbol id="i-up" viewBox="0 0 24 24">
+          <path d="M12 20V4M5 11l7-7 7 7" />
+        </symbol>
+        <symbol id="i-chev" viewBox="0 0 24 24">
+          <path d="M6 9l6 6 6-6" />
+        </symbol>
+        <symbol id="i-play" viewBox="0 0 24 24">
+          <path d="M8 5l11 7-11 7z" fill="currentColor" stroke="none" />
+        </symbol>
+        <symbol id="i-pause" viewBox="0 0 24 24">
+          <path d="M8 5v14M16 5v14" stroke-width="3" />
+        </symbol>
+        <symbol id="i-replay" viewBox="0 0 24 24">
+          <path d="M20 12a8 8 0 1 1-2.3-5.6" />
+          <path d="M20 4v4h-4" />
+        </symbol>
+        <symbol id="i-shield" viewBox="0 0 24 24">
+          <path d="M12 3l7 3v5c0 4.6-3 7.6-7 9-4-1.4-7-4.4-7-9V6z" />
+          <path d="M9 11.5l2 2 4-4" />
+        </symbol>
+        <symbol id="i-target" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="7" />
+          <circle cx="12" cy="12" r="2.5" />
+          <path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
+        </symbol>
+        <symbol id="i-terminal" viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="16" rx="2" />
+          <path d="M7 9l3 3-3 3M12 15h5" />
+        </symbol>
+        <symbol id="i-cube" viewBox="0 0 24 24">
+          <path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z" />
+          <path d="M4 7.5l8 4.5 8-4.5M12 12v9" />
+        </symbol>
+        <symbol id="i-chain" viewBox="0 0 24 24">
+          <path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7" />
+          <path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7" />
+        </symbol>
+        <symbol id="i-spark" viewBox="0 0 24 24">
+          <path
+            d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"
+          />
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24">
+          <path d="M4 12.5l5.5 5.5L20 6.5" />
+        </symbol>
+        <symbol id="i-coffee" viewBox="0 0 24 24">
+          <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
+          <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4z" />
+          <path d="M6 2v3M10 2v3M14 2v3" />
+        </symbol>
+        <symbol id="i-mail" viewBox="0 0 24 24">
+          <rect x="2" y="4" width="20" height="16" rx="2" />
+          <path d="M22 6l-10 7L2 6" />
+        </symbol>
+        <symbol id="i-globe" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M3 12h18" />
+          <path
+            d="M12 3a14 14 0 0 1 3.6 9A14 14 0 0 1 12 21a14 14 0 0 1-3.6-9A14 14 0 0 1 12 3z"
+          />
+        </symbol>
+        <symbol id="i-book" viewBox="0 0 24 24">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+          <path
+            d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+          />
+        </symbol>
+        <symbol id="i-flask" viewBox="0 0 24 24">
+          <path
+            d="M9 3h6M10 3v6l-5.5 9A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-3L14 9V3"
+          />
+          <path d="M7.5 15h9" />
+        </symbol>
+        <symbol id="i-lock" viewBox="0 0 24 24">
+          <rect x="4" y="11" width="16" height="10" rx="2" />
+          <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+        </symbol>
+        <symbol id="i-eye" viewBox="0 0 24 24">
+          <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" />
+          <circle cx="12" cy="12" r="3" />
+        </symbol>
+        <symbol id="i-bolt" viewBox="0 0 24 24">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9z" />
+        </symbol>
+        <symbol id="i-flag" viewBox="0 0 24 24">
+          <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+          <path d="M4 22v-7" />
+        </symbol>
+        <symbol id="i-search" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7" />
+          <path d="M16.5 16.5L21 21" />
+        </symbol>
+        <symbol id="i-download" viewBox="0 0 24 24">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <path d="M7 10l5 5 5-5M12 15V3" />
+        </symbol>
+        <symbol id="i-external" viewBox="0 0 24 24">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+          <path d="M15 3h6v6M10 14L21 3" />
+        </symbol>
+        <symbol id="i-user" viewBox="0 0 24 24">
+          <circle cx="12" cy="8" r="4" />
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+        </symbol>
+        <symbol id="i-cpu" viewBox="0 0 24 24">
+          <rect x="6" y="6" width="12" height="12" rx="1" />
+          <rect x="10" y="10" width="4" height="4" />
+          <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
+        </symbol>
+        <symbol id="i-heart" viewBox="0 0 24 24">
+          <path
+            d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"
+          />
+        </symbol>
+      </defs>
+    </svg>
+
+    <!-- Ambient layers -->
+    <div class="aurora a1" aria-hidden="true"></div>
+    <div class="aurora a2" aria-hidden="true"></div>
+    <div id="cursor" aria-hidden="true"></div>
+    <div id="progress" aria-hidden="true"></div>
+
+    <!-- ============ NAV ============ -->
+    <header id="nav">
+      <div class="container nav-in">
+        <a class="brand" href="#top" aria-label="Sea of Glass — home">
+          <img
+            src="assets/img/shidoon-mark.svg"
+            alt=""
+            width="36"
+            height="36"
+          />
+          <span class="brand-txt"
+            ><small>SHIDOON</small><strong>SEA OF GLASS</strong></span
+          >
+        </a>
+        <nav id="nav-menu" aria-label="Primary">
+          <a href="#about">About</a>
+          <a href="#why">Why us</a>
+          <a href="#globe">Live globe</a>
+          <a href="pages/paths.html">Curriculum</a>
+          <a class="btn small primary" href="#start"
+            >Get started <svg class="ic"><use href="#i-arrow" /></svg
+          ></a>
+        </nav>
+        <button
+          id="nav-toggle"
+          aria-label="Menu"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+        >
+          <svg class="ic m-open"><use href="#i-menu" /></svg>
+          <svg class="ic m-close"><use href="#i-x" /></svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- ============ HERO · 3D ATTACK PIPELINE ============ -->
+      <section class="hero" id="top" data-section>
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow reveal">Shidoon // Immersive cyber range</p>
+            <h1 class="hero-title reveal" style="--d: 0.07s">
+              SEA OF <span>GLASS</span>
+            </h1>
+            <p class="hero-tag reveal" style="--d: 0.12s">
+              See through every attack.
+            </p>
+            <p class="lead reveal" style="--d: 0.16s">
+              Watch a real breach unfold in 3D — then learn to run it, break it
+              and defend it. Hands-on labs on <b>Kali</b> &amp; <b>Parrot</b>,
+              from your first <code>nmap</code> to a full engagement report.
+            </p>
+            <div class="hero-cta reveal" style="--d: 0.22s">
+              <a class="btn primary" href="pages/paths.html"
+                >Start learning — free
+                <svg class="ic"><use href="#i-arrow" /></svg
+              ></a>
+              <a class="btn ghost" href="#globe"
+                ><svg class="ic"><use href="#i-globe" /></svg> See live
+                attacks</a
+              >
+            </div>
+            <ul class="hero-stats reveal" style="--d: 0.28s">
+              <li><b data-count="23">0</b><span>modules</span></li>
+              <li><b data-count="137">0</b><span>lessons &amp; labs</span></li>
+              <li><b data-count="2">0</b><span>career tracks</span></li>
+            </ul>
+          </div>
+
+          <!-- Live kill-chain simulation -->
+          <div class="hero-viz reveal" style="--d: 0.18s">
+            <div class="sim-card" id="sim-card">
+              <div class="sim-head">
+                <span class="sim-title"
+                  ><i class="live-dot"></i> OPERATION GLASSFALL</span
+                >
+                <span class="sim-badge">SANDBOX · SIMULATED</span>
+                <span class="sim-tools">
+                  <button
+                    id="sim-pause"
+                    class="tool"
+                    aria-label="Pause simulation"
+                    aria-pressed="false"
+                    title="Pause / play"
+                  >
+                    <svg class="ic ic-pause"><use href="#i-pause" /></svg>
+                    <svg class="ic ic-play hidden"><use href="#i-play" /></svg>
+                  </button>
+                  <button
+                    id="sim-replay"
+                    class="tool"
+                    aria-label="Replay attack"
+                    title="Replay"
+                  >
+                    <svg class="ic"><use href="#i-replay" /></svg>
+                  </button>
+                </span>
+              </div>
+              <div class="sim-progress"><i id="sim-bar"></i></div>
+
+              <div class="sim-stage">
+                <canvas
+                  id="hero-canvas"
+                  aria-label="3D simulation of a cyber attack pipeline"
+                ></canvas>
+                <div
+                  class="sim-labels"
+                  id="hero-labels"
+                  aria-hidden="true"
+                ></div>
+                <!-- Static fallback if WebGL is unavailable -->
+                <div class="viz-fallback" id="hero-fallback" aria-hidden="true">
+                  <svg viewBox="0 0 640 260">
+                    <g class="fb-line">
+                      <path
+                        d="M40 150 L140 110 L240 160 L340 100 L440 150 L540 110 L600 140"
+                      />
+                    </g>
+                    <g class="fb-nodes">
+                      <circle cx="40" cy="150" r="12" />
+                      <circle cx="140" cy="110" r="12" />
+                      <circle cx="240" cy="160" r="12" />
+                      <circle cx="340" cy="100" r="12" />
+                      <circle cx="440" cy="150" r="12" />
+                      <circle cx="540" cy="110" r="12" />
+                      <circle cx="600" cy="140" r="15" />
+                    </g>
+                    <g class="fb-text">
+                      <text x="40" y="185">KALI</text>
+                      <text x="140" y="85">RECON</text>
+                      <text x="240" y="195">SCAN</text>
+                      <text x="340" y="75">EXPLOIT</text>
+                      <text x="440" y="185">ESCALATE</text>
+                      <text x="540" y="85">EXFIL</text>
+                      <text x="592" y="175">TARGET</text>
+                    </g>
+                  </svg>
+                </div>
+              </div>
+
+              <div
+                class="sim-chips"
+                id="sim-chips"
+                role="group"
+                aria-label="Attack phases — click to jump"
+              >
+                <button data-phase="0"><i>01</i>Recon</button>
+                <button data-phase="1"><i>02</i>Scan</button>
+                <button data-phase="2"><i>03</i>Exploit</button>
+                <button data-phase="3"><i>04</i>Escalate</button>
+                <button data-phase="4"><i>05</i>Exfil</button>
+              </div>
+              <p class="sim-status">
+                <span id="sim-phase">PHASE 01 / 05 — RECONNAISSANCE</span
+                ><span class="dim">safe lab · no real traffic</span>
+              </p>
+
+              <div class="term">
+                <div class="term-bar">
+                  <i class="dot r"></i><i class="dot y"></i><i class="dot g"></i
+                  ><span>shidoon@kali: ~/lab</span><em>KALI LINUX</em>
+                </div>
+                <div
+                  class="term-body"
+                  id="hero-term-body"
+                  aria-live="polite"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a class="scroll-cue" href="#about" aria-label="Scroll to About"
+          ><svg class="ic"><use href="#i-chev" /></svg
+        ></a>
+      </section>
+
+      <!-- ============ ABOUT ============ -->
+      <section class="sec" id="about" data-section>
+        <div class="container about-grid">
+          <div>
+            <p class="eyebrow reveal">01 // About us</p>
+            <h2 class="reveal" style="--d: 0.05s">
+              Clarity in a sea of noise.
+            </h2>
+            <p class="lead reveal" style="--d: 0.1s">
+              Security education is either shallow videos or thousand-page
+              documents. <b>Shidoon</b> built <b>Sea of Glass</b> to be neither:
+              every concept rendered as a living 3D model, every lesson armed
+              with a real terminal, every attack taught from both sides of the
+              wire.
+            </p>
+            <ul class="values">
+              <li class="reveal" style="--d: 0.14s">
+                <span class="v-ic"
+                  ><svg class="ic"><use href="#i-eye" /></svg
+                ></span>
+                <div>
+                  <h3>Glass-box teaching</h3>
+                  <p>
+                    No black boxes. You see how every attack works, packet by
+                    packet, before you ever run it.
+                  </p>
+                </div>
+              </li>
+              <li class="reveal" style="--d: 0.2s">
+                <span class="v-ic"
+                  ><svg class="ic"><use href="#i-flask" /></svg
+                ></span>
+                <div>
+                  <h3>Real tools, safe sandboxes</h3>
+                  <p>
+                    nmap, Burp, Metasploit, hashcat — practised in isolated labs
+                    on Kali &amp; Parrot, never on real targets.
+                  </p>
+                </div>
+              </li>
+              <li class="reveal" style="--d: 0.26s">
+                <span class="v-ic"
+                  ><svg class="ic"><use href="#i-spark" /></svg
+                ></span>
+                <div>
+                  <h3>Built for recall</h3>
+                  <p>
+                    Bite-size theory, memory hooks, flags and checkpoints —
+                    engineered so knowledge actually sticks.
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="about-visual reveal" style="--d: 0.15s">
+            <div class="crystal-scene" aria-hidden="true">
+              <div class="crystal-ring r1"></div>
+              <div class="crystal-ring r2"></div>
+              <div class="crystal-cube">
+                <i class="f f1"></i><i class="f f2"></i><i class="f f3"></i
+                ><i class="f f4"></i><i class="f f5"></i><i class="f f6"></i>
+              </div>
+              <div class="crystal-core"></div>
+              <span class="orbit-chip c1">CIA</span>
+              <span class="orbit-chip c2">TLS 1.3</span>
+              <span class="orbit-chip c3">0-DAY</span>
+            </div>
+            <ul class="about-stats">
+              <li>
+                <b data-count="2026" data-plain="1">0</b><span>founded</span>
+              </li>
+              <li><b data-count="23">0</b><span>modules</span></li>
+              <li><b data-count="55">0</b><span>hands-on labs</span></li>
+              <li>
+                <b data-count="100" data-suffix="%">0</b><span>practical</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ WHY ============ -->
+      <section class="sec" id="why" data-section>
+        <div class="container">
+          <p class="eyebrow reveal">02 // Why Sea of Glass</p>
+          <h2 class="reveal" style="--d: 0.05s">
+            The platform we wished existed.
+          </h2>
+          <p class="lead reveal" style="--d: 0.1s">
+            Not another video dump. A range where you
+            <b>watch it, type it, break it, prove it</b>.
+          </p>
+
+          <div class="why-grid">
+            <article class="f-card tilt glow-card reveal">
+              <span class="f-num">01</span>
+              <span class="f-ic cyan"
+                ><svg class="ic"><use href="#i-target" /></svg
+              ></span>
+              <h3>Attack-first curriculum</h3>
+              <p>
+                Every topic from both sides: how it's exploited, how it's
+                detected, how it's fixed. Think like an attacker, work like an
+                engineer.
+              </p>
+            </article>
+            <article class="f-card tilt glow-card reveal" style="--d: 0.06s">
+              <span class="f-num">02</span>
+              <span class="f-ic teal"
+                ><svg class="ic"><use href="#i-terminal" /></svg
+              ></span>
+              <h3>A terminal in every lesson</h3>
+              <p>
+                Type real commands in a beautiful in-browser CLI. Muscle memory,
+                not memorisation — with instant feedback on every line.
+              </p>
+            </article>
+            <article class="f-card tilt glow-card reveal" style="--d: 0.12s">
+              <span class="f-num">03</span>
+              <span class="f-ic violet"
+                ><svg class="ic"><use href="#i-cube" /></svg
+              ></span>
+              <h3>3D that explains</h3>
+              <p>
+                MITM, TLS handshakes, botnets and kill chains rendered as living
+                models you can rotate, pause and interrogate.
+              </p>
+            </article>
+            <article class="f-card tilt glow-card reveal" style="--d: 0.18s">
+              <span class="f-num">04</span>
+              <span class="f-ic red"
+                ><svg class="ic"><use href="#i-chain" /></svg
+              ></span>
+              <h3>Kill-chain labs</h3>
+              <p>
+                Guided operations on Kali &amp; Parrot: recon → exploit →
+                escalate → exfiltrate → report. The full engagement, not
+                isolated tricks.
+              </p>
+            </article>
+            <article class="f-card tilt glow-card reveal" style="--d: 0.24s">
+              <span class="f-num">05</span>
+              <span class="f-ic amber"
+                ><svg class="ic"><use href="#i-spark" /></svg
+              ></span>
+              <h3>Recall, engineered</h3>
+              <p>
+                Memory hooks, capture-the-flag missions and 23 quiz checkpoints
+                turn “I read it” into “I own it”.
+              </p>
+            </article>
+            <article class="f-card tilt glow-card reveal" style="--d: 0.3s">
+              <span class="f-num">06</span>
+              <span class="f-ic blue"
+                ><svg class="ic"><use href="#i-shield" /></svg
+              ></span>
+              <h3>Ethical &amp; current</h3>
+              <p>
+                OWASP / NIST aligned, permission-first always, and updated for
+                what's next — including AI &amp; LLM attack surfaces.
+              </p>
+            </article>
+          </div>
+
+          <p class="why-note reveal">
+            No 40-hour video dumps · No toy simulators · No paywalled basics
+          </p>
+
+          <div class="band reveal">
+            <div><b data-count="23">0</b><span>modules</span></div>
+            <div><b data-count="137">0</b><span>lessons &amp; labs</span></div>
+            <div><b data-count="55">0</b><span>hands-on labs</span></div>
+            <div><b data-count="23">0</b><span>quiz checkpoints</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 3D GLOBE ============ -->
+      <section class="sec globe-sec" id="globe" data-section>
+        <div class="container">
+          <p class="eyebrow reveal">03 // Live attack telemetry</p>
+          <h2 class="reveal" style="--d: 0.05s">The internet never sleeps.</h2>
+          <p class="lead reveal" style="--d: 0.1s">
+            A living map of simulated attacks across the planet.
+            <b>Drag to spin, scroll to zoom</b> — then tune the storm yourself.
+          </p>
+
+          <div class="globe-grid">
+            <div class="globe-card reveal" style="--d: 0.12s">
+              <div class="globe-stage">
+                <canvas
+                  id="globe-canvas"
+                  aria-label="Interactive 3D globe of simulated cyber attacks"
+                ></canvas>
+                <div
+                  class="viz-fallback"
+                  id="globe-fallback"
+                  aria-hidden="true"
+                >
+                  <svg viewBox="0 0 400 400">
+                    <circle cx="200" cy="200" r="150" class="fb-sphere" />
+                    <ellipse
+                      cx="200"
+                      cy="200"
+                      rx="150"
+                      ry="55"
+                      class="fb-mer"
+                    />
+                    <ellipse
+                      cx="200"
+                      cy="200"
+                      rx="55"
+                      ry="150"
+                      class="fb-mer"
+                    />
+                    <path d="M80 250 Q200 40 320 230" class="fb-arc a" />
+                    <path d="M110 140 Q230 330 310 160" class="fb-arc b" />
+                  </svg>
+                </div>
+                <span class="globe-hint">drag to spin · scroll to zoom</span>
+              </div>
+
+              <!-- Live control console -->
+              <div class="globe-controls">
+                <label class="gc"
+                  ><span>Auto-spin</span
+                  ><input type="checkbox" id="g-rotate" checked /><i
+                    class="switch"
+                  ></i
+                ></label>
+                <label class="gc range"
+                  ><span>Spin speed <output id="g-speed-out">0.6</output></span
+                  ><input
+                    type="range"
+                    id="g-speed"
+                    min="0"
+                    max="2"
+                    step="0.1"
+                    value="0.6"
+                /></label>
+                <label class="gc range"
+                  ><span
+                    >Attack rate <output id="g-rate-out">1.2</output>/s</span
+                  ><input
+                    type="range"
+                    id="g-rate"
+                    min="0.2"
+                    max="4"
+                    step="0.1"
+                    value="1.2"
+                /></label>
+                <label class="gc range"
+                  ><span>Arc height <output id="g-alt-out">1.0</output></span
+                  ><input
+                    type="range"
+                    id="g-alt"
+                    min="0.3"
+                    max="2"
+                    step="0.05"
+                    value="1"
+                /></label>
+                <label class="gc range"
+                  ><span>Glow <output id="g-glow-out">0.8</output></span
+                  ><input
+                    type="range"
+                    id="g-glow"
+                    min="0"
+                    max="1.8"
+                    step="0.05"
+                    value="0.8"
+                /></label>
+                <label class="gc"
+                  ><span>Graticule</span
+                  ><input type="checkbox" id="g-grid" checked /><i
+                    class="switch"
+                  ></i
+                ></label>
+                <label class="gc select"
+                  ><span>Threat mix</span>
+                  <select id="g-mix">
+                    <option value="mixed">Mixed</option>
+                    <option value="critical">Critical only</option>
+                    <option value="recon">Recon only</option>
+                  </select></label
+                >
+                <div class="gc btns">
+                  <button id="g-reset" class="btn tiny ghost">
+                    Reset view
+                  </button>
+                  <button id="g-storm" class="btn tiny hot">
+                    <svg class="ic"><use href="#i-bolt" /></svg> Storm
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <aside class="globe-side reveal" style="--d: 0.2s">
+              <div class="g-stats">
+                <div><b id="g-total">0</b><span>attacks simulated</span></div>
+                <div>
+                  <b id="g-blocked" class="ok">0</b><span>mitigated</span>
+                </div>
+                <div>
+                  <b id="g-live" class="hot">0</b><span>in flight</span>
+                </div>
+              </div>
+              <div class="feed-card">
+                <header><i class="live-dot"></i> LIVE FEED <em>UTC</em></header>
+                <ol id="g-feed" aria-live="polite"></ol>
+              </div>
+              <p class="fineprint">
+                <svg class="ic"><use href="#i-lock" /></svg> Training telemetry
+                — simulated for education. No real traffic is captured or sent.
+              </p>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ GET STARTED ============ -->
+      <section class="sec" id="start" data-section>
+        <div class="container">
+          <p class="eyebrow reveal">04 // Get started</p>
+          <h2 class="reveal" style="--d: 0.05s">
+            Choose your side of the glass.
+          </h2>
+          <p class="lead reveal" style="--d: 0.1s">
+            Two career tracks, one method:
+            <b>read the brief → type the commands → pass the checkpoint.</b>
+          </p>
+
+          <div class="track-grid">
+            <article class="t-card def tilt reveal" style="--d: 0.14s">
+              <span class="t-ic"
+                ><svg class="ic"><use href="#i-shield" /></svg
+              ></span>
+              <h3>Cyber Security Fundamentals</h3>
+              <p class="t-sub">
+                Defend-first foundations for absolute beginners.
+              </p>
+              <ul class="t-meta">
+                <li>8 modules</li>
+                <li>56 lessons</li>
+                <li>Beginner</li>
+              </ul>
+              <ul class="t-list">
+                <li>
+                  <svg class="ic"><use href="#i-check" /></svg> CIA, malware,
+                  networking &amp; cryptography
+                </li>
+                <li>
+                  <svg class="ic"><use href="#i-check" /></svg> Firewalls, 2FA,
+                  VPNs, NIST &amp; Zero Trust
+                </li>
+                <li>
+                  <svg class="ic"><use href="#i-check" /></svg> Build your first
+                  Kali / Parrot lab
+                </li>
+              </ul>
+              <a class="btn ghost wide" href="pages/paths.html#fundamentals"
+                >Browse fundamentals
+                <svg class="ic"><use href="#i-arrow" /></svg
+              ></a>
+            </article>
+
+            <article class="t-card off tilt reveal" style="--d: 0.22s">
+              <span class="t-ic"
+                ><svg class="ic"><use href="#i-target" /></svg
+              ></span>
+              <h3>Penetration Testing</h3>
+              <p class="t-sub">Offensive operations, end to end.</p>
+              <ul class="t-meta">
+                <li>15 modules</li>
+                <li>81 lessons</li>
+                <li>Intermediate</li>
+              </ul>
+              <ul class="t-list">
+                <li>
+                  <svg class="ic"><use href="#i-check" /></svg> Recon, Burp,
+                  SQLi, XSS, Metasploit, hashcat
+                </li>
+                <li>
+                  <svg class="ic"><use href="#i-check" /></svg> Evasion, cloud,
+                  OSINT &amp; AI / LLM security
+                </li>
+                <li>
+                  <svg class="ic"><use href="#i-check" /></svg> Capstone: full
+                  engagement + report
+                </li>
+              </ul>
+              <a class="btn ghost wide" href="pages/paths.html#pentest"
+                >Browse pentest track
+                <svg class="ic"><use href="#i-arrow" /></svg
+              ></a>
+            </article>
+          </div>
+
+          <div class="steps reveal">
+            <div>
+              <i>01</i><svg class="ic"><use href="#i-book" /></svg>
+              <h4>Read the brief</h4>
+              <p>Crystal-clear theory with memory hooks and real examples.</p>
+            </div>
+            <div>
+              <i>02</i><svg class="ic"><use href="#i-terminal" /></svg>
+              <h4>Type the commands</h4>
+              <p>A live CLI in every lesson. Learn by doing, not watching.</p>
+            </div>
+            <div>
+              <i>03</i><svg class="ic"><use href="#i-flag" /></svg>
+              <h4>Pass the checkpoint</h4>
+              <p>Capture the flag, ace the quiz, bank the progress.</p>
+            </div>
+          </div>
+
+          <div class="start-cta reveal">
+            <a class="btn primary big" href="pages/paths.html"
+              >Enter the range <svg class="ic"><use href="#i-arrow" /></svg
+            ></a>
+            <span>Free to start · No credit card · Ethics first</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ COFFEE / CREATOR ============ -->
+      <section class="sec coffee-sec" id="coffee" data-section>
+        <div class="container">
+          <div class="coffee-card reveal">
+            <div class="coffee-avatar">
+              <img
+                src="assets/img/ahor-isaac.svg"
+                alt="Portrait of Ahor Isaac, creator of Sea of Glass"
+                width="112"
+                height="112"
+              />
+            </div>
+            <div class="coffee-body">
+              <p class="eyebrow amber">05 // Fuel the mission</p>
+              <h3>Created by <span>Ahor Isaac</span></h3>
+              <p>
+                Sea of Glass is designed, engineered and written by one obsessed
+                developer. If a lesson saved your day, buy me a coffee — every
+                cup funds new labs, new simulations, new glory.
+              </p>
+              <div class="coffee-cta">
+                <a
+                  class="btn coffee"
+                  href="https://www.buymeacoffee.com/ahorisaac"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <span class="cup"
+                    ><i class="steam s1"></i><i class="steam s2"></i
+                    ><svg class="ic"><use href="#i-coffee" /></svg
+                  ></span>
+                  Buy me a coffee
+                  <svg class="ic"><use href="#i-external" /></svg
+                ></a>
+                <a class="btn ghost" href="mailto:ahor@shidoon.com"
+                  ><svg class="ic"><use href="#i-mail" /></svg> Say hello</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+      <div class="container f-grid">
+        <div class="f-brand">
+          <a class="brand" href="#top"
+            ><img
+              src="assets/img/shidoon-mark.svg"
+              alt=""
+              width="34"
+              height="34"
+            />
+            <span class="brand-txt"
+              ><small>SHIDOON</small><strong>SEA OF GLASS</strong></span
+            ></a
+          >
+          <p>Immersive cyber-security education. See through every attack.</p>
+          <p class="f-status">
+            <i class="live-dot ok"></i> All systems nominal
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h4>Explore</h4>
+          <a href="#top">Overview</a><a href="#about">About us</a
+          ><a href="#why">Why us</a><a href="#globe">Live globe</a
+          ><a href="#start">Get started</a>
+        </nav>
+        <nav aria-label="Learn">
+          <h4>Learn</h4>
+          <a href="pages/paths.html">All paths</a
+          ><a href="pages/paths.html#fundamentals">Fundamentals</a
+          ><a href="pages/paths.html#pentest">Penetration testing</a
+          ><a href="pages/paths.html#lab">Lab setup</a
+          ><a href="pages/concepts/cia-triad.html">Sample lesson</a>
+        </nav>
+        <nav aria-label="Connect">
+          <h4>Connect</h4>
+          <a
+            href="https://www.buymeacoffee.com/ahorisaac"
+            target="_blank"
+            rel="noopener"
+            >Buy me a coffee</a
+          ><a href="mailto:ahor@shidoon.com">Email the creator</a
+          ><a href="#coffee">About the creator</a>
+        </nav>
+      </div>
+      <div class="container f-bottom">
+        <span
+          >© <span data-year>2026</span> Shidoon · Sea of Glass. All rights
+          reserved.</span
+        >
+        <span class="f-ethics"
+          ><svg class="ic"><use href="#i-shield" /></svg> Train ethically. Hack
+          only what you own or have written permission to test.</span
+        >
+      </div>
+    </footer>
+
+    <button id="to-top" aria-label="Back to top">
+      <svg class="ic"><use href="#i-up" /></svg>
+    </button>
+    <noscript
+      ><p class="noscript">
+        Interactive simulations need JavaScript — all written content remains
+        readable.
+      </p></noscript
+    >
+
+    <script type="module" src="assets/js/core/main.js"></script>
+    <script type="module" src="assets/js/home/hero-pipeline.js"></script>
+    <script type="module" src="assets/js/home/globe.js"></script>
+  </body>
+</html>

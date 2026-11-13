@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Temporary Shidoon mark: glass prism + wave -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#38e0ff"/><stop offset="1" stop-color="#3cf5b6"/>
+    </linearGradient>
+  </defs>
+  <path d="M32 4l24 14v28L32 60 8 46V18z" fill="none" stroke="url(#g)" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M32 4v56M8 18l24 14 24-14" fill="none" stroke="url(#g)" stroke-width="1.4" opacity=".45"/>
+  <path d="M18 36c4-6 8-6 12 0s8 6 12 0" fill="none" stroke="url(#g)" stroke-width="3.2" stroke-linecap="round"/>
+  <circle cx="32" cy="24" r="3" fill="#38e0ff"/>
+</svg>
