@@ -4,6 +4,83 @@
    Progress key shared with the paths page: sog:progress.
    ============================================================ */
 
+/* CIA Triad lesson — content + shared engine. */
+import { initLesson } from "./core/lesson-engine.js";
+
+initLesson({
+  slug: "cia-triad",
+  flag: "FLAG{thr33_pr0m1s3s}",
+  files: {
+    "mission.txt": [
+      "MISSION: prove you know the three promises.",
+      "1) read triad.txt   2) run: verify <letters in order>",
+      "Order hint: secrecy first, truth second, uptime third.",
+    ],
+    "triad.txt": [
+      "C — Confidentiality : only the right eyes see the data.",
+      "I — Integrity       : the data is correct and unaltered.",
+      "A — Availability    : the system works when needed.",
+      'Memory hook: "Secrets, Truth, Uptime."',
+    ],
+  },
+  verify: {
+    answers: ["cia"],
+    usage: "verify <three letters in order>",
+    hint: "Which promise is about secrecy? Start there.",
+    success: ["[+] correct: Confidentiality → Integrity → Availability"],
+  },
+  intro: [
+    ['Sea of Glass training shell — type "help" to begin.', "dim"],
+    ["start here: cat mission.txt", "ok"],
+  ],
+  questions: [
+    {
+      q: "Ransomware encrypts a hospital’s patient database so doctors can’t open files. Which promise is broken first?",
+      opts: [
+        "Confidentiality",
+        "Integrity",
+        "Availability",
+        "None — it’s just software",
+      ],
+      a: 2,
+      why: "Doctors can’t use the system: Availability. (Encryption also alters data — Integrity — and modern gangs steal data too, breaking C. But the headline impact is uptime.)",
+    },
+    {
+      q: "An attacker intercepts a bank transfer and changes the amount in transit. Which promise is broken?",
+      opts: [
+        "Availability",
+        "Integrity",
+        "Confidentiality only",
+        "Authentication",
+      ],
+      a: 1,
+      why: "The data no longer tells the truth — Integrity. Reading it also broke Confidentiality, but the alteration itself is an integrity failure.",
+    },
+    {
+      q: "A leaked password dump exposes millions of user emails and hashes. Which promise is broken?",
+      opts: [
+        "Confidentiality",
+        "Integrity",
+        "Availability",
+        "All three equally",
+      ],
+      a: 0,
+      why: "Secrets were exposed to the wrong eyes — Confidentiality. Nothing was altered or taken offline.",
+    },
+    {
+      q: "Which control most directly protects Confidentiality?",
+      opts: [
+        "A RAID array",
+        "AES-256 encryption",
+        "A load balancer",
+        "An uptime monitor",
+      ],
+      a: 1,
+      why: "Encryption keeps data unreadable to the wrong eyes. RAID, load balancers and uptime monitors all protect Availability instead.",
+    },
+  ],
+});
+
 const SLUG = "cia-triad";
 const $ = (s) => document.querySelector(s);
 
