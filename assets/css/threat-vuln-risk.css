@@ -1,0 +1,276 @@
+/* Lesson 02 · Threat, Vulnerability & Risk */
+.prose a {
+  color: var(--cyan);
+}
+.prose a:hover {
+  text-decoration: underline;
+}
+.promise.t {
+  --pc: var(--red);
+}
+.promise.v {
+  --pc: var(--amber);
+}
+.promise.r {
+  --pc: var(--violet);
+}
+.formula {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 77, 109, 0.07),
+    rgba(143, 123, 255, 0.07)
+  );
+  border: 1px solid rgba(255, 77, 109, 0.25);
+  border-radius: 14px;
+  padding: 18px 22px;
+  margin: 22px 0;
+}
+.formula span {
+  font: 700 0.64rem var(--font-mono);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red);
+  display: block;
+  margin-bottom: 8px;
+}
+.formula p {
+  margin: 0;
+  color: var(--muted);
+}
+.formula b {
+  color: var(--text);
+}
+
+/* Risk lab */
+.risk-lab {
+  --rc: var(--red);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 22px;
+  margin: 18px 0 30px;
+}
+.risk-lab[data-band="low"] {
+  --rc: var(--teal);
+}
+.risk-lab[data-band="guarded"] {
+  --rc: var(--blue);
+}
+.risk-lab[data-band="high"] {
+  --rc: var(--amber);
+}
+.risk-lab[data-band="critical"] {
+  --rc: var(--red);
+}
+.risk-controls,
+.risk-meter {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+}
+.risk-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.r-ctl {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font: 700 0.62rem var(--font-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.r-ctl span {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.r-ctl output {
+  color: var(--cyan);
+}
+.r-ctl select {
+  background: var(--bg2);
+  color: var(--text);
+  border: 1px solid var(--line2);
+  border-radius: 9px;
+  padding: 9px 11px;
+  font: 700 0.78rem var(--font-mono);
+}
+.r-ctl input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 5px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, var(--teal), var(--amber), var(--red));
+  cursor: pointer;
+}
+.r-ctl input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--text);
+  border: 3px solid var(--rc);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--rc) 60%, transparent);
+}
+.r-ctl input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--text);
+  border: 3px solid var(--rc);
+}
+.control-toggles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.control-toggles label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  cursor: pointer;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px;
+}
+.control-toggles input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.control-toggles .switch {
+  flex: none;
+  width: 34px;
+  height: 19px;
+  border-radius: 20px;
+  background: #1a2438;
+  border: 1px solid var(--line2);
+  position: relative;
+  transition: 0.2s;
+}
+.control-toggles .switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--faint);
+  transition: 0.2s;
+}
+.control-toggles input:checked + .switch {
+  background: color-mix(in srgb, var(--rc) 20%, transparent);
+  border-color: var(--rc);
+}
+.control-toggles input:checked + .switch::after {
+  left: 17px;
+  background: var(--rc);
+}
+.control-toggles span {
+  font: 800 0.78rem var(--font-body);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+}
+.control-toggles small {
+  font: 400 0.58rem var(--font-mono);
+  color: var(--faint);
+  letter-spacing: 0.08em;
+}
+.r-actions {
+  display: flex;
+  gap: 10px;
+}
+.r-actions .btn {
+  flex: 1;
+}
+.risk-meter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
+  background:
+    radial-gradient(
+      300px 220px at 50% 40%,
+      color-mix(in srgb, var(--rc) 10%, transparent),
+      transparent 70%
+    ),
+    var(--surface);
+}
+.risk-meter svg {
+  width: min(100%, 260px);
+}
+.dial-bg {
+  fill: none;
+  stroke: #1a2438;
+  stroke-width: 14;
+  stroke-linecap: round;
+}
+.dial-fg {
+  fill: none;
+  stroke: var(--rc);
+  stroke-width: 14;
+  stroke-linecap: round;
+  stroke-dasharray: 251.3;
+  stroke-dashoffset: 251.3;
+  transition:
+    stroke-dashoffset 0.5s ease,
+    stroke 0.3s;
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--rc) 60%, transparent));
+}
+#risk-needle {
+  transition: transform 0.5s ease;
+  transform-origin: 100px 110px;
+}
+#risk-needle line {
+  stroke: var(--text);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+#risk-needle circle {
+  fill: var(--rc);
+  stroke: #0a101c;
+  stroke-width: 3;
+}
+.risk-meter b {
+  font: 900 2.6rem var(--font-disp);
+  color: var(--rc);
+  line-height: 1;
+}
+.risk-chip {
+  font: 700 0.66rem var(--font-mono);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rc);
+  border: 1px solid var(--rc);
+  border-radius: 7px;
+  padding: 5px 10px;
+  background: color-mix(in srgb, var(--rc) 9%, transparent);
+}
+.risk-formula {
+  font: 400 0.74rem var(--font-mono);
+  color: var(--faint);
+  margin: 6px 0 0;
+}
+.risk-sentence {
+  font-size: 0.86rem;
+  color: var(--muted);
+  margin: 4px 0 0;
+  max-width: 34ch;
+}
+@media (max-width: 760px) {
+  .risk-lab {
+    grid-template-columns: 1fr;
+  }
+  .control-toggles {
+    grid-template-columns: 1fr;
+  }
+}
