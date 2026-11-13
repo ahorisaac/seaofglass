@@ -1,0 +1,221 @@
+/* Lesson 05 · Hall of Fame timeline */
+.prose a {
+  color: var(--cyan);
+}
+.prose a:hover {
+  text-decoration: underline;
+}
+.tl-tools {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 20px 0 26px;
+}
+.tl-filters {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+.tl-filters button {
+  font: 800 0.78rem var(--font-body);
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 8px 13px;
+  transition: 0.2s;
+}
+.tl-filters button:hover {
+  color: var(--text);
+  border-color: var(--line2);
+}
+.tl-filters button.active {
+  color: var(--cyan);
+  border-color: rgba(56, 224, 255, 0.4);
+  background: rgba(56, 224, 255, 0.08);
+}
+.tl-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font: 400 0.7rem var(--font-mono);
+  letter-spacing: 0.14em;
+  color: var(--faint);
+}
+.timeline {
+  position: relative;
+  padding-left: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--cyan), var(--violet), var(--red));
+}
+.evt {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.evt::before {
+  content: "";
+  position: absolute;
+  left: -24px;
+  top: 24px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--cyan);
+  box-shadow: 0 0 10px rgba(56, 224, 255, 0.5);
+}
+.evt:hover {
+  border-color: var(--line2);
+}
+.evt.open {
+  border-color: rgba(56, 224, 255, 0.35);
+}
+.evt-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+  padding: 16px 18px;
+  cursor: pointer;
+}
+.evt-year {
+  font: 700 0.86rem var(--font-disp);
+  color: var(--cyan);
+  letter-spacing: 0.08em;
+  flex: none;
+  width: 52px;
+}
+.evt-t {
+  flex: 1;
+  min-width: 0;
+}
+.evt-t b {
+  display: block;
+  font-size: 1rem;
+}
+.evt-t small {
+  display: block;
+  color: var(--faint);
+  font-size: 0.78rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cia {
+  display: flex;
+  gap: 5px;
+  flex: none;
+}
+.cia i {
+  font: 700 0.62rem var(--font-mono);
+  font-style: normal;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line2);
+  color: var(--faint);
+  opacity: 0.4;
+}
+.cia i.on {
+  opacity: 1;
+}
+.cia i.c.on {
+  color: var(--cyan);
+  border-color: var(--cyan);
+  background: rgba(56, 224, 255, 0.08);
+}
+.cia i.i.on {
+  color: var(--teal);
+  border-color: var(--teal);
+  background: rgba(60, 245, 182, 0.08);
+}
+.cia i.a.on {
+  color: var(--amber);
+  border-color: var(--amber);
+  background: rgba(255, 180, 84, 0.08);
+}
+.chev {
+  color: var(--faint);
+  transition: transform 0.25s;
+  flex: none;
+}
+.evt.open .chev {
+  transform: rotate(180deg);
+  color: var(--cyan);
+}
+.evt-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+.evt.open .evt-body {
+  grid-template-rows: 1fr;
+}
+.evt-in {
+  overflow: hidden;
+}
+.evt-in p {
+  padding: 0 18px 14px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.evt-in p:first-child {
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+}
+.lesson-learned {
+  color: var(--text) !important;
+  background: rgba(60, 245, 182, 0.05);
+  border-top: 1px solid rgba(60, 245, 182, 0.15);
+  padding-top: 12px !important;
+}
+.lesson-learned b {
+  color: var(--teal);
+}
+.evt[hidden] {
+  display: none;
+}
+@media (max-width: 640px) {
+  .timeline {
+    padding-left: 20px;
+  }
+  .evt::before {
+    left: -16px;
+    width: 9px;
+    height: 9px;
+  }
+  .evt-head {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .evt-t {
+    flex-basis: calc(100% - 70px);
+  }
+  .cia {
+    margin-left: 68px;
+  }
+  .evt-t small {
+    white-space: normal;
+  }
+}
