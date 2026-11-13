@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hall of Fame: Famous Hackers & Breaches — Sea of Glass</title>
+    <meta
+      name="description"
+      content="From the Morris Worm to SolarWinds and Log4Shell: famous hackers and breaches explained simply, mapped to the CIA triad, with a filterable timeline, CLI mission and quiz."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#070b13" />
+    <link
+      rel="canonical"
+      href="https://seaofglass.shidoon.com/pages/concepts/famous-breaches.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="Hall of Fame: Famous Hackers & Breaches — Sea of Glass"
+    />
+    <meta
+      property="og:description"
+      content="Every famous breach is one broken promise plus one ignored lesson. Interactive timeline + quiz."
+    />
+    <meta
+      property="og:url"
+      content="https://seaofglass.shidoon.com/pages/concepts/famous-breaches.html"
+    />
+    <meta
+      property="og:image"
+      content="https://seaofglass.shidoon.com/assets/img/og-cover.svg"
+    />
+    <link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../../assets/css/lesson.css" />
+    <link rel="stylesheet" href="../../assets/css/famous-breaches.css" />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <symbol id="i-menu" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </symbol>
+        <symbol id="i-x" viewBox="0 0 24 24">
+          <path d="M6 6l12 12M18 6L6 18" />
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24">
+          <path d="M4 12h16M13 5l7 7-7 7" />
+        </symbol>
+        <symbol id="i-up" viewBox="0 0 24 24">
+          <path d="M12 20V4M5 11l7-7 7 7" />
+        </symbol>
+        <symbol id="i-chev" viewBox="0 0 24 24">
+          <path d="M6 9l6 6 6-6" />
+        </symbol>
+        <symbol id="i-shield" viewBox="0 0 24 24">
+          <path d="M12 3l7 3v5c0 4.6-3 7.6-7 9-4-1.4-7-4.4-7-9V6z" />
+          <path d="M9 11.5l2 2 4-4" />
+        </symbol>
+        <symbol id="i-terminal" viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="16" rx="2" />
+          <path d="M7 9l3 3-3 3M12 15h5" />
+        </symbol>
+        <symbol id="i-book" viewBox="0 0 24 24">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+          <path
+            d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+          />
+        </symbol>
+        <symbol id="i-flag" viewBox="0 0 24 24">
+          <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+          <path d="M4 22v-7" />
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24">
+          <path d="M4 12.5l5.5 5.5L20 6.5" />
+        </symbol>
+        <symbol id="i-lock" viewBox="0 0 24 24">
+          <rect x="4" y="11" width="16" height="10" rx="2" />
+          <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+        </symbol>
+        <symbol id="i-eye" viewBox="0 0 24 24">
+          <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" />
+          <circle cx="12" cy="12" r="3" />
+        </symbol>
+        <symbol id="i-bolt" viewBox="0 0 24 24">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9z" />
+        </symbol>
+      </defs>
+    </svg>
+
+    <div class="aurora a1" aria-hidden="true"></div>
+    <div class="aurora a2" aria-hidden="true"></div>
+    <div id="cursor" aria-hidden="true"></div>
+    <div id="progress" aria-hidden="true"></div>
+
+    <header id="nav">
+      <div class="container nav-in">
+        <a
+          class="brand"
+          href="../../index.html"
+          aria-label="Sea of Glass — home"
+        >
+          <img
+            src="../../assets/img/shidoon-mark.svg"
+            alt=""
+            width="36"
+            height="36"
+          />
+          <span class="brand-txt"
+            ><small>SHIDOON</small><strong>SEA OF GLASS</strong></span
+          >
+        </a>
+        <nav id="nav-menu" aria-label="Primary">
+          <a href="../../index.html">Home</a
+          ><a href="../paths.html">Curriculum</a> <a href="#mission">Lab</a
+          ><a href="#quiz">Quiz</a>
+          <a class="btn small primary" href="../paths.html#fundamentals"
+            >All lessons <svg class="ic"><use href="#i-arrow" /></svg
+          ></a>
+        </nav>
+        <button
+          id="nav-toggle"
+          aria-label="Menu"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+        >
+          <svg class="ic m-open"><use href="#i-menu" /></svg
+          ><svg class="ic m-close"><use href="#i-x" /></svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="main" class="container lesson">
+      <nav class="crumb" aria-label="Breadcrumb">
+        <a href="../../index.html">Home</a> /
+        <a href="../paths.html#fundamentals">Fundamentals</a> /
+        <span>Hall of Fame</span>
+      </nav>
+      <p class="eyebrow">Fundamentals · Module 01 · Lesson 05</p>
+      <h1>Hall of <span>Fame</span></h1>
+      <div class="l-meta">
+        <span
+          ><svg class="ic"><use href="#i-book" /></svg> 14 min</span
+        >
+        <span class="state" id="read-state">Reading</span>
+        <span class="state" id="lab-state"
+          ><svg class="ic"><use href="#i-terminal" /></svg> Lab: pending</span
+        >
+        <span class="state" id="quiz-state"
+          ><svg class="ic"><use href="#i-flag" /></svg> Quiz: pending</span
+        >
+      </div>
+      <p class="banner hidden" id="lesson-banner">
+        <svg class="ic"><use href="#i-check" /></svg> Lesson complete — progress
+        saved.
+      </p>
+
+      <section class="prose" id="brief" data-section>
+        <div class="hook">
+          <p>
+            History doesn’t repeat, but it rhymes — in <b>incident reports</b>.
+          </p>
+          <code
+            >every famous breach = one broken promise + one ignored lesson</code
+          >
+        </div>
+        <p>
+          Study security history and you’ll see the same patterns return:
+          unpatched systems, trusted updates, human trust, and weak
+          segmentation. Below is a working timeline. Filter by attack family,
+          open each event, and read it through the
+          <a href="cia-triad.html">CIA triad</a>: which promise broke, and what
+          should we have done?
+        </p>
+
+        <div class="tl-tools">
+          <div class="tl-filters" role="group" aria-label="Filter events">
+            <button type="button" class="active" data-f="all">All</button>
+            <button type="button" data-f="worm">Worms</button>
+            <button type="button" data-f="people">People</button>
+            <button type="button" data-f="breach">Breaches</button>
+            <button type="button" data-f="ransomware">Ransomware</button>
+            <button type="button" data-f="supply">Supply chain</button>
+            <button type="button" data-f="physical">Cyber-physical</button>
+          </div>
+          <div class="tl-meta">
+            <span id="tl-count">12 events</span
+            ><button type="button" id="tl-expand" class="btn tiny ghost">
+              Expand all
+            </button>
+          </div>
+        </div>
+
+        <div class="timeline" id="timeline">
+          <article class="evt" data-cat="worm">
+            <button type="button" class="evt-head" aria-expanded="false">
+              <span class="evt-year">1988</span
+              ><span class="evt-t"
+                ><b>Morris Worm</b
+                ><small>The internet’s first wake-up call</small></span
+              >
+              <span class="cia"
+                ><i class="c">C</i><i class="i">I</i><i class="a on">A</i></span
+              ><svg class="ic chev"><use href="#i-chev" /></svg>
+            </button>
+            <div class="evt-body">
+              <div class="evt-in">
+                <p>
+                  Robert Tappan Morris released a self-replicating worm that
+                  spread across the early internet. A reinfection bug made it
+                  copy itself repeatedly, slowing thousands of machines to a
+                  crawl. It led to the first US felony conviction under the
+                  Computer Fraud and Abuse Act — and helped inspire the creation
+                  of CERT.
+                </p>
+                <p class="lesson-learned">
+                  <b>The lesson:</b> availability is a security promise too.
+                  Self-spreading code needs patching, segmentation and incident
+                  coordination.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="evt" data-cat="people">
+            <button type="button" class="evt-head" aria-expanded="false">
+              <span class="evt-year">1995</span
+              ><span class="evt-t"
+                ><b>Kevin Mitnick caught</b
+                ><small>Social engineering becomes famous</small></span
+              >
+              <span class="cia"
+                ><i class="c on">C</i><i class="i">I</i><i class="a">A</i></span
+              ><svg class="ic chev"><use href="#i-chev" /></svg>
+            </button>
+            <div class="evt-body">
+              <div class="evt-in">
+                <p>
+                  Mitnick’s intrusions at companies like DEC and Fujitsu relied
+                  heavily on social engineering: persuading employees to reveal
+                  passwords or grant access. After prison, he became a white-hat
+                  consultant — proof that the same curiosity can be redirected
+                  with permission and ethics.
+                </p>
+                <p class="lesson-learned">
+                  <b>The lesson:</b> humans are part of the attack surface.
+                  Verify identity, limit disclosure, and train people without
+                  blaming them.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="evt" data-cat="worm">
+            <button type="button" class="evt-head" aria-expanded="false">
+              <span class="evt-year">2000</span
+              ><span class="evt-t"
+                ><b>ILOVEYOU</b><small>Curiosity is an exploit</small></span
+              >
+              <span class="cia"
+                ><i class="c">C</i><i class="i on">I</i
+                ><i class="a on">A</i></span
+              ><svg class="ic chev"><use href="#i-chev" /></svg>
+            </button>
+            <div class="evt-body">
+              <div class="evt-in">
+                <p>
+                  A love-letter email attachment spread around the world in
+                  hours. The script overwrote files and mailed itself to
+                  contacts, causing billions in estimated damage. It wasn’t
+                  clever code — it was clever psychology.
+                </p>
+                <p class="lesson-learned">
+                  <b>The lesson:</b> block risky attachments, filter mail, and
+                  teach people that unexpected files are bait, not gifts.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="evt" data-cat="physical">
+            <button type="button" class="evt-head" aria-expanded="false">
+              <span class="evt-year">2010</span
+              ><span class="evt-t"
+                ><b>Stuxnet</b
+                ><small>Cyber crosses into the physical world</small></span
+              >
+              <span class="cia"
+                ><i class="c">C</i><i class="i on">I</i
+                ><i class="a on">A</i></span
+              ><svg class="ic chev"><use href="#i-chev" /></svg>
+            </button>
+            <div class="evt-body">
+              <div class="evt-in">
+                <p>
+                  Stuxnet targeted industrial control systems and quietly
+                  changed centrifuge behaviour while reporting “all normal.” It
+                  demonstrated that malicious code could cause physical damage,
+                  even across networks many believed were isolated.
+                </p>
+                <p class="lesson-learned">
+                  <b>The lesson:</b> air gaps are not magic. Integrity matters
+                  in control systems: what the screen says must match what the
+                  machine does.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="evt" data-cat="people">
+            <button type="button" class="evt-head" aria-expanded="false">
+              <span class="evt-year">2013</span
+              ><span class="evt-t"
+                ><b>Snowden disclosures</b><small>Metadata is data</small></span
+              >
+              <span class="cia"
+                ><i class="c on">C</i><i class="i">I</i><i class="a">A</i></span
+              ><svg class="ic chev"><use href="#i-chev" /></svg>
+            </button>
+            <div class="evt-body">
+              <div class="evt-in">
+                <p>
+                  Documents disclosed by Edward Snowden revealed the scale of
+                  state-level surveillance programmes and alliances such as Five
+                  Eyes. The debate was not only about message content — it was
+                  about who could see patterns of communication.
+                </p>
+                <p class="lesson-learned">
+                  <b>The lesson:</b> metadata (who, when, where) can be as
+                  sensitive as content. Privacy is a design decision, not a
+                  checkbox.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="evt" data-cat="breach">
+            <button type="button" class="evt-head" aria-expanded="false">
+              <span class="evt-year">2013</span
+              ><span class="evt-t"
+                ><b>Target</b><small>The vendor door</small></span
+              >
+              <span class="cia"
+                ><i class="c on">C</i><i class="i">I</i><i class="a">A</i></span
+              ><svg class="ic chev"><use href="#i-chev" /></svg>
+            </button>
+            <div class="evt-body">
+              <div class="evt-in">
+                <p>
+                  Attackers entered through credentials linked to a third-party
+                  HVAC vendor, then reached payment systems and stole data from
+                  tens of millions of payment cards. The front door was strong;
+                  the vendor door was not.
+                </p>
+                <p class="lesson-learned">
+                  <b>The lesson:</b> third parties are your attack surface.
+                  Segment vendor access, monitor it, and apply least privilege.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="evt" data-cat="ransomware">
+            <button type="button" class="evt-head" aria-expanded="false">
+              <span class="evt-year">2017</span
+              ><span class="evt-t"
+                ><b>WannaCry</b
+                ><small>The patch that could have saved the world</small></span
+              >
+              <span class="cia"
+                ><i class="c">C</i><i class="i on">I</i
+                ><i class="a on">A</i></span
+              ><svg class="ic chev"><use href="#i-chev" /></svg>
+            </button>
+            <div class="evt-body">
+              <div class="evt-in">
+                <p>
+                  WannaCry used the leaked EternalBlue exploit against unpatched
+                  Windows SMB services. Hospitals, factories and businesses were
+                  disrupted worldwide. A patch had existed before the outbreak —
+                  many systems simply had not applied it.
+                </p>
+                <p class="lesson-learned">
+                  <b>The lesson:</b> patch known exploited bugs fast. Keep
+                  tested backups. Availability can collapse at internet speed.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="evt" data-cat="ransomware">
+            <button type="button" class="evt-head" aria-expanded="false">
+              <span class="evt-year">2017</span
+              ><span class="evt-t"
+                ><b>NotPetya</b><small>Ransomware as a mask</small></span
+              >
+              <span class="cia"
+                ><i class="c">C</i><i class="i on">I</i
+                ><i class="a on">A</i></span
+              ><svg class="ic chev"><use href="#i-chev" /></svg>
+            </button>
+            <div class="evt-body">
+              <div class="evt-in">
+                <p>
+                  NotPetya spread through a compromised update mechanism in
+                  widely used accounting software, then caused destructive
+                  damage far beyond its initial target. It looked like
+                  ransomware, but recovery was not the attackers’ real goal.
+                </p>
+                <p class="lesson-learned">
+                  <b>The lesson:</b> destructive malware can wear a ransomware
+                  costume. Updates are powerful — verify their integrity and
+                  segment networks.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="evt" data-cat="breach">
+            <button type="button" class="evt-head" aria-expanded="false">
+              <span class="evt-year">2017</span
+              ><span class="evt-t"
+                ><b>Equifax</b><small>147 million reasons to patch</small></span
+              >
+              <span class="cia"
+                ><i class="c on">C</i><i class="i">I</i><i class="a">A</i></span
+              ><svg class="ic chev"><use href="#i-chev" /></svg>
+            </button>
+            <div class="evt-body">
+              <div class="evt-in">
+                <p>
+                  Attackers exploited a known Apache Struts vulnerability in an
+                  Equifax web application. Personal data of about 147 million
+                  people was exposed. The bug had a fix; the organisation failed
+                  to apply it in time.
+                </p>
+                <p class="lesson-learned">
+                  <b>The lesson:</b> patch SLAs matter. You cannot protect data
+                  you don’t know you have — asset inventories and vulnerability
+                  management are not optional.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="evt" data-cat="supply">
+            <button type="button" class="evt-head" aria-expanded="false">
+              <span class="evt-year">2020</span
+              ><span class="evt-t"
+                ><b>SolarWinds</b><small>Trusted updates, poisoned</small></span
+              >
+              <span class="cia"
+                ><i class="c on">C</i><i class="i on">I</i
+                ><i class="a">A</i></span
+              ><svg class="ic chev"><use href="#i-chev" /></svg>
+            </button>
+            <div class="evt-body">
+              <div class="evt-in">
+                <p>
+                  Attackers compromised the build process of SolarWinds Orion
+                  and inserted a backdoor into signed software updates.
+                  Thousands of organisations installed the trojanised updates,
+                  giving attackers a trusted path into their networks.
+                </p>
+                <p class="lesson-learned">
+                  <b>The lesson:</b> supply-chain trust must be verified.
+                  Monitor vendor behaviour, restrict what management tools can
+                  reach, and hunt for anomalous outbound traffic.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="evt" data-cat="supply">
+            <button type="button" class="evt-head" aria-expanded="false">
+              <span class="evt-year">2021</span
+              ><span class="evt-t"
+                ><b>Log4Shell</b><small>The bug in everything</small></span
+              >
+              <span class="cia"
+                ><i class="c on">C</i><i class="i on">I</i
+                ><i class="a on">A</i></span
+              ><svg class="ic chev"><use href="#i-chev" /></svg>
+            </button>
+            <div class="evt-body">
+              <div class="evt-in">
+                <p>
+                  A critical flaw in the ubiquitous Log4j logging library
+                  allowed remote code execution in countless applications.
+                  Defenders struggled because many did not know where the
+                  library lived inside their own software supply chain.
+                </p>
+                <p class="lesson-learned">
+                  <b>The lesson:</b> know your dependencies. SBOMs, dependency
+                  scanning and emergency patch playbooks turn panic into
+                  process.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="evt" data-cat="supply">
+            <button type="button" class="evt-head" aria-expanded="false">
+              <span class="evt-year">2023</span
+              ><span class="evt-t"
+                ><b>MOVEit mass extortion</b
+                ><small>One zero-day, thousands of victims</small></span
+              >
+              <span class="cia"
+                ><i class="c on">C</i><i class="i">I</i><i class="a">A</i></span
+              ><svg class="ic chev"><use href="#i-chev" /></svg>
+            </button>
+            <div class="evt-body">
+              <div class="evt-in">
+                <p>
+                  A zero-day in the MOVEit file-transfer product was exploited
+                  at scale, leading to data theft and extortion across many
+                  organisations. Attackers did not need to phish every victim —
+                  they compromised one product many victims trusted.
+                </p>
+                <p class="lesson-learned">
+                  <b>The lesson:</b> internet-facing transfer tools are
+                  high-value targets. Patch urgently, minimise stored data, and
+                  monitor for bulk outbound transfers.
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="recall">
+          <h3>
+            <svg class="ic"><use href="#i-eye" /></svg> Memory hook
+          </h3>
+          <p>
+            <b>M-S-W-S:</b> <b>M</b>orris → <b>S</b>tuxnet → <b>W</b>annaCry →
+            <b>S</b>olarWinds. <i>“Morris Sent Worms Skyward.”</i> Four anchor
+            events: 1988, 2010, 2017, 2020. Every one taught a lesson the
+            industry keeps relearning.
+          </p>
+        </div>
+      </section>
+
+      <section class="prose" id="mission" data-section>
+        <h2>
+          <svg class="ic"><use href="#i-terminal" /></svg> Mission: order the
+          anchors
+        </h2>
+        <p>
+          Read <code>timeline.txt</code>, then verify the four anchor events in
+          chronological order using their initials: <code>verify msws</code>.
+        </p>
+        <div class="term cli">
+          <div class="term-bar">
+            <i class="dot r"></i><i class="dot y"></i><i class="dot g"></i>
+            <span>student@seaofglass: ~/hall-of-fame</span
+            ><em>TRAINING SHELL</em>
+          </div>
+          <div class="term-body" id="cli-body" aria-live="polite"></div>
+          <form id="cli-form" autocomplete="off">
+            <span class="t-prompt">student@seaofglass</span
+            ><span class="t-path">:~$</span>
+            <input
+              id="cli-input"
+              type="text"
+              spellcheck="false"
+              autocapitalize="off"
+              aria-label="Terminal command input"
+              placeholder="start with: cat timeline.txt"
+            />
+          </form>
+        </div>
+      </section>
+
+      <section class="prose" id="quiz" data-section>
+        <h2>
+          <svg class="ic"><use href="#i-flag" /></svg> Checkpoint: 4 questions
+        </h2>
+        <p>
+          Score 75% or more to complete the lesson. Explanations appear after
+          you submit.
+        </p>
+        <form id="quiz-form"></form>
+        <div class="quiz-actions">
+          <button class="btn primary" id="quiz-submit" type="button">
+            Check answers
+          </button>
+          <button class="btn ghost hidden" id="quiz-retry" type="button">
+            Try again
+          </button>
+          <div class="score hidden" id="quiz-score">
+            <svg viewBox="0 0 64 64">
+              <circle class="bgc" cx="32" cy="32" r="26" />
+              <circle class="fgc" id="score-ring" cx="32" cy="32" r="26" />
+            </svg>
+            <span
+              ><b id="score-num">0%</b
+              ><small id="score-note">score</small></span
+            >
+          </div>
+        </div>
+      </section>
+
+      <nav class="l-nav" aria-label="Lesson navigation">
+        <a class="btn ghost" href="hacker-types.html"
+          >← Hackers &amp; Their Hats</a
+        >
+        <a class="btn primary" href="../checkpoints/first-principles.html"
+          >Next: Module Checkpoint <svg class="ic"><use href="#i-arrow" /></svg
+        ></a>
+      </nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container f-bottom" style="border-top: 0">
+        <span>© <span data-year>2026</span> Shidoon · Sea of Glass</span>
+        <span class="f-ethics"
+          ><svg class="ic"><use href="#i-shield" /></svg> Train ethically. Hack
+          only what you own or have written permission to test.</span
+        >
+      </div>
+    </footer>
+
+    <button id="to-top" aria-label="Back to top">
+      <svg class="ic"><use href="#i-up" /></svg>
+    </button>
+    <script type="module" src="../../assets/js/core/main.js"></script>
+    <script
+      type="module"
+      src="../../assets/js/lessons/famous-breaches.js"
+    ></script>
+  </body>
+</html>
