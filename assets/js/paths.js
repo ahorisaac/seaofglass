@@ -1,8 +1,6 @@
-/* ============================================================
-   Curriculum hub: renders tracks from data, live search,
-   tabs, progress rings and a syllabus export.
-   ============================================================ */
+/* Curriculum hub: renders tracks, live search, tabs, progress, export, live navigation. */
 import { TRACKS } from "../data/curriculum.js";
+import { renderLiveNav, getNextLesson } from "./core/live-nav.js";
 
 const $ = (s, r = document) => r.querySelector(s);
 const KIND = {
@@ -10,8 +8,6 @@ const KIND = {
   lab: ["Lab", "i-terminal"],
   quiz: ["Quiz", "i-flag"],
 };
-
-/* ---------- Progress (shared localStorage key with lessons) ---------- */
 const loadProgress = () => {
   try {
     return JSON.parse(localStorage.getItem("sog:progress")) || {};
@@ -22,14 +18,13 @@ const loadProgress = () => {
 const progress = loadProgress();
 const isDone = (slug) => slug && progress[slug] && progress[slug].quiz >= 75;
 
-/* ---------- Totals ---------- */
 const all = TRACKS.flatMap((t) => t.modules.flatMap((m) => m.lessons));
 $("#st-modules").textContent = TRACKS.reduce((n, t) => n + t.modules.length, 0);
 $("#st-lessons").textContent = all.length;
 $("#st-labs").textContent = all.filter((l) => l.kind === "lab").length;
 $("#st-quizzes").textContent = all.filter((l) => l.kind === "quiz").length;
+$("#st-live").textContent = all.filter((l) => l.href).length;
 
-/* ---------- Render ---------- */
 const icon = (id, cls = "ic") =>
   `<svg class="${cls}"><use href="#${id}"/></svg>`;
 const trackEl = (t) => {
@@ -38,10 +33,10 @@ const trackEl = (t) => {
   const live = lessons.filter((l) => l.href);
   const done = live.filter((l) => isDone(l.slug)).length;
   const pct = live.length ? done / live.length : 0;
-  const off = 163.4 * (1 - pct);
 
   const modules = t.modules
     .map((m, mi) => {
+      const liveCount = m.lessons.filter((l) => l.href).length;
       const rows = m.lessons
         .map((l) => {
           const [label, ic] = KIND[l.kind];
@@ -59,14 +54,13 @@ const trackEl = (t) => {
         })
         .join("");
       const mmins = m.lessons.reduce((n, l) => n + l.mins, 0);
-      return `<details class="module" ${mi === 0 ? "open" : ""}>
+      return `<details class="module" data-live="${liveCount ? 1 : 0}" ${liveCount ? "open" : ""}>
       <summary><span class="m-num">${String(mi + 1).padStart(2, "0")}</span>
         <span class="m-title"><h3>${m.title}</h3><p>${m.summary}</p></span>
+        ${liveCount ? `<span class="m-live">${liveCount} live</span>` : ""}
         <span class="m-count">${m.lessons.length} lessons · ${mmins} min</span>
         <svg class="ic m-chev"><use href="#i-chev"/></svg></summary>
-      <div class="m-body">
-        <div class="m-tools">${m.tools.map((x) => `<span>${x}</span>`).join("")}</div>
-        <ol>${rows}</ol></div></details>`;
+      <div class="m-body"><div class="m-tools">${m.tools.map((x) => `<span>${x}</span>`).join("")}</div><ol>${rows}</ol></div></details>`;
     })
     .join("");
 
@@ -83,7 +77,7 @@ const trackEl = (t) => {
           <li>${live.length} live now</li></ul></div>
       <div class="track-progress" title="Progress across live lessons">
         <svg viewBox="0 0 64 64"><circle class="bgc" cx="32" cy="32" r="26"/>
-          <circle class="fgc" cx="32" cy="32" r="26" style="stroke-dashoffset:${off}"/></svg>
+          <circle class="fgc" cx="32" cy="32" r="26" style="stroke-dashoffset:${163.4 * (1 - pct)}"/></svg>
         <span>${live.length ? `${done}/${live.length} live done` : "in production"}</span></div>
     </div>${modules}`;
   return sec;
@@ -91,7 +85,23 @@ const trackEl = (t) => {
 const tracksRoot = $("#tracks");
 TRACKS.forEach((t) => tracksRoot.appendChild(trackEl(t)));
 
-/* ---------- Tabs ---------- */
+/* Live lessons panel + Continue */
+const liveRoot = $("#live-root");
+const renderLive = () => {
+  if (liveRoot) renderLiveNav(liveRoot, "", { header: true });
+  const c = $("#paths-continue"),
+    n = getNextLesson();
+  if (c) {
+    c.href = n ? n.href : "paths.html#fundamentals";
+    c.innerHTML = `${n ? "Continue" : "Browse next"} <svg class="ic"><use href="#i-arrow"/></svg>`;
+    c.title = n ? `Continue: ${n.title}` : "Browse the next module";
+  }
+};
+renderLive();
+addEventListener("pageshow", (e) => e.persisted && renderLive());
+addEventListener("storage", renderLive);
+
+/* Tabs */
 const tabBtns = [...document.querySelectorAll(".tabs button")];
 const secs = [...document.querySelectorAll("[data-tracksec]")];
 const setTab = (tab, scroll = false) => {
@@ -118,7 +128,7 @@ if (["fundamentals", "pentest", "lab"].includes(initial)) {
   );
 }
 
-/* ---------- Live search ---------- */
+/* Search */
 const search = $("#search"),
   count = $("#search-count"),
   empty = $("#empty");
@@ -137,9 +147,7 @@ search.addEventListener("input", () => {
       });
       mod.hidden = q && modHits === 0;
       if (q && modHits > 0) mod.open = true;
-      if (!q)
-        mod.open =
-          [...mod.parentElement.querySelectorAll(".module")].indexOf(mod) === 0;
+      if (!q) mod.open = mod.dataset.live === "1";
       hits += modHits;
     });
     count.textContent = q
@@ -149,7 +157,7 @@ search.addEventListener("input", () => {
   }, 120);
 });
 
-/* ---------- Syllabus export (.md) ---------- */
+/* Syllabus export */
 $("#dl-md").addEventListener("click", () => {
   let md = `# Sea of Glass — Curriculum\nBy Shidoon · generated ${new Date().toISOString().slice(0, 10)}\n\n`;
   TRACKS.forEach((t) => {
@@ -157,7 +165,7 @@ $("#dl-md").addEventListener("click", () => {
     t.modules.forEach((m, i) => {
       md += `### ${String(i + 1).padStart(2, "0")} · ${m.title}\n${m.summary}\nTools: ${m.tools.join(", ")}\n\n`;
       m.lessons.forEach((l) => {
-        md += `- [${KIND[l.kind][0]}] **${l.title}** — ${l.desc} (${l.mins} min)\n`;
+        md += `- [${KIND[l.kind][0]}] **${l.title}** — ${l.desc} (${l.mins} min)${l.href ? " · LIVE: " + l.href : ""}\n`;
       });
       md += "\n";
     });
