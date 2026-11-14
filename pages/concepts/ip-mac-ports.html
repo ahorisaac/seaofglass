@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IP, MAC & Ports — Sea of Glass</title>
+    <meta
+      name="description"
+      content="IP is the postal address, MAC is the local fingerprint, ports are doors. Learn addressing with a simulated port scanner, CLI mission and quiz."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#070b13" />
+    <link
+      rel="canonical"
+      href="https://seaofglass.shidoon.com/pages/concepts/ip-mac-ports.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="IP, MAC & Ports — Sea of Glass" />
+    <meta
+      property="og:description"
+      content="Addresses, fingerprints and doors. Interactive port scanner + quiz."
+    />
+    <meta
+      property="og:url"
+      content="https://seaofglass.shidoon.com/pages/concepts/ip-mac-ports.html"
+    />
+    <meta
+      property="og:image"
+      content="https://seaofglass.shidoon.com/assets/img/og-cover.svg"
+    />
+    <link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../../assets/css/lesson.css" />
+    <link rel="stylesheet" href="../../assets/css/lab-deck.css" />
+    <link rel="stylesheet" href="../../assets/css/ip-mac-ports.css" />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <symbol id="i-menu" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </symbol>
+        <symbol id="i-x" viewBox="0 0 24 24">
+          <path d="M6 6l12 12M18 6L6 18" />
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24">
+          <path d="M4 12h16M13 5l7 7-7 7" />
+        </symbol>
+        <symbol id="i-up" viewBox="0 0 24 24">
+          <path d="M12 20V4M5 11l7-7 7 7" />
+        </symbol>
+        <symbol id="i-replay" viewBox="0 0 24 24">
+          <path d="M20 12a8 8 0 1 1-2.3-5.6" />
+          <path d="M20 4v4h-4" />
+        </symbol>
+        <symbol id="i-shield" viewBox="0 0 24 24">
+          <path d="M12 3l7 3v5c0 4.6-3 7.6-7 9-4-1.4-7-4.4-7-9V6z" />
+          <path d="M9 11.5l2 2 4-4" />
+        </symbol>
+        <symbol id="i-terminal" viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="16" rx="2" />
+          <path d="M7 9l3 3-3 3M12 15h5" />
+        </symbol>
+        <symbol id="i-book" viewBox="0 0 24 24">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+          <path
+            d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+          />
+        </symbol>
+        <symbol id="i-flag" viewBox="0 0 24 24">
+          <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+          <path d="M4 22v-7" />
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24">
+          <path d="M4 12.5l5.5 5.5L20 6.5" />
+        </symbol>
+        <symbol id="i-lock" viewBox="0 0 24 24">
+          <rect x="4" y="11" width="16" height="10" rx="2" />
+          <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+        </symbol>
+        <symbol id="i-eye" viewBox="0 0 24 24">
+          <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" />
+          <circle cx="12" cy="12" r="3" />
+        </symbol>
+        <symbol id="i-search" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7" />
+          <path d="M16.5 16.5L21 21" />
+        </symbol>
+      </defs>
+    </svg>
+    <div class="aurora a1" aria-hidden="true"></div>
+    <div class="aurora a2" aria-hidden="true"></div>
+    <div id="cursor" aria-hidden="true"></div>
+    <div id="progress" aria-hidden="true"></div>
+
+    <header id="nav">
+      <div class="container nav-in">
+        <a class="brand" href="../../index.html"
+          ><img
+            src="../../assets/img/shidoon-mark.svg"
+            alt=""
+            width="36"
+            height="36"
+          /><span class="brand-txt"
+            ><small>SHIDOON</small><strong>SEA OF GLASS</strong></span
+          ></a
+        >
+        <nav id="nav-menu">
+          <a href="../../index.html">Home</a
+          ><a href="../paths.html#fundamentals">Curriculum</a
+          ><a href="#lab">Lab</a><a href="#mission">CLI</a
+          ><a href="#quiz">Quiz</a
+          ><a class="btn small primary" href="../paths.html#fundamentals"
+            >All lessons <svg class="ic"><use href="#i-arrow" /></svg
+          ></a>
+        </nav>
+        <button id="nav-toggle" aria-label="Menu" aria-expanded="false">
+          <svg class="ic m-open"><use href="#i-menu" /></svg
+          ><svg class="ic m-close"><use href="#i-x" /></svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="main" class="container lesson">
+      <nav class="crumb">
+        <a href="../../index.html">Home</a> /
+        <a href="../paths.html#fundamentals">Fundamentals</a> /
+        <span>IP, MAC &amp; Ports</span>
+      </nav>
+      <p class="eyebrow">Fundamentals · Module 02 · Lesson 02</p>
+      <h1>IP, MAC &amp; <span>Ports</span></h1>
+      <div class="l-meta">
+        <span
+          ><svg class="ic"><use href="#i-book" /></svg> 12 min</span
+        ><span class="state" id="read-state">Reading</span
+        ><span class="state" id="lab-state"
+          ><svg class="ic"><use href="#i-terminal" /></svg> Lab: pending</span
+        ><span class="state" id="quiz-state"
+          ><svg class="ic"><use href="#i-flag" /></svg> Quiz: pending</span
+        >
+      </div>
+      <p class="banner hidden" id="lesson-banner">
+        <svg class="ic"><use href="#i-check" /></svg> Lesson complete — progress
+        saved.
+      </p>
+
+      <section class="prose" id="brief" data-section>
+        <div class="hook">
+          <p>
+            <b>IP</b> is the postal address. <b>MAC</b> is the local
+            fingerprint. <b>Ports</b> are the doors.
+          </p>
+          <code
+            >IP finds the building · MAC finds the device on this LAN · port
+            finds the service</code
+          >
+        </div>
+        <div class="promise ip">
+          <h2><i>IP</i> Internet Protocol address</h2>
+          <p>
+            A logical address that can change when you join a different network.
+            IPv4 looks like <code>192.168.1.20</code>; IPv6 looks like
+            <code>2001:db8::14</code>. Routers use IP to move packets between
+            networks.
+          </p>
+          <ul>
+            <li>
+              <b>Private ranges:</b> 10.0.0.0/8 · 172.16.0.0/12 · 192.168.0.0/16
+            </li>
+            <li><b>Loopback:</b> 127.0.0.1 means “this machine”.</li>
+          </ul>
+        </div>
+        <div class="promise mac">
+          <h2><i>MAC</i> Media Access Control address</h2>
+          <p>
+            A hardware-style address used for <b>local</b> delivery, like
+            <code>02:42:ac:11:00:02</code>. It does not travel across routers
+            the same way IP does. ARP asks “who has this IP?” and gets a MAC
+            answer.
+          </p>
+        </div>
+        <div class="promise port">
+          <h2><i>PORT</i> Service door number</h2>
+          <p>
+            A number from 0–65535 that identifies a service behind an IP. One
+            server can run SSH on 22, HTTP on 80 and HTTPS on 443 at the same
+            time.
+          </p>
+        </div>
+        <table class="map">
+          <thead>
+            <tr>
+              <th>Port</th>
+              <th>Service</th>
+              <th>Why testers care</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>21</td>
+              <td>FTP</td>
+              <td>Anonymous login? Cleartext credentials?</td>
+            </tr>
+            <tr>
+              <td>22</td>
+              <td>SSH</td>
+              <td>Remote shell; key auth is safer than passwords.</td>
+            </tr>
+            <tr>
+              <td>23</td>
+              <td>Telnet</td>
+              <td>Cleartext remote access — usually a finding.</td>
+            </tr>
+            <tr>
+              <td>53</td>
+              <td>DNS</td>
+              <td>Zone transfers and record leaks.</td>
+            </tr>
+            <tr>
+              <td>80 / 443</td>
+              <td>HTTP / HTTPS</td>
+              <td>Web attack surface.</td>
+            </tr>
+            <tr>
+              <td>445</td>
+              <td>SMB</td>
+              <td>Windows file sharing; historically dangerous.</td>
+            </tr>
+            <tr>
+              <td>3389</td>
+              <td>RDP</td>
+              <td>Remote desktop; brute force and exposure risk.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="prose" id="lab" data-section>
+        <h2>
+          <svg class="ic"><use href="#i-search" /></svg> Lab: simulated port
+          scanner
+        </h2>
+        <p>
+          Choose a lab host and scan profile. Doors reveal as open, closed or
+          filtered. Click a revealed door for attacker/defender notes.
+          <b>No real traffic is sent.</b>
+        </p>
+        <div class="lab-grid">
+          <div class="lab-stage scanner-stage">
+            <div class="scanner-wrap">
+              <div class="scan-head">
+                <span id="scan-target">10.10.14.2 · glasscorp-web</span
+                ><span class="scan-badge">SIMULATED</span>
+              </div>
+              <div class="doors" id="doors"></div>
+            </div>
+            <span class="lab-hint">click revealed doors for details</span>
+          </div>
+          <aside class="lab-panel">
+            <div class="deck">
+              <label class="ctl select"
+                ><span>Target</span
+                ><select id="p-target">
+                  <option value="web">10.10.14.2 · web</option>
+                  <option value="dc">10.10.14.5 · domain ctrl</option>
+                  <option value="iot">10.10.14.99 · printer</option>
+                </select></label
+              >
+              <label class="ctl select"
+                ><span>Profile</span
+                ><select id="p-profile">
+                  <option value="top">Top 10</option>
+                  <option value="web">Web only</option>
+                  <option value="full">Full lab list</option>
+                </select></label
+              >
+              <label class="ctl range"
+                ><span>Speed <output id="p-speed-out">5</output></span
+                ><input type="range" id="p-speed" min="1" max="10" value="5"
+              /></label>
+              <label class="ctl"
+                ><span>Show closed</span
+                ><input type="checkbox" id="p-closed" checked /><i
+                  class="switch"
+                ></i
+              ></label>
+              <button type="button" class="btn tiny primary" id="p-scan">
+                <svg class="ic"><use href="#i-search" /></svg> Scan
+              </button>
+              <button type="button" class="btn tiny ghost" id="p-random">
+                Random host
+              </button>
+              <button type="button" class="btn tiny ghost" id="p-reset">
+                <svg class="ic"><use href="#i-replay" /></svg> Reset
+              </button>
+            </div>
+            <div class="port-detail" id="port-detail">
+              <b>Select a door</b>
+              <p>Run a scan, then click an open port to read why it matters.</p>
+            </div>
+          </aside>
+        </div>
+        <div class="recall">
+          <h3>
+            <svg class="ic"><use href="#i-eye" /></svg> Memory hook
+          </h3>
+          <p>
+            <b>“Address, fingerprint, door.”</b> IP = address, MAC = local
+            fingerprint, port = door. When you read an nmap scan, read it like a
+            building survey: which doors are open, and what lives behind them?
+          </p>
+        </div>
+      </section>
+
+      <section class="prose" id="mission" data-section>
+        <h2>
+          <svg class="ic"><use href="#i-terminal" /></svg> Mission: well-known
+          doors
+        </h2>
+        <p>
+          Read <code>ports.txt</code>, then verify SSH, HTTP and HTTPS port
+          numbers in that order: <code>verify 22 80 443</code>.
+        </p>
+        <div class="term cli">
+          <div class="term-bar">
+            <i class="dot r"></i><i class="dot y"></i><i class="dot g"></i
+            ><span>student@seaofglass: ~/ip-mac-ports</span
+            ><em>TRAINING SHELL</em>
+          </div>
+          <div class="term-body" id="cli-body" aria-live="polite"></div>
+          <form id="cli-form" autocomplete="off">
+            <span class="t-prompt">student@seaofglass</span
+            ><span class="t-path">:~$</span
+            ><input
+              id="cli-input"
+              type="text"
+              spellcheck="false"
+              autocapitalize="off"
+              aria-label="Terminal command input"
+              placeholder="start with: cat ports.txt"
+            />
+          </form>
+        </div>
+      </section>
+
+      <section class="prose" id="quiz" data-section>
+        <h2>
+          <svg class="ic"><use href="#i-flag" /></svg> Checkpoint: 4 questions
+        </h2>
+        <p>Score 75% or more to complete the lesson.</p>
+        <form id="quiz-form"></form>
+        <div class="quiz-actions">
+          <button class="btn primary" id="quiz-submit" type="button">
+            Check answers</button
+          ><button class="btn ghost hidden" id="quiz-retry" type="button">
+            Try again
+          </button>
+          <div class="score hidden" id="quiz-score">
+            <svg viewBox="0 0 64 64">
+              <circle class="bgc" cx="32" cy="32" r="26" />
+              <circle class="fgc" id="score-ring" cx="32" cy="32" r="26" /></svg
+            ><span
+              ><b id="score-num">0%</b
+              ><small id="score-note">score</small></span
+            >
+          </div>
+        </div>
+      </section>
+
+      <nav class="l-nav">
+        <a class="btn ghost" href="osi-model.html">← OSI Model</a
+        ><a class="btn primary" href="dns-whois.html"
+          >Next: DNS &amp; Whois <svg class="ic"><use href="#i-arrow" /></svg
+        ></a>
+      </nav>
+    </main>
+    <footer class="footer">
+      <div class="container f-bottom" style="border-top: 0">
+        <span>© <span data-year>2026</span> Shidoon · Sea of Glass</span
+        ><span class="f-ethics"
+          ><svg class="ic"><use href="#i-shield" /></svg> Train ethically. Hack
+          only what you own or have written permission to test.</span
+        >
+      </div>
+    </footer>
+    <button id="to-top" aria-label="Back to top">
+      <svg class="ic"><use href="#i-up" /></svg>
+    </button>
+    <script type="module" src="../../assets/js/core/main.js"></script>
+    <script
+      type="module"
+      src="../../assets/js/lessons/ip-mac-ports.js"
+    ></script>
+  </body>
+</html>

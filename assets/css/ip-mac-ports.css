@@ -1,0 +1,142 @@
+/* IP, MAC & Ports lesson */
+.prose a {
+  color: var(--cyan);
+}
+.prose a:hover {
+  text-decoration: underline;
+}
+.promise.ip {
+  --pc: var(--cyan);
+}
+.promise.mac {
+  --pc: var(--violet);
+}
+.promise.port {
+  --pc: var(--teal);
+}
+.scanner-stage {
+  padding: 0;
+}
+.scanner-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.scan-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+  font: 700 0.7rem var(--font-mono);
+  letter-spacing: 0.14em;
+  color: var(--text);
+}
+.scan-badge {
+  color: var(--amber);
+  border: 1px solid rgba(255, 180, 84, 0.35);
+  background: rgba(255, 180, 84, 0.08);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.58rem;
+}
+.doors {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 18px;
+  align-content: start;
+}
+.door {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  border: 1px solid var(--line2);
+  background: linear-gradient(180deg, #121c2f, #0b1220);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: var(--faint);
+  transition: 0.2s;
+  overflow: hidden;
+}
+.door::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+.door b {
+  font: 700 0.9rem var(--font-disp);
+  z-index: 1;
+}
+.door small {
+  font: 400 0.58rem var(--font-mono);
+  letter-spacing: 0.1em;
+  z-index: 1;
+}
+.door.revealed.open {
+  border-color: var(--teal);
+  color: var(--teal);
+  box-shadow: 0 0 22px rgba(60, 245, 182, 0.18);
+  background: linear-gradient(180deg, rgba(60, 245, 182, 0.12), #0b1220);
+}
+.door.revealed.closed {
+  border-color: rgba(255, 77, 109, 0.35);
+  color: rgba(255, 77, 109, 0.7);
+}
+.door.revealed.filtered {
+  border-color: rgba(255, 180, 84, 0.4);
+  color: var(--amber);
+}
+.door.revealed:hover {
+  transform: translateY(-3px);
+}
+.doors.hide-closed .door.closed,
+.doors.hide-closed .door.filtered {
+  display: none;
+}
+.port-detail {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+}
+.port-detail b {
+  display: block;
+  margin-bottom: 6px;
+}
+.port-detail p {
+  font-size: 0.86rem;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+.port-detail code {
+  display: inline-block;
+  margin-top: 4px;
+}
+.port-detail .tag {
+  font: 700 0.58rem var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 7px;
+  border-radius: 5px;
+  border: 1px solid var(--line2);
+  color: var(--faint);
+  margin-right: 6px;
+}
+@media (max-width: 560px) {
+  .doors {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 12px;
+  }
+  .door b {
+    font-size: 0.78rem;
+  }
+}
