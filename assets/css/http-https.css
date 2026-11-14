@@ -1,0 +1,136 @@
+/* HTTP vs HTTPS lesson */
+.prose a {
+  color: var(--cyan);
+}
+.prose a:hover {
+  text-decoration: underline;
+}
+.http-grid {
+  grid-template-columns: 1.35fr 0.65fr;
+}
+.http-stage {
+  padding: 0;
+  min-height: 500px;
+}
+.http-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  gap: 14px;
+}
+.http-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.http-box,
+.eve-box {
+  background: #0a0f1a;
+  border: 1px solid var(--line2);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.http-box header,
+.eve-box header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--line);
+  font: 700 0.62rem var(--font-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.http-box header span {
+  margin-left: auto;
+  color: var(--cyan);
+}
+.http-box pre,
+.eve-box pre {
+  padding: 12px;
+  font: 400 0.72rem/1.55 var(--font-mono);
+  color: var(--muted);
+  white-space: pre-wrap;
+  word-break: break-word;
+  min-height: 180px;
+  max-height: 230px;
+  overflow: auto;
+}
+.http-box pre::-webkit-scrollbar,
+.eve-box pre::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.http-box pre::-webkit-scrollbar-thumb,
+.eve-box pre::-webkit-scrollbar-thumb {
+  background: #1e4a63;
+  border-radius: 6px;
+}
+#status-chip {
+  margin-left: auto;
+  font: 700 0.62rem var(--font-mono);
+  padding: 3px 7px;
+  border-radius: 5px;
+  border: 1px solid var(--line2);
+  color: var(--faint);
+}
+#status-chip.s2 {
+  color: var(--teal);
+  border-color: rgba(60, 245, 182, 0.4);
+  background: rgba(60, 245, 182, 0.08);
+}
+#status-chip.s3 {
+  color: var(--blue);
+  border-color: rgba(77, 163, 255, 0.4);
+  background: rgba(77, 163, 255, 0.08);
+}
+#status-chip.s4 {
+  color: var(--amber);
+  border-color: rgba(255, 180, 84, 0.4);
+  background: rgba(255, 180, 84, 0.08);
+}
+#status-chip.s5 {
+  color: var(--red);
+  border-color: rgba(255, 77, 109, 0.4);
+  background: rgba(255, 77, 109, 0.08);
+}
+.eve-box {
+  border-color: rgba(255, 180, 84, 0.25);
+}
+.eve-box.safe {
+  border-color: rgba(60, 245, 182, 0.3);
+}
+.eve-box header .ic {
+  color: var(--amber);
+}
+.eve-box.safe header .ic {
+  color: var(--teal);
+}
+.eve-box pre {
+  min-height: 90px;
+  max-height: 120px;
+  color: var(--amber);
+}
+.eve-box.safe pre {
+  color: var(--teal);
+}
+.eve-box p {
+  padding: 0 12px 12px;
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--faint);
+}
+@media (max-width: 900px) {
+  .http-grid {
+    grid-template-columns: 1fr;
+  }
+  .http-cols {
+    grid-template-columns: 1fr;
+  }
+  .http-stage {
+    min-height: auto;
+  }
+}
