@@ -91,7 +91,7 @@
 }
 .live-modules {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 18px;
 }
 .live-module {
@@ -225,9 +225,6 @@
     flex-direction: row;
     flex-wrap: wrap;
   }
-  .live-modules {
-    grid-template-columns: 1fr;
-  }
 }
 @media (max-width: 560px) {
   .live-card {
@@ -241,5 +238,8 @@
   }
   .lm-meta {
     grid-column: 2;
+  }
+  .live-modules {
+    grid-template-columns: 1fr;
   }
 }

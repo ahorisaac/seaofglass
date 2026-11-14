@@ -1,4 +1,4 @@
-/* Progress-aware navigation for every live lesson. */
+/* Progress-aware navigation + live count sync for every live lesson. */
 import { TRACKS } from "../data/curriculum.js";
 import { readProgress } from "./lesson-engine.js";
 
@@ -35,12 +35,36 @@ export const getNextLesson = () => {
   return getLiveLessons().find((l) => !isComplete(l, p)) || null;
 };
 
+/* Keep hardcoded marketing counts truthful without duplicating data. */
+function syncLiveCounts(context) {
+  const n = getLiveLessons().length;
+  if (context === "index") {
+    document.querySelectorAll(".hero-stats li").forEach((li) => {
+      if (li.querySelector("span")?.textContent.trim() === "live lessons") {
+        const b = li.querySelector("b");
+        if (b) {
+          b.dataset.count = n;
+          b.textContent = n;
+        }
+      }
+    });
+    document.querySelectorAll(".t-card.def .t-meta li").forEach((li) => {
+      if (/live/.test(li.textContent)) li.textContent = `${n} live now`;
+    });
+  } else {
+    const b = document.querySelector(".p-hero .lead b");
+    if (b && /live/.test(b.textContent))
+      b.textContent = `${n} lessons are live now`;
+  }
+}
+
 export function renderLiveNav(container, base = "", opts = {}) {
   const p = readProgress();
   const live = getLiveLessons();
   const done = live.filter((l) => isComplete(l, p)).length;
   const next = getNextLesson();
   const pct = live.length ? done / live.length : 0;
+
   const groups = [];
   live.forEach((l) => {
     let g = groups.find((x) => x.module === l.module && x.track === l.track);
@@ -55,6 +79,9 @@ export function renderLiveNav(container, base = "", opts = {}) {
       );
     g.lessons.push(l);
   });
+  const newestIndex = groups.length
+    ? Math.max(...groups.map((g) => g.moduleIndex))
+    : -1;
 
   const head =
     opts.header === false
@@ -75,6 +102,7 @@ export function renderLiveNav(container, base = "", opts = {}) {
   const modules = groups
     .map((g) => {
       const gd = g.lessons.filter((l) => isComplete(l, p)).length;
+      const isNew = g.moduleIndex === newestIndex && groups.length > 1;
       const rows = g.lessons
         .map((l) => {
           const doneRow = isComplete(l, p),
@@ -90,12 +118,13 @@ export function renderLiveNav(container, base = "", opts = {}) {
         <span class="lm-kind">${icon(KIND[l.kind][1])}</span><span class="lm-title">${l.title}</span><span class="lm-meta">${meta}</span></a></li>`;
         })
         .join("");
-      return `<section class="live-module ${g.moduleIndex === 1 ? "new" : ""}">
+      return `<section class="live-module ${isNew ? "new" : ""}">
       <header><span class="lm-num">${String(g.moduleIndex + 1).padStart(2, "0")}</span><h3>${g.module.title}</h3>
-        <span class="lm-count">${gd}/${g.lessons.length} done</span>${g.moduleIndex === 1 ? '<span class="lm-new">NEW</span>' : ""}</header>
+        <span class="lm-count">${gd}/${g.lessons.length} done</span>${isNew ? '<span class="lm-new">NEW</span>' : ""}</header>
       <ol class="lm-lessons">${rows}</ol></section>`;
     })
     .join("");
 
   container.innerHTML = `<div class="live-card">${head}<div class="live-modules">${modules}</div></div>`;
+  syncLiveCounts(base === "" ? "paths" : "index");
 }

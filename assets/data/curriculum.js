@@ -1,6 +1,7 @@
 /* ============================================================
    SEA OF GLASS · curriculum — single source of truth.
-   11 lessons live: Module 01 complete + Module 02 lessons 1–5.
+   16 lessons live: Module 01 + Module 02 complete,
+   Module 03 lessons 1–3.
    Keep landing counters in sync (23 modules / 137 / 55).
    ============================================================ */
 
@@ -119,12 +120,16 @@ export const TRACKS = [
             desc: "Capture, filter, follow a stream. See the conversation, not the mystery.",
             kind: "lab",
             mins: 20,
+            href: "concepts/wireshark.html",
+            slug: "wireshark",
           },
           {
             title: "Checkpoint: Networking",
             desc: "Ports, protocols and packet reading under pressure.",
             kind: "quiz",
             mins: 8,
+            href: "checkpoints/networking.html",
+            slug: "networking-checkpoint",
           },
         ],
       },
@@ -138,18 +143,24 @@ export const TRACKS = [
             desc: "One umbrella, many animals. Droppers, payloads, persistence, C2.",
             kind: "read",
             mins: 12,
+            href: "concepts/malware-intro.html",
+            slug: "malware-intro",
           },
           {
             title: "Viruses vs worms",
             desc: "Viruses need a host and a human; worms walk the network alone.",
             kind: "read",
             mins: 10,
+            href: "concepts/viruses-worms.html",
+            slug: "viruses-worms",
           },
           {
             title: "Trojans & RATs",
             desc: "The gift that owns you: remote access trojans and their handlers.",
             kind: "read",
             mins: 12,
+            href: "concepts/trojans-rats.html",
+            slug: "trojans-rats",
           },
           {
             title: "Ransomware",
