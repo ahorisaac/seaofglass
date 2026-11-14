@@ -1,7 +1,7 @@
 /* ============================================================
    SEA OF GLASS · curriculum — single source of truth.
-   Add lessons here; set `href` + `slug` when a page goes live.
-   Keep landing-page counters in sync (23 modules / 137 / 55).
+   11 lessons live: Module 01 complete + Module 02 lessons 1–5.
+   Keep landing counters in sync (23 modules / 137 / 55).
    ============================================================ */
 
 export const TRACKS = [
@@ -79,30 +79,40 @@ export const TRACKS = [
             desc: "Layers as a postal system: who wraps what, and where attacks live.",
             kind: "read",
             mins: 14,
+            href: "concepts/osi-model.html",
+            slug: "osi-model",
           },
           {
             title: "IP, MAC & ports",
             desc: "Addresses vs doors. Public, private, and why 10.10.x.x feels like home.",
             kind: "read",
             mins: 12,
+            href: "concepts/ip-mac-ports.html",
+            slug: "ip-mac-ports",
           },
           {
             title: "DNS & whois footprinting",
             desc: "Resolve names, read records, map a domain’s exposed surface.",
             kind: "lab",
             mins: 18,
+            href: "concepts/dns-whois.html",
+            slug: "dns-whois",
           },
           {
             title: "TCP vs UDP & the handshake",
             desc: "SYN, SYN-ACK, ACK — reliability vs speed, and how scans abuse both.",
             kind: "read",
             mins: 12,
+            href: "concepts/tcp-udp.html",
+            slug: "tcp-udp",
           },
           {
             title: "HTTP vs HTTPS",
             desc: "Requests, responses, status codes — and what the S actually adds.",
             kind: "read",
             mins: 12,
+            href: "concepts/http-https.html",
+            slug: "http-https",
           },
           {
             title: "Reading packets in Wireshark",
