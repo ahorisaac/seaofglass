@@ -8,7 +8,7 @@
     </title>
     <meta
       name="description"
-      content="Watch a real cyber attack unfold in 3D, then learn to run it, break it and defend it. Hands-on Kali & Parrot labs, interactive terminals and quizzes. Free to start."
+      content="Watch a real cyber attack unfold in 3D, then learn to run it, break it and defend it. Hands-on Kali & Parrot labs, interactive terminals and quizzes. 11 lessons live now."
     />
     <meta
       name="keywords"
@@ -18,7 +18,6 @@
     <meta name="theme-color" content="#070b13" />
     <link rel="canonical" href="https://seaofglass.shidoon.com/" />
 
-    <!-- Social cards -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Sea of Glass · Shidoon" />
     <meta
@@ -57,13 +56,12 @@
     />
     <link rel="stylesheet" href="assets/css/base.css" />
     <link rel="stylesheet" href="assets/css/home.css" />
+    <link rel="stylesheet" href="assets/css/live-nav.css" />
 
-    <!-- Progressive enhancement flag -->
     <script>
       document.documentElement.classList.add("js");
     </script>
 
-    <!-- three.js import map (pinned) -->
     <script type="importmap">
       {
         "imports": {
@@ -73,7 +71,6 @@
       }
     </script>
 
-    <!-- Structured data for search engines -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -112,7 +109,6 @@
   <body>
     <a class="skip" href="#main">Skip to content</a>
 
-    <!-- Icon sprite (shared across pages) -->
     <svg width="0" height="0" style="position: absolute" aria-hidden="true">
       <defs>
         <symbol id="i-menu" viewBox="0 0 24 24">
@@ -241,13 +237,11 @@
       </defs>
     </svg>
 
-    <!-- Ambient layers -->
     <div class="aurora a1" aria-hidden="true"></div>
     <div class="aurora a2" aria-hidden="true"></div>
     <div id="cursor" aria-hidden="true"></div>
     <div id="progress" aria-hidden="true"></div>
 
-    <!-- ============ NAV ============ -->
     <header id="nav">
       <div class="container nav-in">
         <a class="brand" href="#top" aria-label="Sea of Glass — home">
@@ -262,6 +256,7 @@
           >
         </a>
         <nav id="nav-menu" aria-label="Primary">
+          <a href="#journey">Your path</a>
           <a href="#about">About</a>
           <a href="#why">Why us</a>
           <a href="#globe">Live globe</a>
@@ -312,11 +307,11 @@
             <ul class="hero-stats reveal" style="--d: 0.28s">
               <li><b data-count="23">0</b><span>modules</span></li>
               <li><b data-count="137">0</b><span>lessons &amp; labs</span></li>
+              <li><b data-count="11">0</b><span>live lessons</span></li>
               <li><b data-count="2">0</b><span>career tracks</span></li>
             </ul>
           </div>
 
-          <!-- Live kill-chain simulation -->
           <div class="hero-viz reveal" style="--d: 0.18s">
             <div class="sim-card" id="sim-card">
               <div class="sim-head">
@@ -357,7 +352,6 @@
                   id="hero-labels"
                   aria-hidden="true"
                 ></div>
-                <!-- Static fallback if WebGL is unavailable -->
                 <div class="viz-fallback" id="hero-fallback" aria-hidden="true">
                   <svg viewBox="0 0 640 260">
                     <g class="fb-line">
@@ -418,9 +412,140 @@
             </div>
           </div>
         </div>
-        <a class="scroll-cue" href="#about" aria-label="Scroll to About"
+        <a class="scroll-cue" href="#journey" aria-label="Scroll to your path"
           ><svg class="ic"><use href="#i-chev" /></svg
         ></a>
+      </section>
+
+      <!-- ============ MISSION CONTROL · LIVE LESSONS ============ -->
+      <section class="sec journey-sec" id="journey" data-section>
+        <div class="container">
+          <div id="journey-root">
+            <!-- Static fallback; enhanced with progress by journey.js -->
+            <div class="live-card">
+              <div class="live-head">
+                <div>
+                  <p class="eyebrow">00 // Mission control</p>
+                  <h2>Your live lessons.</h2>
+                  <p class="lead">
+                    Module 01 is complete. Module 02 has begun: networking you
+                    actually need.
+                  </p>
+                </div>
+                <div class="live-actions">
+                  <a
+                    class="btn primary"
+                    href="pages/concepts/what-is-security.html"
+                    >Start Lesson 01
+                    <svg class="ic"><use href="#i-arrow" /></svg
+                  ></a>
+                  <a class="btn ghost" href="pages/paths.html"
+                    >Full curriculum</a
+                  >
+                </div>
+              </div>
+              <div class="live-modules">
+                <section class="live-module">
+                  <header>
+                    <span class="lm-num">01</span>
+                    <h3>First Principles</h3>
+                  </header>
+                  <ol class="lm-lessons">
+                    <li>
+                      <a
+                        class="lm-lesson"
+                        href="pages/concepts/what-is-security.html"
+                        ><span class="lm-title">What is Security?</span
+                        ><span class="lm-meta">10 min</span></a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="lm-lesson"
+                        href="pages/concepts/threat-vuln-risk.html"
+                        ><span class="lm-title"
+                          >Threat, Vulnerability, Risk</span
+                        ><span class="lm-meta">12 min</span></a
+                      >
+                    </li>
+                    <li>
+                      <a class="lm-lesson" href="pages/concepts/cia-triad.html"
+                        ><span class="lm-title">The CIA Triad</span
+                        ><span class="lm-meta">15 min</span></a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="lm-lesson"
+                        href="pages/concepts/hacker-types.html"
+                        ><span class="lm-title">Hackers &amp; Their Hats</span
+                        ><span class="lm-meta">10 min</span></a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="lm-lesson"
+                        href="pages/concepts/famous-breaches.html"
+                        ><span class="lm-title">Hall of Fame</span
+                        ><span class="lm-meta">14 min</span></a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="lm-lesson"
+                        href="pages/checkpoints/first-principles.html"
+                        ><span class="lm-title"
+                          >Checkpoint: First Principles</span
+                        ><span class="lm-meta">8 questions</span></a
+                      >
+                    </li>
+                  </ol>
+                </section>
+                <section class="live-module new">
+                  <header>
+                    <span class="lm-num">02</span>
+                    <h3>Networking You Actually Need</h3>
+                    <span class="lm-new">NEW</span>
+                  </header>
+                  <ol class="lm-lessons">
+                    <li>
+                      <a class="lm-lesson" href="pages/concepts/osi-model.html"
+                        ><span class="lm-title">OSI Model</span
+                        ><span class="lm-meta">14 min</span></a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="lm-lesson"
+                        href="pages/concepts/ip-mac-ports.html"
+                        ><span class="lm-title">IP, MAC &amp; Ports</span
+                        ><span class="lm-meta">12 min</span></a
+                      >
+                    </li>
+                    <li>
+                      <a class="lm-lesson" href="pages/concepts/dns-whois.html"
+                        ><span class="lm-title">DNS &amp; Whois</span
+                        ><span class="lm-meta">18 min</span></a
+                      >
+                    </li>
+                    <li>
+                      <a class="lm-lesson" href="pages/concepts/tcp-udp.html"
+                        ><span class="lm-title">TCP vs UDP</span
+                        ><span class="lm-meta">12 min</span></a
+                      >
+                    </li>
+                    <li>
+                      <a class="lm-lesson" href="pages/concepts/http-https.html"
+                        ><span class="lm-title">HTTP vs HTTPS</span
+                        ><span class="lm-meta">12 min</span></a
+                      >
+                    </li>
+                  </ol>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- ============ ABOUT ============ -->
@@ -645,7 +770,6 @@
                 <span class="globe-hint">drag to spin · scroll to zoom</span>
               </div>
 
-              <!-- Live control console -->
               <div class="globe-controls">
                 <label class="gc"
                   ><span>Auto-spin</span
@@ -766,6 +890,7 @@
               <ul class="t-meta">
                 <li>8 modules</li>
                 <li>56 lessons</li>
+                <li>11 live now</li>
                 <li>Beginner</li>
               </ul>
               <ul class="t-list">
@@ -786,6 +911,10 @@
                 >Browse fundamentals
                 <svg class="ic"><use href="#i-arrow" /></svg
               ></a>
+              <a class="t-jump" href="pages/concepts/what-is-security.html"
+                >Jump to Lesson 01: What is Security?
+                <svg class="ic"><use href="#i-arrow" /></svg
+              ></a>
             </article>
 
             <article class="t-card off tilt reveal" style="--d: 0.22s">
@@ -797,6 +926,7 @@
               <ul class="t-meta">
                 <li>15 modules</li>
                 <li>81 lessons</li>
+                <li>In production</li>
                 <li>Intermediate</li>
               </ul>
               <ul class="t-list">
@@ -891,7 +1021,6 @@
       </section>
     </main>
 
-    <!-- ============ FOOTER ============ -->
     <footer class="footer">
       <div class="container f-grid">
         <div class="f-brand">
@@ -913,7 +1042,7 @@
         </div>
         <nav aria-label="Explore">
           <h4>Explore</h4>
-          <a href="#top">Overview</a><a href="#about">About us</a
+          <a href="#journey">Your path</a><a href="#about">About us</a
           ><a href="#why">Why us</a><a href="#globe">Live globe</a
           ><a href="#start">Get started</a>
         </nav>
@@ -921,9 +1050,15 @@
           <h4>Learn</h4>
           <a href="pages/paths.html">All paths</a
           ><a href="pages/paths.html#fundamentals">Fundamentals</a
-          ><a href="pages/paths.html#pentest">Penetration testing</a
-          ><a href="pages/paths.html#lab">Lab setup</a
-          ><a href="pages/concepts/cia-triad.html">Sample lesson</a>
+          ><a href="pages/paths.html#pentest">Penetration testing</a>
+          <a href="pages/paths.html#lab">Lab setup</a
+          ><a href="pages/concepts/what-is-security.html"
+            >Start: What is Security?</a
+          >
+          <a href="pages/concepts/osi-model.html">New: OSI Model</a
+          ><a href="pages/checkpoints/first-principles.html"
+            >Module 01 checkpoint</a
+          >
         </nav>
         <nav aria-label="Connect">
           <h4>Connect</h4>
@@ -961,5 +1096,6 @@
     <script type="module" src="assets/js/core/main.js"></script>
     <script type="module" src="assets/js/home/hero-pipeline.js"></script>
     <script type="module" src="assets/js/home/globe.js"></script>
+    <script type="module" src="assets/js/home/journey.js"></script>
   </body>
 </html>
