@@ -1,12 +1,8 @@
-/* ============================================================
-   Shared lesson engine: progress store, training CLI, quiz,
-   and automatic prev/next navigation from curriculum data.
-   ============================================================ */
+/* Shared lesson engine: progress, reload-proof CLI, quiz, auto-nav. */
 import { TRACKS } from "../data/curriculum.js";
 
 const $ = (s, r = document) => r.querySelector(s);
 
-/* ---------- Progress (shared key with paths page) ---------- */
 export const readProgress = () => {
   try {
     return JSON.parse(localStorage.getItem("sog:progress")) || {};
@@ -25,7 +21,6 @@ export const writeProgress = (slug, patch) => {
   return all[slug];
 };
 
-/* ---------- Lesson boot ---------- */
 export function initLesson(cfg) {
   const {
     slug,
@@ -55,7 +50,7 @@ export function initLesson(cfg) {
       banner.classList.toggle("hidden", !(p.lab && p.quiz >= passMark));
   };
 
-  /* ---------- Training CLI ---------- */
+  /* CLI — Enter runs commands; the page never reloads. */
   const cli = $(".cli"),
     body = $("#cli-body"),
     form = $("#cli-form"),
@@ -63,7 +58,6 @@ export function initLesson(cfg) {
   if (cli && body && form && input) {
     const history = [];
     let hIdx = -1;
-
     const print = (text, cls = "") => {
       const d = document.createElement("div");
       d.className = "t-line t-out " + cls;
@@ -80,6 +74,10 @@ export function initLesson(cfg) {
       d.querySelector(".t-cmd").textContent = cmd;
       body.appendChild(d);
     };
+    const exec = () => {
+      run(input.value);
+      input.value = "";
+    };
 
     function run(raw) {
       const cmd = raw.trim();
@@ -95,11 +93,14 @@ export function initLesson(cfg) {
             "ok",
           );
           break;
-        case "ls": {
-          const locked = readProgress()[slug]?.lab ? "" : "  (locked)";
-          print(Object.keys(files).join("   ") + "   flag.txt" + locked, "dim");
+        case "ls":
+          print(
+            Object.keys(files).join("   ") +
+              "   flag.txt" +
+              (readProgress()[slug]?.lab ? "" : "  (locked)"),
+            "dim",
+          );
           break;
-        }
         case "whoami":
           print("student — soon: pentester", "ok");
           break;
@@ -112,11 +113,8 @@ export function initLesson(cfg) {
             if (readProgress()[slug]?.lab) print(flag, "flag");
             else
               print("cat: flag.txt: locked — finish the mission first", "warn");
-          } else if (files[f]) {
-            files[f].forEach((l) => print(l, "dim"));
-          } else {
-            print(`cat: ${f || "?"}: no such file — try 'ls'`, "bad");
-          }
+          } else if (files[f]) files[f].forEach((l) => print(l, "dim"));
+          else print(`cat: ${f || "?"}: no such file — try 'ls'`, "bad");
           break;
         }
         case "verify": {
@@ -134,9 +132,7 @@ export function initLesson(cfg) {
             print("mission complete — lab progress saved ✓", "ok");
             writeProgress(slug, { lab: true });
             refreshStates();
-          } else {
-            print("[-] not quite. " + verify.hint, "bad");
-          }
+          } else print("[-] not quite. " + verify.hint, "bad");
           break;
         }
         case "clear":
@@ -148,12 +144,12 @@ export function initLesson(cfg) {
       body.scrollTop = body.scrollHeight;
     }
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      run(input.value);
-      input.value = "";
-    });
     input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        exec();
+        return;
+      }
       if (e.key === "ArrowUp") {
         e.preventDefault();
         hIdx = Math.min(hIdx + 1, history.length - 1);
@@ -165,11 +161,15 @@ export function initLesson(cfg) {
         input.value = hIdx < 0 ? "" : history[hIdx];
       }
     });
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      exec();
+    });
     cli.addEventListener("click", () => input.focus());
     intro.forEach(([text, cls]) => print(text, cls));
   }
 
-  /* ---------- Quiz ---------- */
+  /* Quiz */
   const qForm = $("#quiz-form");
   if (qForm && questions?.length) {
     questions.forEach((item, qi) => {
@@ -186,14 +186,12 @@ export function initLesson(cfg) {
         `<p class="why">${item.why}</p>`;
       qForm.appendChild(fs);
     });
-
     const submit = $("#quiz-submit"),
       retry = $("#quiz-retry");
     const scoreBox = $("#quiz-score"),
       scoreNum = $("#score-num"),
       scoreNote = $("#score-note"),
       ring = $("#score-ring");
-
     submit.addEventListener("click", () => {
       let correct = 0,
         answered = 0;
@@ -232,7 +230,6 @@ export function initLesson(cfg) {
       });
       refreshStates();
     });
-
     retry.addEventListener("click", () => {
       document.querySelectorAll(".q").forEach((fs) => {
         fs.classList.remove("graded");
@@ -247,7 +244,7 @@ export function initLesson(cfg) {
     });
   }
 
-  /* ---------- Auto prev/next across live lessons ---------- */
+  /* Auto prev/next */
   const nav = $(".l-nav");
   if (nav) {
     const live = TRACKS.flatMap((t) =>
@@ -265,7 +262,7 @@ export function initLesson(cfg) {
         : `<a class="btn primary" href="../paths.html">All paths <svg class="ic"><use href="#i-arrow"/></svg></a>`);
   }
 
-  /* ---------- Mark brief as read when the lab is reached ---------- */
+  /* Mark brief read */
   const mission = $("#mission"),
     read = $("#read-state");
   if (mission && read && "IntersectionObserver" in window) {
