@@ -1,0 +1,142 @@
+/* TCP vs UDP lesson */
+.prose a {
+  color: var(--cyan);
+}
+.prose a:hover {
+  text-decoration: underline;
+}
+.promise.t {
+  --pc: var(--cyan);
+}
+.promise.u {
+  --pc: var(--amber);
+}
+.wire-stage {
+  padding: 0;
+}
+.wire {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  overflow: hidden;
+}
+.endpoint {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 120px;
+  background: var(--surface);
+  border: 1px solid var(--line2);
+  border-radius: 14px;
+  padding: 16px 10px;
+  text-align: center;
+  z-index: 2;
+}
+.endpoint.left {
+  left: 18px;
+}
+.endpoint.right {
+  right: 18px;
+}
+.endpoint b {
+  display: block;
+  font-size: 0.9rem;
+}
+.endpoint small {
+  display: block;
+  margin-top: 6px;
+  font: 700 0.58rem var(--font-mono);
+  letter-spacing: 0.12em;
+  color: var(--cyan);
+}
+.lane {
+  position: absolute;
+  left: 150px;
+  right: 150px;
+  top: 50%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cyan), var(--violet));
+  opacity: 0.5;
+}
+.lane::before,
+.lane::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cyan);
+}
+.lane::before {
+  left: 0;
+}
+.lane::after {
+  right: 0;
+  background: var(--violet);
+}
+.pkt {
+  position: absolute;
+  top: calc(50% - 16px);
+  left: 150px;
+  padding: 7px 11px;
+  border-radius: 8px;
+  font: 700 0.64rem var(--font-mono);
+  letter-spacing: 0.1em;
+  color: #04222b;
+  background: var(--grad-brand);
+  box-shadow: 0 0 18px rgba(56, 224, 255, 0.4);
+  z-index: 3;
+  transition:
+    transform var(--dur, 900ms) linear,
+    opacity 0.3s;
+  white-space: nowrap;
+}
+.pkt.rev {
+  left: auto;
+  right: 150px;
+  background: var(--grad-hot);
+  color: #fff;
+}
+.pkt.fly {
+  transform: translateX(var(--dist, 220px));
+}
+.pkt.rev.fly {
+  transform: translateX(calc(-1 * var(--dist, 220px)));
+}
+.pkt.lost {
+  opacity: 0.25;
+  filter: grayscale(1);
+  transform: translateX(calc(var(--dist, 220px) * 0.5));
+}
+.pkt.rev.lost {
+  transform: translateX(calc(-1 * var(--dist, 220px) * 0.5));
+}
+.pkt.retry {
+  outline: 2px dashed var(--amber);
+  outline-offset: 3px;
+}
+@media (max-width: 640px) {
+  .endpoint {
+    width: 88px;
+    padding: 12px 6px;
+  }
+  .endpoint.left {
+    left: 8px;
+  }
+  .endpoint.right {
+    right: 8px;
+  }
+  .lane {
+    left: 104px;
+    right: 104px;
+  }
+  .pkt {
+    left: 104px;
+    font-size: 0.56rem;
+  }
+  .pkt.rev {
+    right: 104px;
+  }
+}
