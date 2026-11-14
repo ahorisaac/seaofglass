@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reading Packets in Wireshark — Sea of Glass</title>
+    <meta
+      name="description"
+      content="Learn packet capture with a simulated Wireshark lab: display filters, protocol trees, hex view and Follow TCP Stream — see cleartext credentials and why TLS defeats sniffing."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#070b13" />
+    <link
+      rel="canonical"
+      href="https://seaofglass.shidoon.com/pages/concepts/wireshark.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="Reading Packets in Wireshark — Sea of Glass"
+    />
+    <meta
+      property="og:description"
+      content="Filter, inspect, follow the stream. Interactive capture lab + quiz."
+    />
+    <meta
+      property="og:url"
+      content="https://seaofglass.shidoon.com/pages/concepts/wireshark.html"
+    />
+    <meta
+      property="og:image"
+      content="https://seaofglass.shidoon.com/assets/img/og-cover.svg"
+    />
+    <link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../../assets/css/lesson.css" />
+    <link rel="stylesheet" href="../../assets/css/lab-deck.css" />
+    <link rel="stylesheet" href="../../assets/css/wireshark.css" />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <symbol id="i-menu" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </symbol>
+        <symbol id="i-x" viewBox="0 0 24 24">
+          <path d="M6 6l12 12M18 6L6 18" />
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24">
+          <path d="M4 12h16M13 5l7 7-7 7" />
+        </symbol>
+        <symbol id="i-up" viewBox="0 0 24 24">
+          <path d="M12 20V4M5 11l7-7 7 7" />
+        </symbol>
+        <symbol id="i-replay" viewBox="0 0 24 24">
+          <path d="M20 12a8 8 0 1 1-2.3-5.6" />
+          <path d="M20 4v4h-4" />
+        </symbol>
+        <symbol id="i-shield" viewBox="0 0 24 24">
+          <path d="M12 3l7 3v5c0 4.6-3 7.6-7 9-4-1.4-7-4.4-7-9V6z" />
+          <path d="M9 11.5l2 2 4-4" />
+        </symbol>
+        <symbol id="i-terminal" viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="16" rx="2" />
+          <path d="M7 9l3 3-3 3M12 15h5" />
+        </symbol>
+        <symbol id="i-book" viewBox="0 0 24 24">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+          <path
+            d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+          />
+        </symbol>
+        <symbol id="i-flag" viewBox="0 0 24 24">
+          <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+          <path d="M4 22v-7" />
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24">
+          <path d="M4 12.5l5.5 5.5L20 6.5" />
+        </symbol>
+        <symbol id="i-lock" viewBox="0 0 24 24">
+          <rect x="4" y="11" width="16" height="10" rx="2" />
+          <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+        </symbol>
+        <symbol id="i-eye" viewBox="0 0 24 24">
+          <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" />
+          <circle cx="12" cy="12" r="3" />
+        </symbol>
+        <symbol id="i-search" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7" />
+          <path d="M16.5 16.5L21 21" />
+        </symbol>
+      </defs>
+    </svg>
+    <div class="aurora a1" aria-hidden="true"></div>
+    <div class="aurora a2" aria-hidden="true"></div>
+    <div id="cursor" aria-hidden="true"></div>
+    <div id="progress" aria-hidden="true"></div>
+
+    <header id="nav">
+      <div class="container nav-in">
+        <a class="brand" href="../../index.html"
+          ><img
+            src="../../assets/img/shidoon-mark.svg"
+            alt=""
+            width="36"
+            height="36"
+          /><span class="brand-txt"
+            ><small>SHIDOON</small><strong>SEA OF GLASS</strong></span
+          ></a
+        >
+        <nav id="nav-menu">
+          <a href="../../index.html">Home</a
+          ><a href="../paths.html#fundamentals">Curriculum</a
+          ><a href="#lab">Lab</a><a href="#mission">CLI</a
+          ><a href="#quiz">Quiz</a
+          ><a class="btn small primary" href="../paths.html#fundamentals"
+            >All lessons <svg class="ic"><use href="#i-arrow" /></svg
+          ></a>
+        </nav>
+        <button id="nav-toggle" aria-label="Menu" aria-expanded="false">
+          <svg class="ic m-open"><use href="#i-menu" /></svg
+          ><svg class="ic m-close"><use href="#i-x" /></svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="main" class="container lesson">
+      <nav class="crumb">
+        <a href="../../index.html">Home</a> /
+        <a href="../paths.html#fundamentals">Fundamentals</a> /
+        <span>Wireshark</span>
+      </nav>
+      <p class="eyebrow">Fundamentals · Module 02 · Lesson 06</p>
+      <h1>Reading Packets in <span>Wireshark</span></h1>
+      <div class="l-meta">
+        <span
+          ><svg class="ic"><use href="#i-book" /></svg> 20 min</span
+        ><span class="state" id="read-state">Reading</span
+        ><span class="state" id="lab-state"
+          ><svg class="ic"><use href="#i-terminal" /></svg> Lab: pending</span
+        ><span class="state" id="quiz-state"
+          ><svg class="ic"><use href="#i-flag" /></svg> Quiz: pending</span
+        >
+      </div>
+      <p class="banner hidden" id="lesson-banner">
+        <svg class="ic"><use href="#i-check" /></svg> Lesson complete — progress
+        saved.
+      </p>
+
+      <section class="prose" id="brief" data-section>
+        <div class="hook">
+          <p>
+            Packets are the <b>security camera footage of the network</b>.
+            Wireshark lets you rewind, filter and read the story.
+          </p>
+          <code>capture → filter → inspect → follow stream</code>
+        </div>
+        <p>
+          Wireshark records network traffic and dissects it layer by layer — the
+          OSI model made visible. Two filter types matter:
+          <b>capture filters</b> decide what gets recorded (before storage);
+          <b>display filters</b> decide what you see from an existing capture.
+          Beginners should record broadly, then filter aggressively.
+        </p>
+        <table class="map">
+          <thead>
+            <tr>
+              <th>Display filter</th>
+              <th>Shows</th>
+              <th>Use it when…</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>http</code></td>
+              <td>Only HTTP requests/responses</td>
+              <td>Hunting cleartext web traffic.</td>
+            </tr>
+            <tr>
+              <td><code>dns</code></td>
+              <td>Only DNS queries/responses</td>
+              <td>Seeing what names were resolved.</td>
+            </tr>
+            <tr>
+              <td><code>tcp.port == 80</code></td>
+              <td>TCP traffic on port 80</td>
+              <td>Focusing on one service.</td>
+            </tr>
+            <tr>
+              <td><code>ip.addr == 10.10.14.2</code></td>
+              <td>Anything to/from that IP</td>
+              <td>Tracking one host.</td>
+            </tr>
+            <tr>
+              <td><code>tcp.flags.syn == 1</code></td>
+              <td>SYN packets</td>
+              <td>Spotting scan behaviour.</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="recall">
+          <h3>
+            <svg class="ic"><use href="#i-lock" /></svg> Ethics &amp; limits
+          </h3>
+          <p>
+            Capture only traffic you own or are authorised to monitor. And
+            remember: TLS turns payload into ciphertext. You can still see IPs,
+            ports, timing and certificate metadata — but not passwords or page
+            content.
+          </p>
+        </div>
+      </section>
+
+      <section class="prose" id="lab" data-section>
+        <h2>
+          <svg class="ic"><use href="#i-search" /></svg> Lab: the capture tells
+          a story
+        </h2>
+        <p>
+          This seeded capture contains a login over HTTP, then the same site
+          over HTTPS. Filter it, inspect layers, then select packet 11 and
+          <b>Follow TCP Stream</b>. The password is visible in plaintext — that
+          is the lesson.
+        </p>
+        <div class="lab-grid ws-grid">
+          <div class="lab-stage ws-stage">
+            <div class="ws-wrap">
+              <div class="ws-toolbar">
+                <span
+                  >Display filter:
+                  <code id="filter-chip">all packets</code></span
+                ><span id="ws-count">22 / 22</span>
+              </div>
+              <div
+                class="ws-table"
+                id="ws-table"
+                role="table"
+                aria-label="Packet list"
+              ></div>
+              <div class="ws-bottom">
+                <div class="ws-tree" id="ws-tree">
+                  <p class="ws-empty">
+                    Select a packet to inspect its protocol tree.
+                  </p>
+                </div>
+                <pre class="ws-hex hidden" id="ws-hex"></pre>
+              </div>
+              <div class="ws-stream hidden" id="ws-stream"></div>
+            </div>
+            <span class="lab-hint">simulated capture · no real traffic</span>
+          </div>
+          <aside class="lab-panel">
+            <div class="deck">
+              <label class="ctl" style="grid-column: 1/-1"
+                ><span>Display filter</span
+                ><input
+                  type="text"
+                  id="w-filter"
+                  placeholder="http · dns · tcp.port == 80 · ip.addr == 10.10.14.2"
+              /></label>
+              <label class="ctl select"
+                ><span>Quick protocol</span
+                ><select id="w-proto">
+                  <option value="">All</option>
+                  <option>tcp</option>
+                  <option>udp</option>
+                  <option>dns</option>
+                  <option>http</option>
+                  <option>tls</option>
+                  <option>arp</option>
+                </select></label
+              >
+              <label class="ctl select"
+                ><span>Time format</span
+                ><select id="w-time">
+                  <option value="rel">Seconds since start</option>
+                  <option value="abs">Lab clock (UTC)</option>
+                </select></label
+              >
+              <label class="ctl"
+                ><span>Colour rules</span
+                ><input type="checkbox" id="w-color" checked /><i
+                  class="switch"
+                ></i
+              ></label>
+              <label class="ctl"
+                ><span>Expand layers</span
+                ><input type="checkbox" id="w-expand" checked /><i
+                  class="switch"
+                ></i
+              ></label>
+              <label class="ctl"
+                ><span>Hex pane</span><input type="checkbox" id="w-hex" /><i
+                  class="switch"
+                ></i
+              ></label>
+              <button type="button" class="btn tiny primary" id="w-follow">
+                Follow TCP Stream
+              </button>
+              <button type="button" class="btn tiny ghost" id="w-replay">
+                <svg class="ic"><use href="#i-replay" /></svg> Replay capture
+              </button>
+              <button type="button" class="btn tiny ghost" id="w-reset">
+                Reset
+              </button>
+            </div>
+            <p class="lab-note" id="ws-note">
+              <b>Try this:</b> filter <code>http</code>, select packet 11, then
+              Follow TCP Stream. Compare with the TLS stream at packet 19.
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="prose" id="mission" data-section>
+        <h2>
+          <svg class="ic"><use href="#i-terminal" /></svg> Mission: filter the
+          phonebook
+        </h2>
+        <p>
+          Read <code>capture.txt</code>, then verify the display filter that
+          shows only DNS packets.
+        </p>
+        <div class="term cli">
+          <div class="term-bar">
+            <i class="dot r"></i><i class="dot y"></i><i class="dot g"></i
+            ><span>student@seaofglass: ~/wireshark</span><em>TRAINING SHELL</em>
+          </div>
+          <div class="term-body" id="cli-body" aria-live="polite"></div>
+          <form id="cli-form" autocomplete="off">
+            <span class="t-prompt">student@seaofglass</span
+            ><span class="t-path">:~$</span
+            ><input
+              id="cli-input"
+              type="text"
+              spellcheck="false"
+              autocapitalize="off"
+              aria-label="Terminal command input"
+              placeholder="start with: cat capture.txt"
+            />
+          </form>
+        </div>
+      </section>
+
+      <section class="prose" id="quiz" data-section>
+        <h2>
+          <svg class="ic"><use href="#i-flag" /></svg> Checkpoint: 4 questions
+        </h2>
+        <p>Score 75% or more to complete the lesson.</p>
+        <form id="quiz-form"></form>
+        <div class="quiz-actions">
+          <button class="btn primary" id="quiz-submit" type="button">
+            Check answers</button
+          ><button class="btn ghost hidden" id="quiz-retry" type="button">
+            Try again
+          </button>
+          <div class="score hidden" id="quiz-score">
+            <svg viewBox="0 0 64 64">
+              <circle class="bgc" cx="32" cy="32" r="26" />
+              <circle class="fgc" id="score-ring" cx="32" cy="32" r="26" /></svg
+            ><span
+              ><b id="score-num">0%</b
+              ><small id="score-note">score</small></span
+            >
+          </div>
+        </div>
+      </section>
+
+      <nav class="l-nav">
+        <a class="btn ghost" href="http-https.html">← HTTP vs HTTPS</a
+        ><a class="btn primary" href="../checkpoints/networking.html"
+          >Next: Networking Checkpoint
+          <svg class="ic"><use href="#i-arrow" /></svg
+        ></a>
+      </nav>
+    </main>
+    <footer class="footer">
+      <div class="container f-bottom" style="border-top: 0">
+        <span>© <span data-year>2026</span> Shidoon · Sea of Glass</span
+        ><span class="f-ethics"
+          ><svg class="ic"><use href="#i-shield" /></svg> Train ethically. Hack
+          only what you own or have written permission to test.</span
+        >
+      </div>
+    </footer>
+    <button id="to-top" aria-label="Back to top">
+      <svg class="ic"><use href="#i-up" /></svg>
+    </button>
+    <script type="module" src="../../assets/js/core/main.js"></script>
+    <script type="module" src="../../assets/js/lessons/wireshark.js"></script>
+  </body>
+</html>

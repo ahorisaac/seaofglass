@@ -1,0 +1,137 @@
+/* Viruses vs Worms lesson */
+.prose a {
+  color: var(--cyan);
+}
+.prose a:hover {
+  text-decoration: underline;
+}
+.promise.v {
+  --pc: var(--amber);
+}
+.promise.w {
+  --pc: var(--red);
+}
+.spread-stage {
+  padding: 0;
+}
+.spread-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  gap: 14px;
+}
+.spread-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font: 700 0.68rem var(--font-mono);
+  letter-spacing: 0.14em;
+  color: var(--faint);
+}
+.spread-head span:first-child {
+  color: var(--cyan);
+}
+.vw-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 6px;
+  position: relative;
+}
+.vw-grid.segmented::before,
+.vw-grid.segmented::after {
+  content: "";
+  position: absolute;
+  background: rgba(56, 224, 255, 0.35);
+  z-index: 2;
+  pointer-events: none;
+}
+.vw-grid.segmented::before {
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+}
+.vw-grid.segmented::after {
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+}
+.vw-node {
+  aspect-ratio: 1;
+  border-radius: 6px;
+  background: #121c2f;
+  border: 1px solid var(--line);
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+.vw-node.patched {
+  background: rgba(60, 245, 182, 0.18);
+  border-color: rgba(60, 245, 182, 0.4);
+}
+.vw-node.infected {
+  background: rgba(255, 77, 109, 0.28);
+  border-color: var(--red);
+  box-shadow: 0 0 12px rgba(255, 77, 109, 0.35);
+  animation: infect 0.35s ease;
+}
+@keyframes infect {
+  from {
+    transform: scale(0.6);
+  }
+}
+.spark {
+  width: 100%;
+  height: 70px;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.spark polyline {
+  fill: none;
+  stroke: var(--red);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 6px rgba(255, 77, 109, 0.5));
+}
+.legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font: 400 0.6rem var(--font-mono);
+  letter-spacing: 0.1em;
+  color: var(--faint);
+  text-transform: uppercase;
+}
+.legend i {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  margin-right: 6px;
+  vertical-align: -1px;
+}
+.legend .healthy {
+  background: #121c2f;
+  border: 1px solid var(--line2);
+}
+.legend .patched {
+  background: rgba(60, 245, 182, 0.3);
+}
+.legend .infected {
+  background: rgba(255, 77, 109, 0.4);
+}
+.legend .seg {
+  background: rgba(56, 224, 255, 0.4);
+}
+@media (max-width: 560px) {
+  .vw-grid {
+    gap: 4px;
+  }
+  .vw-node {
+    border-radius: 4px;
+  }
+}

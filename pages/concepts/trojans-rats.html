@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trojans & RATs — Sea of Glass</title>
+    <meta
+      name="description"
+      content="Trojans hide inside useful-looking software. RATs give attackers remote control. Learn the architecture, indicators and defences with an inert defender-focused simulator and quiz."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#070b13" />
+    <link
+      rel="canonical"
+      href="https://seaofglass.shidoon.com/pages/concepts/trojans-rats.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Trojans & RATs — Sea of Glass" />
+    <meta
+      property="og:description"
+      content="The gift that owns you. Inert defender-focused lab + quiz."
+    />
+    <meta
+      property="og:url"
+      content="https://seaofglass.shidoon.com/pages/concepts/trojans-rats.html"
+    />
+    <meta
+      property="og:image"
+      content="https://seaofglass.shidoon.com/assets/img/og-cover.svg"
+    />
+    <link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../../assets/css/lesson.css" />
+    <link rel="stylesheet" href="../../assets/css/lab-deck.css" />
+    <link rel="stylesheet" href="../../assets/css/trojans-rats.css" />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <symbol id="i-menu" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </symbol>
+        <symbol id="i-x" viewBox="0 0 24 24">
+          <path d="M6 6l12 12M18 6L6 18" />
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24">
+          <path d="M4 12h16M13 5l7 7-7 7" />
+        </symbol>
+        <symbol id="i-up" viewBox="0 0 24 24">
+          <path d="M12 20V4M5 11l7-7 7 7" />
+        </symbol>
+        <symbol id="i-replay" viewBox="0 0 24 24">
+          <path d="M20 12a8 8 0 1 1-2.3-5.6" />
+          <path d="M20 4v4h-4" />
+        </symbol>
+        <symbol id="i-shield" viewBox="0 0 24 24">
+          <path d="M12 3l7 3v5c0 4.6-3 7.6-7 9-4-1.4-7-4.4-7-9V6z" />
+          <path d="M9 11.5l2 2 4-4" />
+        </symbol>
+        <symbol id="i-terminal" viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="16" rx="2" />
+          <path d="M7 9l3 3-3 3M12 15h5" />
+        </symbol>
+        <symbol id="i-book" viewBox="0 0 24 24">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+          <path
+            d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+          />
+        </symbol>
+        <symbol id="i-flag" viewBox="0 0 24 24">
+          <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+          <path d="M4 22v-7" />
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24">
+          <path d="M4 12.5l5.5 5.5L20 6.5" />
+        </symbol>
+        <symbol id="i-lock" viewBox="0 0 24 24">
+          <rect x="4" y="11" width="16" height="10" rx="2" />
+          <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+        </symbol>
+        <symbol id="i-eye" viewBox="0 0 24 24">
+          <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" />
+          <circle cx="12" cy="12" r="3" />
+        </symbol>
+        <symbol id="i-terminal" viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="16" rx="2" />
+          <path d="M7 9l3 3-3 3M12 15h5" />
+        </symbol>
+      </defs>
+    </svg>
+    <div class="aurora a1" aria-hidden="true"></div>
+    <div class="aurora a2" aria-hidden="true"></div>
+    <div id="cursor" aria-hidden="true"></div>
+    <div id="progress" aria-hidden="true"></div>
+
+    <header id="nav">
+      <div class="container nav-in">
+        <a class="brand" href="../../index.html"
+          ><img
+            src="../../assets/img/shidoon-mark.svg"
+            alt=""
+            width="36"
+            height="36"
+          /><span class="brand-txt"
+            ><small>SHIDOON</small><strong>SEA OF GLASS</strong></span
+          ></a
+        >
+        <nav id="nav-menu">
+          <a href="../../index.html">Home</a
+          ><a href="../paths.html#fundamentals">Curriculum</a
+          ><a href="#lab">Lab</a><a href="#mission">CLI</a
+          ><a href="#quiz">Quiz</a
+          ><a class="btn small primary" href="../paths.html#fundamentals"
+            >All lessons <svg class="ic"><use href="#i-arrow" /></svg
+          ></a>
+        </nav>
+        <button id="nav-toggle" aria-label="Menu" aria-expanded="false">
+          <svg class="ic m-open"><use href="#i-menu" /></svg
+          ><svg class="ic m-close"><use href="#i-x" /></svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="main" class="container lesson">
+      <nav class="crumb">
+        <a href="../../index.html">Home</a> /
+        <a href="../paths.html#fundamentals">Fundamentals</a> /
+        <span>Trojans &amp; RATs</span>
+      </nav>
+      <p class="eyebrow">Fundamentals · Module 03 · Lesson 03</p>
+      <h1>Trojans &amp; <span>RATs</span></h1>
+      <div class="l-meta">
+        <span
+          ><svg class="ic"><use href="#i-book" /></svg> 12 min</span
+        ><span class="state" id="read-state">Reading</span
+        ><span class="state" id="lab-state"
+          ><svg class="ic"><use href="#i-terminal" /></svg> Lab: pending</span
+        ><span class="state" id="quiz-state"
+          ><svg class="ic"><use href="#i-flag" /></svg> Quiz: pending</span
+        >
+      </div>
+      <p class="banner hidden" id="lesson-banner">
+        <svg class="ic"><use href="#i-check" /></svg> Lesson complete — progress
+        saved.
+      </p>
+
+      <section class="prose" id="brief" data-section>
+        <div class="hook">
+          <p>
+            A <b>trojan</b> is malware wearing a useful disguise. A
+            <b>RAT</b> is a trojan that hands the attacker a remote control.
+          </p>
+          <code>looks useful → runs hidden → attacker in control</code>
+        </div>
+        <p>
+          The name comes from the Trojan Horse: the gift looks harmless, so the
+          victim carries it inside the walls. Trojans do not self-replicate like
+          worms. They rely on deception — cracked software, fake installers,
+          game cheats, “urgent” attachments.
+        </p>
+        <div class="promise t">
+          <h2><i>T</i> Trojan — the disguise</h2>
+          <p>
+            Pretends to be legitimate: a PDF reader, a codec, a cheat engine, a
+            system update. When run, it installs something malicious instead of
+            (or alongside) the promised function.
+          </p>
+        </div>
+        <div class="promise r">
+          <h2><i>R</i> RAT — Remote Access Trojan</h2>
+          <p>
+            A trojan that gives the attacker interactive control: screen
+            capture, file access, keystroke logging, webcam/mic access, command
+            execution. Architecture:
+            <b>controller → C2 → agent on the victim</b>.
+          </p>
+        </div>
+        <table class="map">
+          <thead>
+            <tr>
+              <th>Capability</th>
+              <th>What the victim might notice</th>
+              <th>Defender artifact</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Screen capture</td>
+              <td>Nothing obvious</td>
+              <td>Suspicious process reading display APIs</td>
+            </tr>
+            <tr>
+              <td>Keylogging</td>
+              <td>Nothing obvious</td>
+              <td>Keyboard hook DLL / input capture</td>
+            </tr>
+            <tr>
+              <td>File transfer</td>
+              <td>Disk/network spikes</td>
+              <td>Outbound data volume anomaly</td>
+            </tr>
+            <tr>
+              <td>Webcam/mic</td>
+              <td>Camera LED (sometimes)</td>
+              <td>Process accessing camera/mic without consent</td>
+            </tr>
+            <tr>
+              <td>Persistence</td>
+              <td>Slower boot</td>
+              <td>New Run key / scheduled task / service</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="recall">
+          <h3>
+            <svg class="ic"><use href="#i-shield" /></svg> The consent line
+          </h3>
+          <p>
+            Remote admin tools (like helpdesk software) are legitimate with
+            consent and visibility. A RAT is the same category of capability
+            <b>without consent</b>. The difference is permission, visibility and
+            intent.
+          </p>
+        </div>
+      </section>
+
+      <section class="prose" id="lab" data-section>
+        <h2>
+          <svg class="ic"><use href="#i-terminal" /></svg> Lab: know the enemy
+          (inert simulation)
+        </h2>
+        <p>
+          This is a <b>defender-focused, fully inert UI</b> — no real access, no
+          real capture, no malware code. Trigger simulated actions to see what
+          artifacts a defender can detect. Toggle Defender view to reveal
+          alerts, then kill the C2 channel to see why egress control matters.
+        </p>
+        <div class="lab-grid rat-grid">
+          <div class="lab-stage rat-stage">
+            <div class="rat-wrap">
+              <div class="victim">
+                <header>
+                  <span>Victim desktop</span><i class="cam" id="r-cam"></i
+                  ><span class="conn" id="r-conn">C2: connected</span>
+                </header>
+                <div class="desktop" id="r-desktop">
+                  <div class="desk-icons">
+                    <span>📄 notes.txt</span><span>📁 projects</span
+                    ><span>🖼 photo.png</span>
+                  </div>
+                  <textarea
+                    id="r-note"
+                    placeholder="Type here to simulate a user writing a note…"
+                  >
+remember: change the admin password on Friday</textarea
+                  >
+                  <div class="progress"><i id="r-progress"></i></div>
+                </div>
+                <div class="startup">
+                  <span>Startup entries</span>
+                  <ol id="r-startup">
+                    <li>BrowserUpdater — trusted publisher</li>
+                  </ol>
+                </div>
+              </div>
+              <div class="attacker">
+                <header>
+                  <span id="r-mode">Simulated controller</span
+                  ><span class="scan-badge">INERT</span>
+                </header>
+                <div class="console" id="r-console"></div>
+                <div class="keylog">
+                  <span>Simulated keylog buffer</span>
+                  <pre id="r-keylog">—</pre>
+                </div>
+                <div class="alerts hidden" id="r-alerts">
+                  <span>Defender alerts</span>
+                  <ol id="r-alert-list"></ol>
+                </div>
+              </div>
+            </div>
+            <span class="lab-hint">simulated actions · no real access</span>
+          </div>
+          <aside class="lab-panel">
+            <div class="deck">
+              <button
+                type="button"
+                class="btn tiny ghost"
+                data-cmd="screenshot"
+              >
+                Screenshot
+              </button>
+              <button type="button" class="btn tiny ghost" data-cmd="files">
+                List files
+              </button>
+              <button type="button" class="btn tiny ghost" data-cmd="keylog">
+                Keylog on/off
+              </button>
+              <button type="button" class="btn tiny ghost" data-cmd="webcam">
+                Webcam on/off
+              </button>
+              <button type="button" class="btn tiny ghost" data-cmd="download">
+                Transfer file
+              </button>
+              <button type="button" class="btn tiny ghost" data-cmd="persist">
+                Add persistence
+              </button>
+              <label class="ctl"
+                ><span>Defender view</span
+                ><input type="checkbox" id="r-defender" /><i class="switch"></i
+              ></label>
+              <label class="ctl"
+                ><span>C2 channel</span
+                ><input type="checkbox" id="r-c2" checked /><i
+                  class="switch"
+                ></i
+              ></label>
+              <button type="button" class="btn tiny primary" id="r-clean">
+                <svg class="ic"><use href="#i-replay" /></svg> Clean system
+              </button>
+            </div>
+            <p class="lab-note" id="rat-note">
+              <b>Blue-team lens:</b> every action leaves an artifact. Toggle
+              Defender view, repeat an action, and read the alert.
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="prose" id="mission" data-section>
+        <h2>
+          <svg class="ic"><use href="#i-terminal" /></svg> Mission: the disguise
+        </h2>
+        <p>
+          Read <code>trojan.txt</code>, then verify what kind of software a
+          trojan pretends to be.
+        </p>
+        <div class="term cli">
+          <div class="term-bar">
+            <i class="dot r"></i><i class="dot y"></i><i class="dot g"></i
+            ><span>student@seaofglass: ~/trojans-rats</span
+            ><em>TRAINING SHELL</em>
+          </div>
+          <div class="term-body" id="cli-body" aria-live="polite"></div>
+          <form id="cli-form" autocomplete="off">
+            <span class="t-prompt">student@seaofglass</span
+            ><span class="t-path">:~$</span
+            ><input
+              id="cli-input"
+              type="text"
+              spellcheck="false"
+              autocapitalize="off"
+              aria-label="Terminal command input"
+              placeholder="start with: cat trojan.txt"
+            />
+          </form>
+        </div>
+      </section>
+
+      <section class="prose" id="quiz" data-section>
+        <h2>
+          <svg class="ic"><use href="#i-flag" /></svg> Checkpoint: 4 questions
+        </h2>
+        <p>Score 75% or more to complete the lesson.</p>
+        <form id="quiz-form"></form>
+        <div class="quiz-actions">
+          <button class="btn primary" id="quiz-submit" type="button">
+            Check answers</button
+          ><button class="btn ghost hidden" id="quiz-retry" type="button">
+            Try again
+          </button>
+          <div class="score hidden" id="quiz-score">
+            <svg viewBox="0 0 64 64">
+              <circle class="bgc" cx="32" cy="32" r="26" />
+              <circle class="fgc" id="score-ring" cx="32" cy="32" r="26" /></svg
+            ><span
+              ><b id="score-num">0%</b
+              ><small id="score-note">score</small></span
+            >
+          </div>
+        </div>
+      </section>
+
+      <nav class="l-nav">
+        <a class="btn ghost" href="viruses-worms.html">← Viruses vs Worms</a
+        ><a class="btn primary" href="../paths.html#fundamentals"
+          >Back to Fundamentals <svg class="ic"><use href="#i-arrow" /></svg
+        ></a>
+      </nav>
+    </main>
+    <footer class="footer">
+      <div class="container f-bottom" style="border-top: 0">
+        <span>© <span data-year>2026</span> Shidoon · Sea of Glass</span
+        ><span class="f-ethics"
+          ><svg class="ic"><use href="#i-shield" /></svg> Train ethically. Hack
+          only what you own or have written permission to test.</span
+        >
+      </div>
+    </footer>
+    <button id="to-top" aria-label="Back to top">
+      <svg class="ic"><use href="#i-up" /></svg>
+    </button>
+    <script type="module" src="../../assets/js/core/main.js"></script>
+    <script
+      type="module"
+      src="../../assets/js/lessons/trojans-rats.js"
+    ></script>
+  </body>
+</html>

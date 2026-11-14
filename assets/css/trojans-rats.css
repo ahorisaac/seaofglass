@@ -1,0 +1,237 @@
+/* Trojans & RATs lesson */
+.prose a {
+  color: var(--cyan);
+}
+.prose a:hover {
+  text-decoration: underline;
+}
+.promise.t {
+  --pc: var(--amber);
+}
+.promise.r {
+  --pc: var(--red);
+}
+.rat-grid {
+  grid-template-columns: 1.4fr 0.6fr;
+}
+.rat-stage {
+  padding: 0;
+  min-height: 560px;
+}
+.rat-wrap {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding: 16px;
+}
+.victim,
+.attacker {
+  background: #0a0f1a;
+  border: 1px solid var(--line2);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 420px;
+}
+.victim > header,
+.attacker > header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  font: 700 0.62rem var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.cam {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #1a2438;
+  border: 1px solid var(--line2);
+  margin-left: auto;
+}
+.cam.on {
+  background: var(--red);
+  box-shadow: 0 0 12px var(--red);
+  animation: pulse 1.4s infinite;
+}
+.conn {
+  color: var(--teal);
+  font-size: 0.58rem;
+}
+.conn.off {
+  color: var(--red);
+}
+.desktop {
+  position: relative;
+  flex: 1;
+  padding: 14px;
+  background:
+    radial-gradient(
+      300px 200px at 30% 20%,
+      rgba(56, 224, 255, 0.08),
+      transparent 70%
+    ),
+    #0b1220;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.desktop.flash {
+  animation: flash 0.35s ease;
+}
+@keyframes flash {
+  50% {
+    filter: brightness(2.2);
+  }
+}
+.desk-icons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  font: 400 0.68rem var(--font-mono);
+  color: var(--muted);
+}
+.desk-icons span {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 6px 8px;
+}
+#r-note {
+  flex: 1;
+  min-height: 130px;
+  background: rgba(7, 11, 19, 0.7);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px;
+  color: var(--text);
+  font: 400 0.78rem/1.5 var(--font-mono);
+  resize: none;
+}
+#r-note:focus {
+  outline: 1px solid var(--cyan);
+}
+.progress {
+  height: 6px;
+  border-radius: 6px;
+  background: #1a2438;
+  overflow: hidden;
+}
+.progress i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--grad-hot);
+  transition: width 1.1s ease;
+}
+.startup {
+  padding: 10px 12px;
+  border-top: 1px solid var(--line);
+  font: 400 0.68rem var(--font-mono);
+  color: var(--muted);
+}
+.startup span {
+  display: block;
+  color: var(--faint);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.56rem;
+  margin-bottom: 6px;
+}
+.startup li {
+  padding: 3px 0;
+}
+.startup li.bad {
+  color: var(--amber);
+}
+.console {
+  flex: 1;
+  overflow: auto;
+  padding: 12px;
+  font: 400 0.72rem/1.55 var(--font-mono);
+  color: var(--muted);
+}
+.console::-webkit-scrollbar {
+  width: 7px;
+}
+.console::-webkit-scrollbar-thumb {
+  background: #1e4a63;
+  border-radius: 6px;
+}
+.console .ok {
+  color: var(--teal);
+}
+.console .warn {
+  color: var(--amber);
+}
+.console .bad {
+  color: var(--red);
+}
+.console .dim {
+  color: var(--faint);
+}
+.keylog,
+.alerts {
+  padding: 10px 12px;
+  border-top: 1px solid var(--line);
+}
+.keylog span,
+.alerts > span {
+  display: block;
+  font: 700 0.56rem var(--font-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 6px;
+}
+.keylog pre {
+  font: 400 0.7rem var(--font-mono);
+  color: var(--amber);
+  white-space: pre-wrap;
+  max-height: 60px;
+  overflow: auto;
+}
+.alerts ol {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 130px;
+  overflow: auto;
+}
+.alerts li {
+  font: 400 0.66rem/1.45 var(--font-mono);
+  color: var(--muted);
+  border-left: 2px solid var(--amber);
+  padding-left: 8px;
+}
+.alerts li b {
+  color: var(--amber);
+}
+.scan-badge {
+  margin-left: auto;
+  color: var(--amber);
+  border: 1px solid rgba(255, 180, 84, 0.35);
+  background: rgba(255, 180, 84, 0.08);
+  padding: 3px 7px;
+  border-radius: 5px;
+  font-size: 0.56rem;
+}
+@media (max-width: 980px) {
+  .rat-grid {
+    grid-template-columns: 1fr;
+  }
+  .rat-wrap {
+    grid-template-columns: 1fr;
+  }
+  .victim,
+  .attacker {
+    min-height: 320px;
+  }
+}
