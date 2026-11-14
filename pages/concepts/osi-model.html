@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OSI Model: 7 Layers in Practice — Sea of Glass</title>
+    <meta
+      name="description"
+      content="Learn the OSI model with a 3D layer stack, encapsulation simulator, attacker/defender notes, CLI mission and quiz. Please Do Not Throw Sausage Pizza Away."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#070b13" />
+    <link
+      rel="canonical"
+      href="https://seaofglass.shidoon.com/pages/concepts/osi-model.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="OSI Model: 7 Layers in Practice — Sea of Glass"
+    />
+    <meta
+      property="og:description"
+      content="A postal system for packets. Interactive 3D stack + quiz."
+    />
+    <meta
+      property="og:url"
+      content="https://seaofglass.shidoon.com/pages/concepts/osi-model.html"
+    />
+    <meta
+      property="og:image"
+      content="https://seaofglass.shidoon.com/assets/img/og-cover.svg"
+    />
+    <link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../../assets/css/lesson.css" />
+    <link rel="stylesheet" href="../../assets/css/lab-deck.css" />
+    <link rel="stylesheet" href="../../assets/css/osi-model.css" />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <symbol id="i-menu" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </symbol>
+        <symbol id="i-x" viewBox="0 0 24 24">
+          <path d="M6 6l12 12M18 6L6 18" />
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24">
+          <path d="M4 12h16M13 5l7 7-7 7" />
+        </symbol>
+        <symbol id="i-up" viewBox="0 0 24 24">
+          <path d="M12 20V4M5 11l7-7 7 7" />
+        </symbol>
+        <symbol id="i-replay" viewBox="0 0 24 24">
+          <path d="M20 12a8 8 0 1 1-2.3-5.6" />
+          <path d="M20 4v4h-4" />
+        </symbol>
+        <symbol id="i-shield" viewBox="0 0 24 24">
+          <path d="M12 3l7 3v5c0 4.6-3 7.6-7 9-4-1.4-7-4.4-7-9V6z" />
+          <path d="M9 11.5l2 2 4-4" />
+        </symbol>
+        <symbol id="i-terminal" viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="16" rx="2" />
+          <path d="M7 9l3 3-3 3M12 15h5" />
+        </symbol>
+        <symbol id="i-book" viewBox="0 0 24 24">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+          <path
+            d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+          />
+        </symbol>
+        <symbol id="i-flag" viewBox="0 0 24 24">
+          <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+          <path d="M4 22v-7" />
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24">
+          <path d="M4 12.5l5.5 5.5L20 6.5" />
+        </symbol>
+        <symbol id="i-lock" viewBox="0 0 24 24">
+          <rect x="4" y="11" width="16" height="10" rx="2" />
+          <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+        </symbol>
+        <symbol id="i-eye" viewBox="0 0 24 24">
+          <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" />
+          <circle cx="12" cy="12" r="3" />
+        </symbol>
+        <symbol id="i-cube" viewBox="0 0 24 24">
+          <path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z" />
+          <path d="M4 7.5l8 4.5 8-4.5M12 12v9" />
+        </symbol>
+      </defs>
+    </svg>
+
+    <div class="aurora a1" aria-hidden="true"></div>
+    <div class="aurora a2" aria-hidden="true"></div>
+    <div id="cursor" aria-hidden="true"></div>
+    <div id="progress" aria-hidden="true"></div>
+
+    <header id="nav">
+      <div class="container nav-in">
+        <a class="brand" href="../../index.html"
+          ><img
+            src="../../assets/img/shidoon-mark.svg"
+            alt=""
+            width="36"
+            height="36"
+          /><span class="brand-txt"
+            ><small>SHIDOON</small><strong>SEA OF GLASS</strong></span
+          ></a
+        >
+        <nav id="nav-menu" aria-label="Primary">
+          <a href="../../index.html">Home</a
+          ><a href="../paths.html#fundamentals">Curriculum</a
+          ><a href="#lab">Lab</a><a href="#mission">CLI</a
+          ><a href="#quiz">Quiz</a>
+          <a class="btn small primary" href="../paths.html#fundamentals"
+            >All lessons <svg class="ic"><use href="#i-arrow" /></svg
+          ></a>
+        </nav>
+        <button
+          id="nav-toggle"
+          aria-label="Menu"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+        >
+          <svg class="ic m-open"><use href="#i-menu" /></svg
+          ><svg class="ic m-close"><use href="#i-x" /></svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="main" class="container lesson">
+      <nav class="crumb">
+        <a href="../../index.html">Home</a> /
+        <a href="../paths.html#fundamentals">Fundamentals</a> /
+        <span>OSI Model</span>
+      </nav>
+      <p class="eyebrow">Fundamentals · Module 02 · Lesson 01</p>
+      <h1>The OSI <span>Model</span></h1>
+      <div class="l-meta">
+        <span
+          ><svg class="ic"><use href="#i-book" /></svg> 14 min</span
+        ><span class="state" id="read-state">Reading</span>
+        <span class="state" id="lab-state"
+          ><svg class="ic"><use href="#i-terminal" /></svg> Lab: pending</span
+        >
+        <span class="state" id="quiz-state"
+          ><svg class="ic"><use href="#i-flag" /></svg> Quiz: pending</span
+        >
+      </div>
+      <p class="banner hidden" id="lesson-banner">
+        <svg class="ic"><use href="#i-check" /></svg> Lesson complete — progress
+        saved.
+      </p>
+
+      <section class="prose" id="brief" data-section>
+        <div class="hook">
+          <p>
+            The OSI model is a <b>postal system for data</b>. Each layer does
+            one job, then hands the parcel to the next layer.
+          </p>
+          <code>All People Seem To Need Data Processing</code>
+        </div>
+        <p>
+          You don’t memorise the OSI model to sound clever. You use it to
+          <b>locate problems and attacks</b>. “The cable is fine” is Layer 1.
+          “The IP is reachable but the port is closed” is Layer 4. “The app
+          returns 403” is Layer 7. It turns confusion into a checklist.
+        </p>
+        <div class="job">
+          <span>Memory hook · top to bottom</span
+          ><b>All People Seem To Need Data Processing</b
+          ><small
+            >Application · Presentation · Session · Transport · Network · Data
+            Link · Physical</small
+          >
+        </div>
+        <table class="map">
+          <thead>
+            <tr>
+              <th>Layer</th>
+              <th>Job</th>
+              <th>Examples</th>
+              <th>Attack clue</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>7 · Application</td>
+              <td>What the user touches</td>
+              <td>HTTP, DNS, SMTP</td>
+              <td>SQLi, XSS, broken auth</td>
+            </tr>
+            <tr>
+              <td>6 · Presentation</td>
+              <td>Format &amp; encryption</td>
+              <td>TLS, JPEG, UTF-8</td>
+              <td>Weak TLS, downgrade</td>
+            </tr>
+            <tr>
+              <td>5 · Session</td>
+              <td>Start / stop conversations</td>
+              <td>Sockets, RPC</td>
+              <td>Session hijacking</td>
+            </tr>
+            <tr>
+              <td>4 · Transport</td>
+              <td>Reliability &amp; ports</td>
+              <td>TCP, UDP</td>
+              <td>Port scans, SYN flood</td>
+            </tr>
+            <tr>
+              <td>3 · Network</td>
+              <td>Logical addressing &amp; routing</td>
+              <td>IP, ICMP</td>
+              <td>IP spoofing, route abuse</td>
+            </tr>
+            <tr>
+              <td>2 · Data Link</td>
+              <td>Local delivery &amp; MAC</td>
+              <td>Ethernet, Wi-Fi</td>
+              <td>ARP spoofing, VLAN hopping</td>
+            </tr>
+            <tr>
+              <td>1 · Physical</td>
+              <td>Bits on the medium</td>
+              <td>Cables, radio, fibre</td>
+              <td>Wiretaps, jamming</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="prose" id="lab" data-section>
+        <h2>
+          <svg class="ic"><use href="#i-cube" /></svg> Lab: spin the stack, wrap
+          the packet
+        </h2>
+        <p>
+          Focus a layer, then step the packet down the stack. Watch headers get
+          added: <b>data → segment → packet → frame → bits</b>. This wrapping is
+          called <b>encapsulation</b>.
+        </p>
+        <div class="lab-grid">
+          <div class="lab-stage osi-stage">
+            <div class="osi-spin spinning" id="osi-spin">
+              <div
+                class="osi-stack"
+                id="osi-stack"
+                style="--tilt: 58deg; --angle: -32deg; --spread: 30px"
+              >
+                <button
+                  type="button"
+                  class="osi-layer focus"
+                  data-layer="0"
+                  style="--i: 6; --lc: #38e0ff"
+                >
+                  <span>L7 · APPLICATION</span>
+                </button>
+                <button
+                  type="button"
+                  class="osi-layer"
+                  data-layer="1"
+                  style="--i: 5; --lc: #3cf5b6"
+                >
+                  <span>L6 · PRESENTATION</span>
+                </button>
+                <button
+                  type="button"
+                  class="osi-layer"
+                  data-layer="2"
+                  style="--i: 4; --lc: #4da3ff"
+                >
+                  <span>L5 · SESSION</span>
+                </button>
+                <button
+                  type="button"
+                  class="osi-layer"
+                  data-layer="3"
+                  style="--i: 3; --lc: #8f7bff"
+                >
+                  <span>L4 · TRANSPORT</span>
+                </button>
+                <button
+                  type="button"
+                  class="osi-layer"
+                  data-layer="4"
+                  style="--i: 2; --lc: #ffb454"
+                >
+                  <span>L3 · NETWORK</span>
+                </button>
+                <button
+                  type="button"
+                  class="osi-layer"
+                  data-layer="5"
+                  style="--i: 1; --lc: #ff4d6d"
+                >
+                  <span>L2 · DATA LINK</span>
+                </button>
+                <button
+                  type="button"
+                  class="osi-layer"
+                  data-layer="6"
+                  style="--i: 0; --lc: #9db0c9"
+                >
+                  <span>L1 · PHYSICAL</span>
+                </button>
+              </div>
+            </div>
+            <span class="lab-hint">click a layer · wrap the packet below</span>
+          </div>
+          <aside class="lab-panel">
+            <div class="deck">
+              <label class="ctl"
+                ><span>Spin</span
+                ><input type="checkbox" id="o-spin" checked /><i
+                  class="switch"
+                ></i
+              ></label>
+              <label class="ctl"
+                ><span>Ghost</span><input type="checkbox" id="o-ghost" /><i
+                  class="switch"
+                ></i
+              ></label>
+              <label class="ctl range"
+                ><span>Spread <output id="o-spread-out">30</output>px</span
+                ><input type="range" id="o-spread" min="18" max="58" value="30"
+              /></label>
+              <label class="ctl range"
+                ><span>Tilt <output id="o-tilt-out">58</output>°</span
+                ><input type="range" id="o-tilt" min="30" max="80" value="58"
+              /></label>
+              <label class="ctl range"
+                ><span>Angle <output id="o-angle-out">-32</output>°</span
+                ><input
+                  type="range"
+                  id="o-angle"
+                  min="-180"
+                  max="180"
+                  value="-32"
+              /></label>
+              <label class="ctl select"
+                ><span>Focus</span
+                ><select id="o-focus">
+                  <option value="0">L7 Application</option>
+                  <option value="1">L6 Presentation</option>
+                  <option value="2">L5 Session</option>
+                  <option value="3">L4 Transport</option>
+                  <option value="4">L3 Network</option>
+                  <option value="5">L2 Data Link</option>
+                  <option value="6">L1 Physical</option>
+                </select></label
+              >
+              <button type="button" class="btn tiny primary" id="o-wrap">
+                Wrap next layer ↓
+              </button>
+              <button type="button" class="btn tiny ghost" id="o-unwrap">
+                Unwrap ↑
+              </button>
+              <button type="button" class="btn tiny ghost" id="o-reset">
+                <svg class="ic"><use href="#i-replay" /></svg> Reset
+              </button>
+            </div>
+            <div class="packet-card">
+              <span>Encapsulation preview</span>
+              <div class="packet" id="packet-preview"></div>
+              <p id="packet-note"></p>
+            </div>
+            <p class="lab-note" id="layer-note"></p>
+          </aside>
+        </div>
+        <div class="recall">
+          <h3>
+            <svg class="ic"><use href="#i-eye" /></svg> Attacker &amp; defender
+            view
+          </h3>
+          <p>
+            <b>Attackers</b> pick a layer to attack. <b>Defenders</b> monitor
+            layers: firewalls at L3/L4, WAFs at L7, TLS at L6, switches at L2.
+            When troubleshooting, start at L1 and climb — or start at the
+            symptom and drop.
+          </p>
+        </div>
+      </section>
+
+      <section class="prose" id="mission" data-section>
+        <h2>
+          <svg class="ic"><use href="#i-terminal" /></svg> Mission: prove the
+          order
+        </h2>
+        <p>
+          Read <code>layers.txt</code>, then verify the top-to-bottom initials:
+          <code>verify apstndp</code>. The terminal never reloads the page —
+          press Enter freely.
+        </p>
+        <div class="term cli">
+          <div class="term-bar">
+            <i class="dot r"></i><i class="dot y"></i><i class="dot g"></i
+            ><span>student@seaofglass: ~/osi-model</span><em>TRAINING SHELL</em>
+          </div>
+          <div class="term-body" id="cli-body" aria-live="polite"></div>
+          <form id="cli-form" autocomplete="off">
+            <span class="t-prompt">student@seaofglass</span
+            ><span class="t-path">:~$</span
+            ><input
+              id="cli-input"
+              type="text"
+              spellcheck="false"
+              autocapitalize="off"
+              aria-label="Terminal command input"
+              placeholder="start with: cat layers.txt"
+            />
+          </form>
+        </div>
+      </section>
+
+      <section class="prose" id="quiz" data-section>
+        <h2>
+          <svg class="ic"><use href="#i-flag" /></svg> Checkpoint: 4 questions
+        </h2>
+        <p>Score 75% or more to complete the lesson.</p>
+        <form id="quiz-form"></form>
+        <div class="quiz-actions">
+          <button class="btn primary" id="quiz-submit" type="button">
+            Check answers</button
+          ><button class="btn ghost hidden" id="quiz-retry" type="button">
+            Try again
+          </button>
+          <div class="score hidden" id="quiz-score">
+            <svg viewBox="0 0 64 64">
+              <circle class="bgc" cx="32" cy="32" r="26" />
+              <circle class="fgc" id="score-ring" cx="32" cy="32" r="26" /></svg
+            ><span
+              ><b id="score-num">0%</b
+              ><small id="score-note">score</small></span
+            >
+          </div>
+        </div>
+      </section>
+
+      <nav class="l-nav">
+        <a class="btn ghost" href="../checkpoints/first-principles.html"
+          >← First Principles checkpoint</a
+        ><a class="btn primary" href="ip-mac-ports.html"
+          >Next: IP, MAC &amp; Ports
+          <svg class="ic"><use href="#i-arrow" /></svg
+        ></a>
+      </nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container f-bottom" style="border-top: 0">
+        <span>© <span data-year>2026</span> Shidoon · Sea of Glass</span
+        ><span class="f-ethics"
+          ><svg class="ic"><use href="#i-shield" /></svg> Train ethically. Hack
+          only what you own or have written permission to test.</span
+        >
+      </div>
+    </footer>
+    <button id="to-top" aria-label="Back to top">
+      <svg class="ic"><use href="#i-up" /></svg>
+    </button>
+    <script type="module" src="../../assets/js/core/main.js"></script>
+    <script type="module" src="../../assets/js/lessons/osi-model.js"></script>
+  </body>
+</html>

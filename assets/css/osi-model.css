@@ -1,0 +1,139 @@
+/* OSI Model lesson */
+.job {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: linear-gradient(
+    135deg,
+    rgba(56, 224, 255, 0.09),
+    rgba(60, 245, 182, 0.06)
+  );
+  border: 1px solid rgba(56, 224, 255, 0.3);
+  border-radius: 14px;
+  padding: 18px 22px;
+  margin: 22px 0;
+}
+.job span {
+  font: 700 0.64rem var(--font-mono);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+.job b {
+  font-size: 1.12rem;
+  line-height: 1.4;
+}
+.job small {
+  color: var(--faint);
+  font-family: var(--font-mono);
+}
+.osi-stage {
+  perspective: 1100px;
+  min-height: 470px;
+}
+.osi-spin {
+  transform-style: preserve-3d;
+}
+.osi-spin.spinning {
+  animation: osispin 46s linear infinite;
+}
+.osi-spin.spinning:hover {
+  animation-play-state: paused;
+}
+@keyframes osispin {
+  to {
+    transform: rotateZ(360deg);
+  }
+}
+.osi-stack {
+  position: relative;
+  width: 250px;
+  height: 190px;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--tilt)) rotateZ(var(--angle));
+  transition: transform 0.25s ease;
+}
+.osi-layer {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+  padding: 12px;
+  border: 1px solid var(--lc);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(10, 16, 28, 0.75)
+  );
+  box-shadow: inset 0 0 26px rgba(255, 255, 255, 0.03);
+  transform: translateZ(calc(var(--i) * var(--spread)));
+  transition:
+    transform 0.35s ease,
+    opacity 0.35s,
+    box-shadow 0.35s;
+}
+.osi-layer span {
+  font: 700 0.58rem var(--font-mono);
+  letter-spacing: 0.18em;
+  color: var(--lc);
+  text-shadow: 0 2px 8px #000;
+}
+.osi-layer:hover {
+  box-shadow:
+    0 0 30px rgba(56, 224, 255, 0.18),
+    inset 0 0 26px rgba(255, 255, 255, 0.05);
+}
+.osi-layer.focus {
+  transform: translateZ(calc(var(--i) * var(--spread) + 24px));
+  box-shadow:
+    0 0 44px rgba(56, 224, 255, 0.28),
+    inset 0 0 30px rgba(255, 255, 255, 0.07);
+}
+.osi-stack.ghost .osi-layer:not(.focus) {
+  opacity: 0.15;
+}
+.packet-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.packet-card > span {
+  font: 700 0.6rem var(--font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--faint);
+  display: block;
+  margin-bottom: 10px;
+}
+.packet {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+.p-chip {
+  font: 700 0.62rem var(--font-mono);
+  letter-spacing: 0.08em;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--pc);
+  color: var(--pc);
+  background: rgba(255, 255, 255, 0.03);
+}
+.packet-card p {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin: 0;
+}
+@media (max-width: 560px) {
+  .osi-stack {
+    width: 200px;
+    height: 150px;
+  }
+  .osi-stage {
+    min-height: 380px;
+  }
+}
