@@ -6,7 +6,7 @@
     <title>Learning Paths & Curriculum — Sea of Glass | Shidoon</title>
     <meta
       name="description"
-      content="The full Sea of Glass curriculum: 23 modules, 137 lessons and labs across Cyber Security Fundamentals and Penetration Testing on Kali & Parrot. Search, explore, download."
+      content="The full Sea of Glass curriculum: 23 modules, 137 lessons and labs. 11 lessons live now across First Principles and Networking. Search, explore, continue, download."
     />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#070b13" />
@@ -18,7 +18,7 @@
     <meta property="og:title" content="Learning Paths — Sea of Glass" />
     <meta
       property="og:description"
-      content="23 modules · 137 lessons & labs · Kali / Parrot. The full curriculum."
+      content="23 modules · 137 lessons & labs · 11 live now. The full curriculum."
     />
     <meta
       property="og:url"
@@ -37,6 +37,7 @@
     />
     <link rel="stylesheet" href="../assets/css/base.css" />
     <link rel="stylesheet" href="../assets/css/paths.css" />
+    <link rel="stylesheet" href="../assets/css/live-nav.css" />
     <script>
       document.documentElement.classList.add("js");
     </script>
@@ -44,7 +45,6 @@
   <body>
     <a class="skip" href="#main">Skip to content</a>
 
-    <!-- Icon sprite (shared) -->
     <svg width="0" height="0" style="position: absolute" aria-hidden="true">
       <defs>
         <symbol id="i-menu" viewBox="0 0 24 24">
@@ -150,8 +150,11 @@
           <a href="../index.html#about">About</a>
           <a href="../index.html#globe">Live globe</a>
           <a href="paths.html" class="active" aria-current="page">Curriculum</a>
-          <a class="btn small primary" href="concepts/cia-triad.html"
-            >Try a lesson <svg class="ic"><use href="#i-arrow" /></svg
+          <a
+            id="paths-continue"
+            class="btn small primary"
+            href="concepts/what-is-security.html"
+            >Continue <svg class="ic"><use href="#i-arrow" /></svg
           ></a>
         </nav>
         <button
@@ -167,21 +170,22 @@
     </header>
 
     <main id="main">
-      <!-- Page hero -->
       <section class="p-hero">
         <div class="container">
           <p class="eyebrow reveal">Shidoon // Curriculum</p>
           <h1 class="reveal" style="--d: 0.05s">Learning <span>Paths</span></h1>
           <p class="lead reveal" style="--d: 0.1s">
             Two career tracks built like operations: brief → hands-on →
-            checkpoint. Every lesson ships with a live terminal and a quiz. New
-            lessons go live weekly.
+            checkpoint. Every lesson ships with a live terminal and a quiz.
+            <b>11 lessons are live now</b> — start at the top or continue where
+            you left off.
           </p>
           <ul class="p-stats reveal" style="--d: 0.15s">
             <li><b id="st-modules">—</b><span>modules</span></li>
             <li><b id="st-lessons">—</b><span>lessons &amp; labs</span></li>
             <li><b id="st-labs">—</b><span>hands-on labs</span></li>
             <li><b id="st-quizzes">—</b><span>checkpoints</span></li>
+            <li><b id="st-live">—</b><span>live now</span></li>
           </ul>
           <p class="ethics reveal" style="--d: 0.2s">
             <svg class="ic"><use href="#i-lock" /></svg> Everything here is for
@@ -191,7 +195,6 @@
         </div>
       </section>
 
-      <!-- Toolbar: tabs + search + export -->
       <div class="toolbar" id="toolbar">
         <div class="container tb-in">
           <div class="tabs" role="tablist" aria-label="Curriculum views">
@@ -222,6 +225,9 @@
               aria-label="Search lessons"
             />
           </label>
+          <a class="btn tiny ghost" href="#live"
+            ><svg class="ic"><use href="#i-bolt" /></svg> Live lessons</a
+          >
           <button id="dl-md" class="btn tiny ghost">
             <svg class="ic"><use href="#i-download" /></svg> Syllabus .md
           </button>
@@ -229,7 +235,6 @@
         <p class="container search-info"><span id="search-count"></span></p>
       </div>
 
-      <!-- How lessons work -->
       <section class="container how" id="how">
         <div>
           <svg class="ic"><use href="#i-book" /></svg>
@@ -248,19 +253,111 @@
           <h3>Prove it</h3>
           <p>Capture the flag, pass the checkpoint, save your progress.</p>
         </div>
-        <a class="how-cta" href="concepts/cia-triad.html"
-          >Try the live sample lesson
-          <svg class="ic"><use href="#i-arrow" /></svg
+        <a class="how-cta" href="concepts/what-is-security.html"
+          >Start Lesson 01 <svg class="ic"><use href="#i-arrow" /></svg
         ></a>
       </section>
 
-      <!-- Tracks render here from curriculum.js -->
+      <!-- Every live lesson, grouped and progress-aware -->
+      <section class="container live-sec" id="live">
+        <div id="live-root">
+          <div class="live-card">
+            <div class="live-modules">
+              <section class="live-module">
+                <header>
+                  <span class="lm-num">01</span>
+                  <h3>First Principles</h3>
+                </header>
+                <ol class="lm-lessons">
+                  <li>
+                    <a class="lm-lesson" href="concepts/what-is-security.html"
+                      ><span class="lm-title">What is Security?</span
+                      ><span class="lm-meta">10 min</span></a
+                    >
+                  </li>
+                  <li>
+                    <a class="lm-lesson" href="concepts/threat-vuln-risk.html"
+                      ><span class="lm-title">Threat, Vulnerability, Risk</span
+                      ><span class="lm-meta">12 min</span></a
+                    >
+                  </li>
+                  <li>
+                    <a class="lm-lesson" href="concepts/cia-triad.html"
+                      ><span class="lm-title">The CIA Triad</span
+                      ><span class="lm-meta">15 min</span></a
+                    >
+                  </li>
+                  <li>
+                    <a class="lm-lesson" href="concepts/hacker-types.html"
+                      ><span class="lm-title">Hackers &amp; Their Hats</span
+                      ><span class="lm-meta">10 min</span></a
+                    >
+                  </li>
+                  <li>
+                    <a class="lm-lesson" href="concepts/famous-breaches.html"
+                      ><span class="lm-title">Hall of Fame</span
+                      ><span class="lm-meta">14 min</span></a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="lm-lesson"
+                      href="checkpoints/first-principles.html"
+                      ><span class="lm-title">Checkpoint: First Principles</span
+                      ><span class="lm-meta">8 questions</span></a
+                    >
+                  </li>
+                </ol>
+              </section>
+              <section class="live-module new">
+                <header>
+                  <span class="lm-num">02</span>
+                  <h3>Networking You Actually Need</h3>
+                  <span class="lm-new">NEW</span>
+                </header>
+                <ol class="lm-lessons">
+                  <li>
+                    <a class="lm-lesson" href="concepts/osi-model.html"
+                      ><span class="lm-title">OSI Model</span
+                      ><span class="lm-meta">14 min</span></a
+                    >
+                  </li>
+                  <li>
+                    <a class="lm-lesson" href="concepts/ip-mac-ports.html"
+                      ><span class="lm-title">IP, MAC &amp; Ports</span
+                      ><span class="lm-meta">12 min</span></a
+                    >
+                  </li>
+                  <li>
+                    <a class="lm-lesson" href="concepts/dns-whois.html"
+                      ><span class="lm-title">DNS &amp; Whois</span
+                      ><span class="lm-meta">18 min</span></a
+                    >
+                  </li>
+                  <li>
+                    <a class="lm-lesson" href="concepts/tcp-udp.html"
+                      ><span class="lm-title">TCP vs UDP</span
+                      ><span class="lm-meta">12 min</span></a
+                    >
+                  </li>
+                  <li>
+                    <a class="lm-lesson" href="concepts/http-https.html"
+                      ><span class="lm-title">HTTP vs HTTPS</span
+                      ><span class="lm-meta">12 min</span></a
+                    >
+                  </li>
+                </ol>
+              </section>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <div class="container" id="tracks"></div>
       <p class="container empty hidden" id="empty">
-        No lessons match that search. Try “nmap”, “phishing” or “tls”.
+        No lessons match that search. Try “nmap”, “phishing”, “tls” or “osi”.
       </p>
 
-      <!-- Lab setup -->
       <section class="container lab-sec" id="lab" data-tracksec="lab">
         <p class="eyebrow">Lab // Build your range</p>
         <h2>Your first hacking lab — safely.</h2>
@@ -405,22 +502,20 @@ sudo apt install -y nmap burpsuite metasploit-framework</pre
         <nav aria-label="Explore">
           <h4>Explore</h4>
           <a href="../index.html">Overview</a
+          ><a href="../index.html#journey">Your path</a
           ><a href="../index.html#about">About us</a
           ><a href="../index.html#why">Why us</a
           ><a href="../index.html#globe">Live globe</a>
         </nav>
         <nav aria-label="Learn">
           <h4>Learn</h4>
-          <a
-            href="#top"
-            onclick="
-              scrollTo({ top: 0, behavior: 'smooth' });
-              return false;
-            "
-            >All paths</a
+          <a href="#live">Live lessons</a
           ><a href="#fundamentals">Fundamentals</a
-          ><a href="#pentest">Penetration testing</a><a href="#lab">Lab setup</a
-          ><a href="concepts/cia-triad.html">Sample lesson</a>
+          ><a href="#pentest">Penetration testing</a
+          ><a href="#lab">Lab setup</a>
+          <a href="concepts/what-is-security.html">Start Lesson 01</a
+          ><a href="concepts/osi-model.html">New: OSI Model</a
+          ><a href="checkpoints/first-principles.html">Module 01 checkpoint</a>
         </nav>
         <nav aria-label="Connect">
           <h4>Connect</h4>
