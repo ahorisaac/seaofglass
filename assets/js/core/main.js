@@ -1,21 +1,26 @@
-/* ============================================================
-   Shared UI behaviour: nav, reveals, counters, tilt, cursor.
-   Every feature guards on element presence — safe on all pages.
-   ============================================================ */
-
+/* Shared UI: nav, reveals, counters, tilt, cursor, terminal guard. */
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const COARSE = matchMedia("(pointer: coarse)").matches;
 
-/* ---------- Nav: shrink on scroll + mobile menu ---------- */
+/* Terminal forms never reload the page, even if a lesson module fails. */
+document.addEventListener(
+  "submit",
+  (e) => {
+    if (e.target.id === "cli-form" || e.target.closest(".cli"))
+      e.preventDefault();
+  },
+  true,
+);
+
+/* Nav */
 const nav = $("#nav"),
   toggle = $("#nav-toggle"),
   menu = $("#nav-menu");
 const onScrollNav = () => nav && nav.classList.toggle("scrolled", scrollY > 8);
 addEventListener("scroll", onScrollNav, { passive: true });
 onScrollNav();
-
 if (toggle && menu) {
   const setMenu = (open) => {
     menu.classList.toggle("open", open);
@@ -32,7 +37,7 @@ if (toggle && menu) {
   addEventListener("keydown", (e) => e.key === "Escape" && setMenu(false));
 }
 
-/* ---------- Scroll progress + back-to-top ---------- */
+/* Scroll progress + back-to-top */
 const bar = $("#progress"),
   toTop = $("#to-top");
 let ticking = false;
@@ -55,7 +60,7 @@ toTop &&
     scrollTo({ top: 0, behavior: REDUCED ? "auto" : "smooth" }),
   );
 
-/* ---------- Active section highlighting ---------- */
+/* Active section */
 const hashLinks = $$('#nav-menu a[href^="#"]');
 if (hashLinks.length && "IntersectionObserver" in window) {
   const map = new Map(
@@ -75,7 +80,7 @@ if (hashLinks.length && "IntersectionObserver" in window) {
   $$("[data-section]").forEach((s) => io.observe(s));
 }
 
-/* ---------- Reveal on scroll ---------- */
+/* Reveal */
 const revealEls = $$(".reveal");
 if ("IntersectionObserver" in window && !REDUCED) {
   const io = new IntersectionObserver(
@@ -91,11 +96,11 @@ if ("IntersectionObserver" in window && !REDUCED) {
   revealEls.forEach((el) => io.observe(el));
 } else revealEls.forEach((el) => el.classList.add("in"));
 
-/* ---------- Animated counters ---------- */
+/* Counters */
 const runCounter = (el) => {
   const end = +el.dataset.count,
-    suffix = el.dataset.suffix || "";
-  const plain = el.dataset.plain; // e.g. years: no easing drama
+    suffix = el.dataset.suffix || "",
+    plain = el.dataset.plain;
   if (REDUCED) {
     el.textContent = end + suffix;
     return;
@@ -104,8 +109,7 @@ const runCounter = (el) => {
     dur = plain ? 600 : 1400;
   const step = (now) => {
     const p = Math.min(1, (now - t0) / dur);
-    const eased = 1 - Math.pow(1 - p, 4);
-    el.textContent = Math.round(end * eased) + suffix;
+    el.textContent = Math.round(end * (1 - Math.pow(1 - p, 4))) + suffix;
     if (p < 1) requestAnimationFrame(step);
   };
   requestAnimationFrame(step);
@@ -124,13 +128,13 @@ if ("IntersectionObserver" in window) {
   $$("[data-count]").forEach((el) => io.observe(el));
 } else $$("[data-count]").forEach(runCounter);
 
-/* ---------- Card tilt + pointer glow ---------- */
+/* Tilt + glow */
 if (!COARSE && !REDUCED) {
   $$(".tilt").forEach((card) => {
     card.addEventListener("pointermove", (e) => {
       const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5;
-      const y = (e.clientY - r.top) / r.height - 0.5;
+      const x = (e.clientX - r.left) / r.width - 0.5,
+        y = (e.clientY - r.top) / r.height - 0.5;
       card.style.transform = `perspective(800px) rotateX(${-y * 5}deg) rotateY(${x * 5}deg) translateY(-3px)`;
     });
     card.addEventListener("pointerleave", () => {
@@ -146,7 +150,7 @@ if (!COARSE && !REDUCED) {
   );
 }
 
-/* ---------- Cursor glow ring (desktop only) ---------- */
+/* Cursor */
 const cursor = $("#cursor");
 if (cursor && !COARSE && !REDUCED) {
   let cx = innerWidth / 2,
@@ -159,7 +163,7 @@ if (cursor && !COARSE && !REDUCED) {
     cursor.classList.add("on");
     cursor.classList.toggle(
       "big",
-      !!e.target.closest("a,button,input,select,label"),
+      !!e.target.closest("a,button,input,select,label,textarea"),
     );
   });
   document.addEventListener("mouseleave", () => cursor.classList.remove("on"));
@@ -172,7 +176,7 @@ if (cursor && !COARSE && !REDUCED) {
   })();
 }
 
-/* ---------- Copy buttons + year stamp ---------- */
+/* Copy + year */
 $$("[data-copy]").forEach((btn) =>
   btn.addEventListener("click", async () => {
     const src = $(btn.dataset.copy);
@@ -180,7 +184,7 @@ $$("[data-copy]").forEach((btn) =>
     try {
       await navigator.clipboard.writeText(src.textContent.trim());
     } catch {
-      /* clipboard blocked */
+      /* blocked */
     }
     const old = btn.textContent;
     btn.textContent = "Copied ✓";
